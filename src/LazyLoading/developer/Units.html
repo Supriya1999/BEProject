@@ -1,0 +1,130 @@
+<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
+        Add Units
+    </button>
+    <hr/>
+    <form [formGroup]="unitform" (submit)="AddUnit(unitform.value)">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Units</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body ">
+                <div class="container">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Unit ID</label>
+                            <input type="text" class="form-control" formControlName="unit_id" disabled>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label>Course Name</label>
+                            <select class="form-control" formControlName="course_id">
+                                <option selected disabled>Select Course</option>
+                                <option *ngFor="let c of courses">{{c.course_name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Year of Study</label>
+                            <select class="form-control" formControlName="year_id">
+                                <option selected disabled>Select Year</option>
+                                <option *ngFor="let y of years">{{y.year_name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Subject Name</label>
+                            <select class="form-control" formControlName="subject_id">
+                                <option selected disabled>Select Subject</option>
+                                <option *ngFor="let s of subjects" value="{{s.subject_id}}">{{s.subject_name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Unit Name</label>
+                            <span *ngIf="unitform.get('unit_name').errors && unitform.get('unit_name').dirty"> 
+                                <span *ngIf="unitform.get('unit_name').errors.required" style="color:red;"> please enter unit name</span>
+                                <span *ngIf="unitform.get('unit_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                              </span>
+                            <input type="text" formControlName="unit_name" class="form-control" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Description</label>
+                            <span *ngIf="unitform.get('description').errors && unitform.get('description').dirty"> 
+                                <span *ngIf="unitform.get('description').errors.required" style="color:red;"> please enter description</span>
+                                <span *ngIf="unitform.get('description').errors.pattern" style="color:red;"> only characters are allowed</span>
+                              </span>
+                            <input type="text" formControlName="description" class="form-control" >
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Video length</label>
+                        <input type="time" formControlName="video_length" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Video</label>
+                        <input type="file" class="form-control" >
+                    </div>
+                    
+                </div>
+            </div>
+                
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" [disabled]=!unitform.valid>Save</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+        </div>
+    </form>
+    
+    <!--filter-->
+    <div class="row">
+        <div class="col-md-3">
+        <label>Filter Data</label><br>
+        <input type="text" placeholder="Filter data by name" class="form-control"/>
+        </div>
+    </div>
+    <br><br>
+    <!--table-->
+    <section class="table" style="background-color: white; overflow-y: auto; ">
+        <table class="table  table-hover table-bordered" >
+            <thead>
+              <tr>
+                <th scope="col">Course Name</th>
+                <th scope="col">Year Of Study</th>
+                <th scope="col">Subject Name</th>
+                <th scope="col">Unit Name</th>
+                <th scope="col">Video Length</th>
+                <th scope="col">Description</th>
+                <th scope="col">Video</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let u of units">
+                  <td>{{u.course_name}}</td>
+                  <td>{{u.year_name}}</td>
+                  <td>{{u.subject_name}}</td>
+                  <td>{{u.unit_name}}</td>
+                  <td>{{u.description}}</td>
+                  <td>{{u.video_length}}</td>
+                  <td>{{u.video}}</td>
+                  <td class="social-media">
+                    <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                    <i class="fa fa-trash  social-iconn   " ></i>
+                  </td>
+                 
+              </tr>
+              
+            </tbody>
+          </table>            
+        </section>
+  

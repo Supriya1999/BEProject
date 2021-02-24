@@ -1,0 +1,107 @@
+<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
+    Add Subjects
+</button>
+<hr/>
+<form [formGroup]="subjectform" (submit)="AddSubject(subjectform.value)">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Subjects</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div> 
+        <div class="modal-body ">
+            <div class="container">
+                <div class="form-group ">
+                  <label>Subject ID</label>
+                  <input type="text" formControlName="subject_id" class="form-control" disabled>
+                </div>
+                
+            <div class="form-group">
+                <label>Course Name</label>
+                <select class="form-control" formControlName="course_id">
+                    <option selected disabled>Select Course</option>
+                    <option *ngFor="let c of courses" value="{{c.course_id}}">{{c.course_name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Year of Study</label>
+                <select class="form-control" formControlName="year_id">
+                    <option selected disabled>Select Year</option>
+                    <option *ngFor="let y of years" value="{{y.year_id}}">{{y.year_name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+            
+                <label>Subject Name</label>
+                <span *ngIf="subjectform.get('subject_name').errors && subjectform.get('subject_name').dirty"> 
+                    <span *ngIf="subjectform.get('subject_name').errors.required" style="color:red;"> please enter subject name</span>
+                    <span *ngIf="subjectform.get('subject_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                  </span>
+                <input type="text" class="form-control"  formControlName="subject_name">
+            </div>
+            
+            <div class="form-group">
+                <label>Description</label>
+                <span *ngIf="subjectform.get('description').errors && subjectform.get('description').dirty">
+                    <span *ngIf="subjectform.get('description').errors.required" style="color:red;"> please enter description</span>
+                    <span *ngIf="subjectform.get('description').errors.pattern" style="color:red;"> only characters are allowed</span>
+                  </span>
+                <input type="text" class="form-control" formControlName="description">
+            </div>
+            
+            <div class="form-group">
+                <label>Subject Pic</label>
+                <input type="file" class="form-control" >
+            </div>
+        
+            </div>
+        </div>
+        <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" [disabled]="!subjectform.valid">Save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        
+        </div>
+    </div>
+    </div>
+</div>
+</form>
+<!--filter-->
+<div class="row">
+    <div class="col-md-3">
+    <label>Filter Data</label><br>
+    <input type="text" placeholder="Filter data by name" class="form-control"/>
+    </div>
+</div>
+<br><br>
+<!--table-->
+<section class="table" style="background-color: white; overflow-y: auto; ">
+    <table class="table  table-hover table-bordered" >
+        <thead>
+          <tr>
+            <th scope="col">Course Name</th>
+            <th scope="col">Year Of Study</th>
+            <th scope="col">Subject Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Subject Pic</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let s of subjects">
+              <td>{{s.course_name}}</td>
+              <td>{{s.year_name}}</td>
+              <td>{{s.subject_name}}</td>
+              <td>{{s.description}}</td>
+              <td>null</td>
+              <td class="social-media">
+                <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                <i class="fa fa-trash  social-iconn   " ></i>
+              </td>
+          </tr>
+        </tbody>
+      </table>            
+    </section>

@@ -1,0 +1,379 @@
+<form [formGroup]="groupform" (submit)="AddGroup(groupform.value)">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Group</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body ">
+            <div class="container">
+            <div class="form-row"> 
+                <div class="form-group col-md-3">
+                  <label>Group ID</label>
+                  <input type="text" formControlName="group_id" class="form-control" disabled>
+                </div>
+                <div class="form-group col-md-9">
+                  <label >Group Name</label>
+                  <input type="text" formControlName="group_name" class="form-control" >
+                </div>
+            </div>  
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label >Courses</label>
+                    <select class="form-control" >
+                        <option selected disabled>select Course</option>
+                        <option *ngFor="let c of courses"  >{{c.course_name}}</option>
+                    </select>
+                </div>
+
+                
+                <div class="form-group col-md-6">
+                    <label >Year Of Study</label>
+                    <select class="form-control" formControlName="year_id">
+                        <option selected disabled>select year of study</option>
+                        <option *ngFor="let y of years" value="{{y.year_id}}">{{y.year_name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                
+                <div class="form-group col-md-12" >
+                    <label >Start Date</label>
+                    <input type="date" formControlName="start_date" class="form-control" >
+                  </div>
+                  
+                <div class="form-group col-md-12">
+                    <label >End Date</label>
+                    <input type="date" formControlName="end_date" class="form-control" >
+                  </div>
+            </div>
+              
+            </div>
+        </div>
+        <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" [disabled]="!groupform.valid">Save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        
+        </div>
+    </div>
+    </div>
+</div>
+</form>
+<!-- Modal -->
+<div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Group Members</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body ">
+            <div class="container">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label>Member ID</label>
+                  <input type="text" class="form-control" disabled>
+                </div>
+                <div class="form-group col-md-12">
+                  <label >Group Name</label>
+                  <select class="form-control" >
+                      <option>
+                          Select Group Name
+                      </option>
+                  </select>
+                </div>
+                
+                <div class="form-group col-md-12">
+                    <label >Student Name</label>
+                    <select class="form-control" >
+                        <option>Select Student Name</option>
+                    </select>
+                  </div>
+                  
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        
+        </div>
+    </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="asgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Group Assignemnet</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body ">
+            <div class="container">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label>Assignment ID</label>
+                  <input type="text" class="form-control" disabled>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label >Group Name</label>
+                    <select class="form-control" >
+                        <option>Select Group name</option>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group col-md-6">
+                      <label >Unit Name</label>
+                      <select class="form-control" >
+                          <option>Select Unit Name</option>
+                      </select>
+                    </div>
+            </div>
+                
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label >Assignment Date</label>
+                    <input type="date" class="form-control" >
+                </div>
+                <div class="form-group col-md-6">
+                    <label >Mail</label>
+                    <input type="text" class="form-control" >
+                </div>
+            </div>      
+            <div class="form-row">
+                
+                <div class="form-group col-md-12">
+                    <label >Assignment Question</label>
+                    <input type="text" class="form-control" >
+                </div>
+                
+                
+                <div class="form-group col-md-12">
+                    <label >Document</label>
+                    <input type="file" class="form-control" >
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        
+        </div>
+    </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Group Message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body ">
+            <div class="container">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label>Message ID</label>
+                  <input type="text" class="form-control" disabled>
+                </div>
+                <div class="form-group col-md-12">
+                  <label >Group Name</label>
+                  <select class="form-control" >
+                      <option>Select Group Name</option>
+                  </select>
+                </div>
+                
+                <div class="form-group col-md-12">
+                    <label >Message Date</label>
+                    <input type="date" class="form-control" >
+                  </div>
+                  
+                <div class="form-group col-md-12">
+                    <label >Message For</label>
+                    <input type="text" class="form-control" >
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label >Message </label>
+                    <input type="text" class="form-control" >
+                  </div>
+
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+    <li class="nav-item ">
+      <a class="nav-link "  data-toggle="tab" href="#home">Create Group</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu1">Group Members</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu2">Group Assignements</a>
+    </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu3">Group Message</a>
+      </li>
+  </ul>
+  
+  <!-- Tab panes -->
+  <div class="tab-content mt-3">
+    <div class="tab-pane container " id="home">
+        <!--table-->
+        <section class="table" style="background-color: white; overflow-y: auto; ">
+            <table class="table  table-hover table-bordered" >
+                <thead>
+                <tr>
+                    <th scope="col">Group Name</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col">Year of Study</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Action</th>
+
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let g of group">
+                    <td>{{g.group_name}}</td>
+                    <td>{{g.course_name}}</td>
+                    <td>{{g.year_name}}</td>
+                    <td>{{g.start_date}}</td>
+                    <td>{{g.end_date}}</td>
+                    <td class="social-media">
+                        <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus social-iconnn " ></i></a>
+                        <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                        <i class="fa fa-trash  social-iconn   " ></i>
+                    </td>
+                    
+                </tr>
+                </tbody>
+            </table>            
+            </section>
+    </div>
+    <div class="tab-pane container fade" id="menu1">
+        <!--table-->
+        <section class="table" style="background-color: white; overflow-y: auto; ">
+            <table class="table  table-hover table-bordered" >
+                <thead>
+                <tr>
+                    <th scope="col">Group Name</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Action</th>
+
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>BE Comp 2020-21</td>
+                    <td>Danish Shaikh</td>
+                    <td class="social-media">
+                        <a data-toggle="modal" data-target="#memberModal"><i class="fa fa-plus social-iconnn " ></i></a>
+                        <a data-toggle="modal" data-target="#memberModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                        <i class="fa fa-trash  social-iconn   " ></i>
+                    </td>
+                    
+                </tr>
+                </tbody>
+            </table>            
+            </section>
+    </div>
+    <div class="tab-pane container fade" id="menu2">
+        <section class="table" style="background-color: white; overflow-y: auto; ">
+            <table class="table  table-hover table-bordered" >
+                <thead>
+                <tr>
+                    <th scope="col">Group Name</th>
+                    <th scope="col">Unit Name</th>
+                    <th scope="col">Assignment Date</th>
+                    <th scope="col">Assignment Question</th>
+                    <th scope="col">Mail</th>
+                    <th scope="col">File</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>BE Comp 2020-21</td>
+                    <td>Normalization</td>
+                    <td>8/1/21</td>
+                    <td>what is nor?</td>
+                    <td>danish2000ds@gmail.com</td>
+                    <td>Normalization.pdf</td>
+                    <td class="social-media">
+                        <a data-toggle="modal" data-target="#asgModal"><i class="fa fa-plus social-iconnn " ></i></a>
+                        <a data-toggle="modal" data-target="#asgModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                        <i class="fa fa-trash  social-iconn   " ></i>
+                    </td>
+                    
+                </tr>
+                </tbody>
+            </table>            
+            </section>
+        
+    </div>
+    <div class="tab-pane container fade" id="menu3">
+        <!--table-->
+        <section class="table" style="background-color: white; overflow-y: auto; ">
+            <table class="table  table-hover table-bordered" >
+                <thead>
+                <tr>
+                    <th scope="col">Group Name</th>
+                    <th scope="col">Message Date</th>
+                    <th scope="col">Message For</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Action</th>
+
+                    
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>BE Comp 2020-21</td>
+                    <td>8/1/21</td>
+                    <td>Scholarship</td>
+                    <td>hi nice</td>
+                    <td class="social-media">
+                        <a data-toggle="modal" data-target="#msgModal"><i class="fa fa-plus social-iconnn " ></i></a>
+                        <a data-toggle="modal" data-target="#msgModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                        <i class="fa fa-trash  social-iconn   " ></i>
+                    </td>
+                    
+                </tr>
+                </tbody>
+            </table>            
+            </section>
+    </div>
+  </div>

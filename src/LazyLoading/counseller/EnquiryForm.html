@@ -1,0 +1,272 @@
+<h5 class="text-center">Enquiry Form</h5>
+            <hr>
+            <section class="enquiry_form">
+                <!--candidate basic info-->
+                <div class="card ">
+                    <div class="card-header bg-dark text-white text-center">
+                        Candidate Basic Information
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                  <input type="date" class="form-control" [(ngModel)]="birth_date" placeholder="Birth Date">
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <input type="text" [(ngModel)]="first_name" placeholder="Candidate Name" class="form-control" >
+                                </div>
+                                <div class="form-group col-md-3">
+                                  <input type="text" [(ngModel)]="mobile_number" placeholder="Mobile Number" class="form-control" >
+                                  </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-8">
+                                  <input type="text" [(ngModel)]="local_address" class="form-control" placeholder="Local Address" >
+                                </div>
+                                <div class="form-group col-md-4">
+                                  <input type="text" [(ngModel)]="email_address" placeholder="Email Address" class="form-control" >
+                                  </div>
+                            </div>
+                            <div class="form-row">
+                              <div class="form-group col-md-4">
+                                <input type="date" class="form-control" [(ngModel)]="birth_date" placeholder="Birth Date">
+                            </div>
+                              <div class="form-group col-md-4">
+                                <input type="text" [(ngModel)]="permanent_address" class="form-control" placeholder="Category">
+                              </div>
+                              <div class="form-group col-md-4">
+                                <input type="text" [(ngModel)]="alternative_number" placeholder="Annual Income" class="form-control" >
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+                <br>
+                <!--candidate education info-->
+                <div class="card ">
+                    <div class="card-header bg-dark text-white text-center">
+                        Educational Details
+                    </div>
+                    <div class="card-body" style="overflow-y: auto;">
+                        <div class="container">
+                          <table class="table table-bordered"> 
+                            <tr>
+                              <td>
+                                <select class="form-control" [(ngModel)]="qualification_id" (change)="GetSpecializations(qualification_id)">
+                                  <option selected disabled>Select Qualification</option>
+                                <option *ngFor="let q of qualifications" value="{{q.qualification_id}}">{{q.qualification}}</option>
+        
+                              </select>
+                            </td>
+                              
+                              <td>
+                                <select class="form-control" [(ngModel)]="specialization_id" >
+                                  <option selected disabled>Select Specialization</option>
+                                  <option *ngFor="let s of specializations" value="{{s.specialization_id}}">{{s.specialization}}</option>
+          
+                                </select>
+                              </td>
+                              
+                              <td>
+                                
+                                <input type="text" [(ngModel)]="medium" class="form-control" placeholder="Medium">
+                              </td>
+                              
+                              <td>
+                               
+                                <input type="text" [(ngModel)]="university" class="form-control" placeholder="university">
+        
+                              </td>
+                              
+                              <td>
+                                 
+                                <input type="text" [(ngModel)]="passing_year" class="form-control" placeholder="passing_year">
+        
+                              </td>
+                              
+                              <td>
+                                
+                                <input type="text" [(ngModel)]="percentage" class="form-control" placeholder="percentage">
+        
+                              </td>
+                              
+                              <td>
+                                <button type="button" class="btn btn-dark" (click)="AddStudentQulification(qualification_id,specialization_id,medium,university,passing_year,percentage)">
+                                  <i class="fa fa-plus"></i>
+                                </button>
+                                
+                              </td>
+                            </tr>
+                          </table>
+                            <table class="table table-bordered" > 
+                                <th>Qualification</th>
+                                <th>Specialization</th>
+                                <th>Medium</th>
+                                <th>University</th>
+                                <th>Year</th>
+                                <th>Percentage</th>
+                                <tbody>
+                                  <tr *ngFor="let q of studentqualifications">
+                                      <td>{{q.qualifications}}</td>
+                                      <td>{{q.specializations}}</td>
+                                      <td>{{q.medium}}</td>
+                                      <td>{{q.university}}</td>
+                                      <td>{{q.passing_year}}</td>
+                                      <td>{{q.percentage}}</td>
+                                  </tr>  
+                                </tbody>
+                            </table>
+
+                        </div>    
+                    </div>
+                </div>
+                <br>
+                <!--Candidate Exam Score-->
+                <div class="card ">
+                    <div class="card-header bg-dark text-white text-center">
+                        Candidate Exam Scores
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" placeholder="CET/JEE Marks">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" placeholder="12th PCM Marks">
+                              </div>
+                          </div>
+                        </div>    
+                    </div>
+                </div>
+                <br>
+                <!--know about us-->
+                <div class="card ">
+                    <div class="card-header bg-dark text-white text-center">
+                        How did you know about us?
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="form-check-inline pl-5 ">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input" value="">TCOER Student
+                                </label>
+                              </div>
+                              <div class="form-check-inline px-5">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input" value="">Call
+                                </label>
+                              </div>
+                              <div class="form-check-inline px-5">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input" value="" >Banner
+                                </label>
+                              </div>
+                              <div class="form-check-inline px-5">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input" value="" >Online
+                                </label>
+                              </div>
+                              
+                              <div class="form-check-inline px-5">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input" value="" >Email
+                                </label>
+                              </div>
+                              <div class="form-check-inline px-5">
+                                <label class="form-check-label">
+                                  <input type="checkbox" class="form-check-input" value="" >Other
+                                </label>
+                              </div>
+                        </div>    
+                    </div>
+                </div>
+
+                <br>
+                <!--interested-->
+                <div class="card ">
+                    <div class="card-header bg-dark text-white text-center">
+                        Tick your Interested Course
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="form-check col-md-4">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" class="form-check-input" value="">BE(Computer Engineering)
+                                    </label>
+                                  </div>
+                                  <div class="form-check col-md-4">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" class="form-check-input" value="">BE(Mechanical Engineering)
+                                    </label>
+                                  </div>
+                                  <div class="form-check col-md-4">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" class="form-check-input" value="" >BE(Electrical Engineering)
+                                    </label>
+                                  </div>
+                                  <div class="form-check col-md-4">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" class="form-check-input" value="" >BE(IT Engineering)
+                                    </label>
+                                  </div>
+                                  
+                                  <div class="form-check col-md-4">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" class="form-check-input" value="" >BE(ENTC Engineering)
+                                    </label>
+                                  </div>
+                                  <div class="form-check col-md-4">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" class="form-check-input" value="" >BE(Civil Engineering)
+                                    </label>
+                                  </div>
+                                  <div class="form-check col-md-4">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" class="form-check-input" value="">ME(Computer Engineering)
+                                    </label>
+                                  </div>
+                                  <div class="form-check col-md-4">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" class="form-check-input" value="">ME(Structural Engineering-CIVIL)
+                                    </label>
+                                  </div>
+                                  <div class="form-check col-md-4">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" class="form-check-input" value="" >ME(HEAT POWER Engineering)
+                                    </label>
+                                  </div>
+                                  <div class="form-check col-md-4">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" class="form-check-input" value="" >ME(DESIGN Engineering)
+                                    </label>
+                                  </div>
+                                  
+                                  <div class="form-check col-md-4">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" class="form-check-input" value="" >ME(E&TC Engineering)
+                                    </label>
+                                  </div>
+                                  <div class="form-check col-md-4">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" class="form-check-input" value="" >MBA
+                                    </label>
+                                  </div>
+                                  
+                                  <div class="form-check col-md-4">
+                                    <label class="form-check-label">
+                                      <input type="checkbox" class="form-check-input" value="" >Other
+                                    </label>
+                                  </div>
+                            </div>
+                            
+                              
+                        </div>    
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <input type="button" class="btn btn-dark" name="Submit" value="Submit"/>
+                </div>
+            </section>

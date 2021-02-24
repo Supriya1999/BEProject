@@ -1,0 +1,116 @@
+<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
+    Study Material
+ </button>
+ <hr/>
+ <!--filter-->
+ <div class="row">
+     <div class="col-md-3">
+     <label>Filter Data</label><br>
+     <input type="text" placeholder="Filter data by name" class="form-control"/>
+     </div>
+ </div>
+ <br><br>
+ <!--table-->
+ <section class="table" style="background-color: white; overflow-y: auto; ">
+     <table class="table  table-hover table-bordered" >
+         <thead>
+           <tr>
+             <th scope="col">Course Name</th>
+             <th scope="col">Year Of Study</th>
+             <th scope="col">Subject Name</th>
+             <th scope="col">Unit Name</th>
+             <th scope="col">Ppts</th>
+             <th scope="col">Description</th>
+             <th scope="col">Action</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr *ngFor="let s of studymaterial">
+               <td>{{s.course_name}}</td>
+               <td>{{s.year_name}}</td>
+               <td>{{s.subject_name}}</td>
+               <td>{{s.unit_name}}</td>
+               <td></td>
+               <td>{{s.description}}</td>
+               <td class="social-media">
+                 <a ><i class="fa fa-eye social-iconnn " ></i></a>
+                 <a ><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                 <a ><i class="fa fa-trash social-iconn " ></i></a>
+               </td>
+               </tr>
+           </tbody>
+       </table>            
+     </section>
+
+<form [formGroup]="studyform" (submit)="AddStudy(studyform.value)">
+
+     <!-- Modal -->
+     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Study Material</h5><br>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Study Material ID</label>
+                        <input type="text" class="form-control" formControlName="ppt_id" disabled/>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label><b>Course Name</b></label>
+                        <select class="form-control">
+                            <option selected disabled>select Course</option>
+                            <option *ngFor="let c of courses" >{{c.course_name}}</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group col-md-6">
+                        <label><b>Year of Study</b></label>
+                        <select class="form-control">
+                            <option selected disabled>select year of study</option>
+                            <option *ngFor="let y of years">{{y.year_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label><b>Subject Name</b></label>
+                        <select class="form-control">
+                            <option selected disabled>select subjects</option>
+                            <option *ngFor="let s of subjects">{{s.subject_name}}</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group col-md-6">
+                        <label><b>Unit Name</b></label>
+                        <select class="form-control" formControlName="unit_id">
+                            <option selected disabled>select Units</option>
+                            <option *ngFor="let u of units" value="{{u.unit_id}}">{{u.unit_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <label><b>Upload PDF/PPT</b></label>
+                <input type="file" class="form-control" id="exampleFormControlFile1">
+                <br>
+                <label><b>Description</b></label>
+                <span *ngIf="studyform.get('description').errors && studyform.get('description').dirty">
+                    <span *ngIf="studyform.get('description').errors.required" style="color:red;"> please enter description</span>
+                    <span *ngIf="studyform.get('description').errors.pattern" style="color:red;"> only characters are allowed</span>
+                  </span>
+                <textarea class="form-control" formControlName="description" rows="2" placeholder="type content description"></textarea><br>
+            </div>
+            <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="!studyform.valid">Save</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</form>

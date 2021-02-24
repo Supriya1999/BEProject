@@ -1,0 +1,90 @@
+<main>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
+        Add Role
+    </button>
+    <hr/>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Role  </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Role ID</label>
+                    <input type="text" name="qid" class="form-control" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Role Name</label>
+                    <input type="text" name="qualification" class="form-control" >
+                </div>
+                    
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <!--filter-->
+    <div class="row">
+        <div class="col-md-3">
+        <label>Filter Data</label><br>
+        <input type="text" placeholder="Filter data by name" class="form-control"/>
+        </div>
+    </div>
+    <br><br>
+    <!--table-->
+    <section class="table" style="background-color: white;">
+        <table class="table table-hover table-bordered" >
+            <thead>
+              <tr>
+                <th scope="col">Role Name</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                  <td>Admin</td>
+                  <td class="social-media">
+                    <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a> 
+                    <i class="fa fa-trash  social-iconn   " ></i>
+                  </td>
+                 
+              </tr>
+              <tr>
+                <td>Accountant</td>
+                <td class="social-media"><i class="fa fa-pencil-square-o social-icon " ></i> 
+                    <i class="fa fa-trash  social-iconn   " ></i>
+                  </td>
+            </tr>
+            <tr>
+                <td>Super user</td>
+                <td class="social-media"><i class="fa fa-pencil-square-o social-icon " ></i> 
+                    <i class="fa fa-trash  social-iconn   " ></i>
+                  </td>
+            </tr>
+            <tr>
+                <td>Counsellor</td>
+                <td class="social-media"><i class="fa fa-pencil-square-o social-icon " ></i> 
+                    <i class="fa fa-trash  social-iconn   " ></i>
+                  </td>
+            </tr>
+            <tr>
+                <td>Developer</td>
+                <td class="social-media"><i class="fa fa-pencil-square-o social-icon " ></i> 
+                    <i class="fa fa-trash  social-iconn   " ></i>
+                  </td>
+            </tr>
+            </tbody>
+          </table>            
+        </section>
+</main>

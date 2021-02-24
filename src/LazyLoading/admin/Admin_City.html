@@ -1,0 +1,80 @@
+ <!-- Button trigger modal -->
+ <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
+  Add City
+</button>
+<hr/>
+<!-- Modal -->
+<form [formGroup]="cityform" (submit)="AddCity(cityform.value)">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+  <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">City  </h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+              <label>City ID</label>
+              <input type="text" formControlName="city_id" class="form-control" disabled>
+          </div>
+          <div class="form-group">
+               <label>State</label>
+              <select class="form-control" formControlName="state_id">
+                  <option selected disabled>Select State</option>
+                <option *ngFor="let s of states" value={{s.state_id}}>{{s.state_name}}</option>
+              </select>
+          </div> 
+          <div class="form-group">
+              <label>City</label>
+              <span *ngIf="cityform.get('city_name').errors && cityform.get('city_name').dirty">
+                <span *ngIf="cityform.get('city_name').errors.required" style="color:red;"> please enter City name</span>
+                <span *ngIf="cityform.get('city_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+              </span>
+              <input type="text" formControlName="city_name" class="form-control" >
+          </div>
+              
+      </div>
+      <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" [disabled]="!cityform.valid">Save</button>
+      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      
+      </div>
+  </div>
+  </div>
+</div>
+</form>
+<!--filter-->
+<div class="row">
+  <div class="col-md-3">
+  <label>Filter Data</label><br>
+  <input type="text" placeholder="Filter data by name" class="form-control"/>
+  </div>
+</div>
+<br><br>
+<!--table-->
+<section class="table" style="background-color: white;">
+  <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xs table-hover table-bordered" >
+      <thead>
+        <tr>
+          <th scope="col">State Name</th>
+          <th scope="col">City Name</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of cities">
+            <td>{{c.state_name}}</td>
+            <td>{{c.city_name}}</td>
+            <td class="social-media">
+              <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a> 
+              <i class="fa fa-trash social-iconn"></i>
+            </td>
+           
+        </tr>
+      
+        
+      </tbody>
+    </table>            
+  </section>

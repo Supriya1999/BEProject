@@ -1,0 +1,162 @@
+<main>
+    <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
+        Add Branch Owners
+    </button>
+    <hr/>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Owner Details  </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body ">
+                <div class="container">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label>Owner ID</label>
+                      <input type="text" class="form-control" disabled>
+                    </div>
+                    <div class="form-group col-md-8">
+                      <label >Center Name</label>
+                      <select class="form-control" >
+                          <option>Select Center Name</option>
+                      </select>
+                    </div>
+                    
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label>Owner Name</label>
+                        <input type="text" class="form-control" >
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label >Mobile Number</label>
+                        <input type="text" class="form-control" >
+                      </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>State</label>
+                        <select class="form-control">
+                            <option></option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label >City</label>
+                        <select class="form-control">
+                            <option></option>
+                        </select>
+                      </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <label>Address</label>
+                        <input type="number" class="form-control" >
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label >Email Address</label>
+                        <input type="email" class="form-control" >
+                      </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Qualification</label>
+                        <select class="form-control">
+                            <option></option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label >Specialization</label>
+                        <select class="form-control">
+                            <option></option>
+                        </select>
+                      </div>
+                  </div>
+                  <div class="form-group ">
+                    <label>Upload Photo</label>
+                    <input type="file" class="form-control" >
+                 </div>
+                </div>
+                    
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <!--filter-->
+    <div class="row">
+        <div class="col-md-3">
+        <label>Filter Data</label><br>
+        <input type="text" placeholder="Filter data by name" class="form-control"/>
+        </div>
+    </div>
+    <br><br>
+    <!--table-->
+    <section class="table" style="background-color: white; overflow-y: auto; ">
+        <table class="table  table-hover table-bordered" >
+            <thead>
+              <tr>
+                <th scope="col">Owner Name</th>
+                <th scope="col">Center Name</th>
+                <th scope="col">Mobile Number</th>
+                <th scope="col">State</th>
+                <th scope="col">City</th>
+                <th scope="col">Address</th>
+                <th scope="col">Email Address</th>
+                <th scope="col">Qualification</th>
+                <th scope="col">Specialization</th>
+                <th scope="col">Photo</th>
+                <th scope="col">Action</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                  <td>Mansi Shivarkar</td>
+                  <td>TCOER</td>
+                  <td>9890032075</td>
+                  <td>Maharashtra</td>
+                  <td>Pune</td>
+                  <td>Saswad - Bopdev - Pune Rd, Yewalewadi, Kondhwa Budruk, Pune, Maharashtra 411048
+                 </td>
+                  <td>danish2000ds@gmail.com</td>
+                  <td>BE</td>
+                  <td>Computer</td>
+                  <td>danish.jpg</td>
+                  <td class="social-media">
+                    <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                    <i class="fa fa-trash  social-iconn   " ></i>
+                  </td>
+                 
+              </tr>
+              <tr>
+                <td>Mansi Shivarkar</td>
+                <td>TCOER</td>
+                <td>9890032075</td>
+                <td>Maharashtra</td>
+                <td>Pune</td>
+                <td>Saswad - Bopdev - Pune Rd, Yewalewadi, Kondhwa Budruk, Pune, Maharashtra 411048
+               </td>
+                <td>danish2000ds@gmail.com</td>
+                <td>BE</td>
+                <td>Computer</td>
+                <td>danish.jpg</td>
+                <td class="social-media">
+                  <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                  <i class="fa fa-trash  social-iconn   " ></i>
+                </td>
+               
+            </tr>
+            </tbody>
+          </table>            
+        </section>
+</main>

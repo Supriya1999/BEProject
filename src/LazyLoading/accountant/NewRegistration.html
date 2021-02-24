@@ -1,0 +1,510 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+  <li class="nav-item ">
+    <a class="nav-link "  data-toggle="tab" href="#home">Guidelines</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#menu1">Student Details</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#menu2">Registration Details</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#menu3">Payments Details</a>
+  </li>
+</ul>
+
+<div class="tab-content mt-3">
+  <div class="tab-pane container " id="home">
+    <section class="enquiry_form">
+      <!--guidelines-->
+      <div class="card ">
+          <div class="card-header bg-dark text-white text-center">
+              Guidelines for Admission Process
+          </div>
+          <div class="card-body">
+              <div class="container">
+                 
+                    <img src="assets/images/guide.JPG" class="img-fluid " />
+                  
+              </div>    
+          </div>
+      </div>
+      <br>
+      <!--fee stucture-->
+      <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+            Fee Structure
+        </div>
+        <div class="card-body">
+            <div class="container">
+           
+                <label class="text-dark">Fee Structure Click Here to check fee. Kindly check your admitted
+                   year and fee 
+                   (<a href=" https://tinyurl.com/TCOER-Fee-Structure" target="_blank" >Click Here</a>).
+                </label>
+              
+            </div>    
+        </div>
+      </div>
+      <br>
+      <!--Payment options-->
+      <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+            Payment Options
+        </div>
+        <div class="card-body">
+            <div class="container">
+              
+              <label class="text-dark">For Payment of Fee Scan the given QR - Code, Use below bank Details or use Payment Gateway.<br> (Use PhonePay, Google Pay, Or Any UPI Payment App for QR Code)</label>
+           <br>  
+           
+                  <img src="assets/images/qr.jpeg" class="img-fluid " />
+               
+            </div>    
+        </div>
+      </div>
+      <br>
+      <!--guidelines-->
+      <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+            Account Details
+        </div>
+        <div class="card-body">
+            <div class="container">
+             
+                  <img src="assets/images/acc.PNG" class="img-fluid " />
+               
+                
+                
+            </div>    
+        </div>
+      </div>
+      <br>
+      <!--guidelines-->
+      <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+            DD Details
+        </div>
+        <div class="card-body">
+            <div class="container">
+               
+                  <img src="assets/images/dd.JPG" class="img-fluid " />
+               
+                
+                
+            </div>    
+        </div>
+      </div>
+      <br>
+      <!--guidelines-->
+      <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+            Contact Details
+        </div>
+        <div class="card-body">
+            <div class="container">
+               
+                  <img src="assets/images/contact.JPG" class="img-fluid " />
+                
+                
+                
+            </div>    
+        </div>
+      </div>
+      <br>
+      <!--guidelines-->
+      <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+            Account Details
+        </div>
+        <div class="card-body">
+            <div class="container">
+               
+                  <img src="assets/images/acc.PNG" class="img-fluid " />
+               
+                
+                
+            </div>    
+        </div>
+      </div>
+      <br>
+  </section> 
+  </div>
+
+  <div class="tab-pane container fade" id="menu1">
+    
+    <section class="enquiry_form">
+  
+      <!--candidate basic info-->
+      <div class="card ">
+          <div class="card-header bg-dark text-white text-center">
+              Student Basic Information
+          </div>
+          <div class="card-body">
+              <div class="container">
+                  <div class="form-row">
+                      <div class="form-group col-md-3">
+                        <span *ngIf="studentform.get('first_name').errors && studentform.get('first_name').dirty">
+                          <span *ngIf="studentform.get('first_name').errors.required" style="color:red;"> please enter first name</span>
+                          <span *ngIf="studentform.get('first_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                        </span> 
+                        <input type="text" [(ngModel)]="first_name" placeholder="First Name" class="form-control" >
+                      </div>
+                      <div class="form-group col-md-3">
+                        <span *ngIf="studentform.get('middle_name').errors && studentform.get('middle_name').dirty">
+                          <span *ngIf="studentform.get('middle_name').errors.required" style="color:red;"> please enter middle name</span>
+                          <span *ngIf="studentform.get('middle_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                        </span> 
+                        <input type="text" [(ngModel)]="middle_name" placeholder="Middle Name" class="form-control" >
+                      </div>
+                      <div class="form-group col-md-3">
+                        <span *ngIf="studentform.get('last_name').errors && studentform.get('last_name').dirty">
+                          <span *ngIf="studentform.get('last_name').errors.required" style="color:red;"> please enter last name</span>
+                          <span *ngIf="studentform.get('last_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                        </span> 
+                        <input type="text" [(ngModel)]="last_name" placeholder="Last Name" class="form-control" >
+                      </div>
+                      <div class="form-group col-md-3">
+                        <input type="date" class="form-control" [(ngModel)]="birth_date" placeholder="Birth Date">
+                      </div>
+                  </div>
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+
+                        <span *ngIf="studentform.get('email_address').errors && studentform.get('email_address').dirty">
+                          <span *ngIf="studentform.get('email_addre').errors.required" style="color:red;"> please enter email address</span>
+                          <span *ngIf="studentform.get('email_address').errors.pattern" style="color:red;"> only characters are allowed</span>
+                        </span> 
+                        <input type="text" [(ngModel)]="email_address" placeholder="Email Address" class="form-control" >
+                      </div>
+                      <div class="form-group col-md-6">
+                        <select class="form-control" [(ngModel)]="center_id">
+                          <option selected disabled>Select Center Name</option>
+                          <option *ngFor="let c of centers" value={{c.center_id}}>{{c.center_name}}</option>
+                        </select>
+                      </div>
+                    </div>
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <span *ngIf="studentform.get('mobile_number').errors && studentform.get('mobile_number').dirty">
+                            <span *ngIf="studentform.get('mobile_number').errors.required" style="color:red;"> please enter mobile number</span>
+                            <span *ngIf="studentform.get('mobile_number').errors.pattern" style="color:red;"> only characters are allowed</span>
+                          </span> 
+                          <input type="text" [(ngModel)]="mobile_number" placeholder="Mobile Number" class="form-control" >
+                          </div>
+                          <div class="form-group col-md-6">
+                        <span *ngIf="studentform.get('alternative_number').errors && studentform.get('alternative_number').dirty">
+                          <span *ngIf="studentform.get('alternative_number').errors.required" style="color:red;"> please enter mobile number</span>
+                          <span *ngIf="studentform.get('alternative_number').errors.pattern" style="color:red;"> only characters are allowed</span>
+                        </span> 
+                        <input type="text" [(ngModel)]="alternative_number" placeholder="Alternative Number" class="form-control" >
+                        </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                      
+                      <select class="form-control" [(ngModel)]="state_id" (change)="GetCities(state_id)">
+                        <option selected disabled>Select State</option>
+                        <option *ngFor="let s of states" value="{{s.state_id}}" >{{s.state_name}}</option>
+                      </select>
+                      </div>
+                    <div class="form-group col-md-4">
+                     
+                      <select class="form-control" [(ngModel)]="city_id" (change)="GetLocations(city_id)">
+                        <option selected disabled>Select City</option>
+                        <option *ngFor="let c of cities" value="{{c.city_id}}">{{c.city_name}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                      
+                      <select class="form-control" [(ngModel)]="location_id">
+                        <option selected disabled>Select Location</option>
+                        <option *ngFor="let l of locations" value={{l.location_id}}>{{l.location_name}}</option>
+                      </select>
+                  </div>
+                </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <span *ngIf="studentform.get('local_address').errors && studentform.get('local_address').dirty">
+                        <span *ngIf="studentform.get('local_address').errors.required" style="color:red;"> please enter mobile number</span>
+                        <span *ngIf="studentform.get('local_address').errors.pattern" style="color:red;"> only characters are allowed</span>
+                      </span> 
+                      <input type="text" [(ngModel)]="local_address" class="form-control" placeholder="Local Address" >
+                    </div>
+                    <div class="form-group col-md-6">
+                      <span *ngIf="studentform.get('permanent_address').errors && studentform.get('permanent_address').dirty">
+                        <span *ngIf="studentform.get('permanent_address').errors.required" style="color:red;"> please enter mobile number</span>
+                        <span *ngIf="studentform.get('permanent_address').errors.pattern" style="color:red;"> only characters are allowed</span>
+                      </span> 
+                      <input type="text" [(ngModel)]="permanent_address" class="form-control" placeholder="Permanent Address">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Upload Picture</label>
+                    <input type="file" class="form-control" placeholder="Permanent Address">
+                  </div>
+              </div>
+              </div>    
+          </div>
+      
+      <br>
+      <!--candidate education info-->
+      <div class="card ">
+          <div class="card-header bg-dark text-white text-center">
+             Previous Educational Details
+          </div>
+          <div class="card-body" style="overflow-y: auto;">
+              <div class="container">
+                  <table class="table table-bordered"> 
+                    <tr>
+                      <td>
+                        <select class="form-control" [(ngModel)]="qualification_id" (change)="GetSpecializations(qualification_id)">
+                          <option selected disabled>Select Qualification</option>
+                        <option *ngFor="let q of qualifications" value="{{q.qualification_id}}">{{q.qualification}}</option>
+
+                      </select>
+                    </td>
+                      
+                      <td>
+                        <select class="form-control" [(ngModel)]="specialization_id" >
+                          <option selected disabled>Select Specialization</option>
+                          <option *ngFor="let s of specializations" value="{{s.specialization_id}}">{{s.specialization}}</option>
+  
+                        </select>
+                      </td>
+                      
+                      <td>
+                        
+                        <input type="text" [(ngModel)]="medium" class="form-control" placeholder="Medium">
+                      </td>
+                      
+                      <td>
+                       
+                        <input type="text" [(ngModel)]="university" class="form-control" placeholder="university">
+
+                      </td>
+                      
+                      <td>
+                         
+                        <input type="text" [(ngModel)]="passing_year" class="form-control" placeholder="passing_year">
+
+                      </td>
+                      
+                      <td>
+                        
+                        <input type="text" [(ngModel)]="percentage" class="form-control" placeholder="percentage">
+
+                      </td>
+                      
+                      <td>
+                        <button type="button" class="btn btn-dark" (click)="AddStudentQulification(qualification_id,specialization_id,medium,university,passing_year,percentage)">
+                          <i class="fa fa-plus"></i>
+                        </button>
+                        
+                      </td>
+                    </tr>
+                  </table>
+                  <table class="table table-bordered" >
+                    <th>Qualification</th>
+                    <th>Specialization</th>
+                    <th>Medium</th>
+                    <th>University</th>
+                    <th>Year</th>
+                    <th>Percentage</th>
+
+                    <tbody>
+                      <tr *ngFor="let q of studentqualifications">
+                          <td>{{q.qualifications}}</td>
+                          <td>{{q.specializations}}</td>
+                          <td>{{q.medium}}</td>
+                          <td>{{q.university}}</td>
+                          <td>{{q.passing_year}}</td>
+                          <td>{{q.percentage}}</td>
+                          
+                          
+                         
+                      </tr>
+                      
+                    </tbody>
+                    
+                </table>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <input type="text" class="form-control" placeholder="CET/JEE Marks"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <input type="text" class="form-control" placeholder="12th PCM Marks"/>
+                    </div> 
+                  </div>
+              </div>    
+          </div>
+      </div>
+    
+      <br>
+          <!--Parent basic info-->
+          <div class="card ">
+            <div class="card-header bg-dark text-white text-center">
+                parent Information
+            </div>
+            <div class="card-body">
+                <div class="container">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <input type="text" [(ngModel)]="father_name" class="form-control" placeholder="Father Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                          <input type="number" [(ngModel)]="father_number" class="form-control" placeholder="Father Contact Number">
+                        </div>
+                        
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <input type="text" [(ngModel)]="mother_name" class="form-control" placeholder="Mother Name">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <input type="number" [(ngModel)]="mother_number" class="form-control" placeholder="Mother Contact Number">
+                      </div>
+                    </div>
+                    
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <input type="text" [(ngModel)]="occupation" class="form-control" placeholder="Father Occupation">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <input type="text" [(ngModel)]="annual_income" class="form-control" placeholder="Annual Income(Last Year)">
+                      </div>
+                      <div class="form-group col-md-4">
+                        
+                        <input type="text" [(ngModel)]="email_addresss" class="form-control" placeholder="Father/Mother Email ID">
+                     
+                      </div>
+                    </div>
+
+                </div>
+                </div>    
+            </div>
+          <br>
+         
+    </section>
+    
+    </div>
+  
+  <div class="tab-pane container fade" id="menu2">
+    <section class="enquiry_form">
+      <!--candidate bank info-->
+      <div class="card ">
+          <div class="card-header bg-dark text-white text-center">
+              Student Course Details
+          </div>
+          <div class="card-body">
+              <div class="container">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Course</label>
+                    <select class="form-control">
+                      <option>Select Course</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Year of Study</label>
+                    <select class="form-control">
+                      <option>Select Year of Study</option>
+                    </select>
+                  </div> 
+                </div>
+                
+                <div class="form-row">
+                  
+                  <div class="form-group col-md-4">
+                    <label>Category</label>
+                    <select class="form-control">
+                      <option>Select Category</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label>Course Fees</label>
+                    <input type="text" class="form-control" placeholder="Course Fees"/>
+                  </div>
+                  
+                  <div class="form-group col-md-4">
+                    <label>Joining Date</label>
+                    <input type="date" class="form-control" />
+                  </div>
+                  
+                </div>
+                <div class="form-group ">
+                  <label>Description</label>
+                  <input type="text" class="form-control" placeholder="Description"/>
+                </div>  
+              </div>
+              </div>    
+          </div>
+          <br>
+          <!--candidate category info-->
+      
+      </section>
+  </div>
+  <div class="tab-pane container fade" id="menu3">
+    <section class="enquiry_form">
+      <!--candidate bank info-->
+      <div class="card ">
+          <div class="card-header bg-dark text-white text-center">
+              Student Payment Details
+          </div>
+          <div class="card-body">
+              <div class="container">
+                      
+                  <div class="form-row">
+                      
+                      <div class="form-group col-md-6">
+                        <label>Payment Date</label>
+                          <input type="date" class="form-control">
+                      </div>
+                      
+                  </div>
+                  <div class="form-row">
+                      
+                    <div class="form-group col-md-6">
+                        <label>Payment Mode</label>
+                        <select class="form-control">
+                          <option>Select Payment Mode</option>
+                          <option>Cash</option>
+                          <option>Online</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>Payment Type</label>
+                      <select class="form-control">
+                        <option>Select Payment Type</option>
+                        <option>Lumsum</option>
+                        <option>Installments</option>
+                      </select>
+                  </div>
+                </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-12">
+                      <label>Ammpunt Paid</label>
+                      <input type="text" class="form-control" placeholder="Amount Paid">
+                    </div>
+                      
+                  </div>
+                  
+              </div>
+              </div>    
+          </div>
+          <br>
+          <div class="form-group">
+        
+         
+            <input type="button" value="Save" class="btn btn-primary btn-lg btn-sm btn-xs" (click)="CreateStudent(first_name,middle_name,last_name,email_address,mobile_number,alternative_number,birth_date,state_id,location_id,city_id,local_address,permanent_address,center_id,father_name,father_number,mother_name,mother_number,occupation,annual_income,email_addresss)">
+           
+           
+        </div>
+          
+      </section>
+     
+      
+  </div>
+  
+</div>

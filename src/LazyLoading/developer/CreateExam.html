@@ -1,0 +1,124 @@
+<h4>Create New Exam</h4><hr><br>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+            <label>Course Name</label><br>
+            <select class="form-control" [(ngModel)]="course_id" (change)="GetYears(course_id)">
+                <option>Open this select menu</option>
+                <option *ngFor="let c of courses" value="{{c.course_id}}">{{c.course_name}}</option>
+              </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                <label>Year of Study</label><br>
+                <select class="form-control" [(ngModel)]="year_id" (change)="GetSubjects(year_id)"> 
+                    <option>Open this select menu</option>
+                <option *ngFor="let c of years" value="{{c.year_id}}">{{c.year_name}}</option>
+
+                  </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                    <label>Subject Name</label><br>
+                    <select class="form-control" [(ngModel)]="subject_id" (change)="GetUnits(subject_id)">
+                        <option>Open this select menu</option>
+                <option *ngFor="let c of subjects" value="{{c.subject_id}}">{{c.subject_name}}</option>
+
+                      </select>
+                        </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                        <label>Unit Name</label><br>
+                        <select class="form-control" [(ngModel)]="unit_id">
+                            <option>Open this select menu</option>
+                          <option *ngFor="let c of units" value="{{c.unit_id}}">{{c.unit_name}}</option>
+
+                          </select>
+                            </div>
+             
+                            
+                                <div class="form-group col-md-4">
+                            <label>Exam Level</label><br>
+                            <select class="form-control" [(ngModel)]="level_id">
+                                <option>Open this select menu</option>
+                          <option *ngFor="let c of examlevels" value="{{c.level_id}}">{{c.level}}</option>
+
+                              </select>
+                    </div>
+           </div>
+
+           <!-- Button trigger modal -->
+           
+        <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
+            Add Question
+        </button><br>
+        <br> <label>Total Question=1</label>
+            <br><br>
+         <!--table-->
+         <section class="table" style="background-color: white; overflow-y: auto; ">
+            <table class="table  table-hover table-bordered" >
+                <thead>
+                  <tr>
+                    <th scope="col">Question</th>
+                    <th scope="col">Option 1</th>
+                    <th scope="col">Option 2</th>
+                    <th scope="col">Option 3</th>
+                    <th scope="col">Option 4</th>
+                    <th scope="col">Correct Option</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let q of examquestions">
+                      <td>{{q.question}}</td>
+                      <td>{{q.option1}}</td>
+                      <td>{{q.option2}}</td>
+                      <td>{{q.option3}}</td>
+                      <td>{{q.option4}}</td>
+                      <td>{{q.correct_option_id}}</td>
+                      
+                      <td class="social-media">
+                        <a href="exams_delete.html"><i class="fa fa-trash social-iconn " ></i></a>
+                      </td>
+                     
+                  </tr>
+                  
+                </tbody>
+              </table>            
+            </section>
+      
+            <input type="button" value="Create Exam" class="btn btn-primary btn-lg btn-sm btn-xs" (click)="CreateExam(unit_id,level_id)">
+                
+            <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Question</h5><br>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            <label><b>Question</b></label>
+                            <textarea class="form-control" rows="1" [(ngModel)]="question"></textarea><br>
+                            <label><b>Option 1</b></label>
+                            <input class="form-control form-control-sm" type="text" [(ngModel)]="option1"><br>
+                            <label><b>Option 2</b></label>
+                            <input class="form-control form-control-sm" type="text"[(ngModel)]="option2"><br>
+                            <label><b>Option 3</b></label>
+                            <input class="form-control form-control-sm" type="text"[(ngModel)]="option3"><br>
+                            <label><b>Option 4</b></label>
+                            <input class="form-control form-control-sm" type="text"[(ngModel)]="option4"><br>
+                            <label><b>Correct Answer Option</b></label>
+                            <input class="form-control form-control-sm" type="text"[(ngModel)]="correct_option_id">
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" (click)="AddQuestion(question,option1,option2,option3,option4,correct_option_id)">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>

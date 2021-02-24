@@ -24,9 +24,18 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/project_files/css/bootstrap.min.css",
+              "node_modules/project_files/css/style.css",
+              "node_modules/project_files/css/admin_style.css",
+              "node_modules/project_files/css/superuser_style.css"
+
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/project_files/js/jquery-3.5.1.slim.min.js",
+              "node_modules/project_files/js/bootstrap.min.js",
+              "node_modules/project_files/js/popper.min.js",
+              "node_modules/project_files/js/smooth-scroll.polyfills.min.js"
+            ]
           },
           "configurations": {
             "production": {
