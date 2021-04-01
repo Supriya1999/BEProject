@@ -1,0 +1,118 @@
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+<li class="nav-item ">
+  <a class="nav-link "  data-toggle="tab" href="#home">Basic Information</a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#menu1">Candidate Qualification  Details</a>
+</li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content mt-3">
+<div class="tab-pane container " id="home">
+    <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+            Enquiry Details
+        </div>
+    <div class="card-body">
+        <div class="container">
+            <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered" style="overflow-x: auto;background-color: white;">
+                    <tr>
+                        <th>Action</th>
+                        <td class="social-media">
+                            <a href="employee.html"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                             <i class="fa fa-trash  social-iconn   " ></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Candidate Name</th>
+                        <td>{{s.candidate_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Enquiry Date</th>
+                        <td>{{s.enquiry_date}}</td>
+                    </tr>
+                    <tr>
+                        <th>Mobile Number</th>
+                        <td>{{s.mobile_number}}</td>
+                    </tr>
+                    <tr>
+                        <th>Email Address</th>
+                        <td>{{s.email}}</td>
+                    </tr>
+                    <tr>
+                        <th>Birth Date</th>
+                        <td>{{s.birth_date}}</td>
+                    </tr>
+                    <tr>
+                        <th>Category</th>
+                        <td>{{s.category_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Known By</th>
+                        <td>{{s.lead_sources}}</td>
+                    </tr>
+                    <tr>
+                        <th>Interested Courses</th>
+                        <td>{{s.technologies}}</td>    
+                    </tr>
+                </table>
+        </div>
+    </div>
+    </div>
+</div>
+<div class="tab-pane container fade" id="menu1">
+    <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+           Candidate Qualification  Details
+        </div>
+        <div class="card-body" style="overflow-y: auto;">
+            <div class="container">
+                <table class="table table-bordered" > 
+                    <tr>
+                    <th>Qualification</th>
+                    <th>Specialization</th>
+                    <th>Medium</th>
+                    <th>University</th>
+                    <th>Year</th>
+                    <th>Percentage</th>
+                    <th>Action</th>
+                        
+                    </tr>
+                    <tr *ngFor="let q of s.qualifications">
+                        <td>{{q.qualification}}</td>
+                        <td>{{q.specialization}}</td>
+                        <td>{{q.medium}}</td>
+                        <td>{{q.university}}</td>
+                        <td>{{q.passing_year}}</td> 
+                        <td>{{q.percentage}}</td>
+                        <td class="social-media">
+                            <a href="employee.html"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                             <i class="fa fa-trash  social-iconn   " ></i>
+                        </td>
+                    </tr>
+                    
+                </table>
+                <br>
+                     <table class="table table-bordered" > 
+                        <tr>
+                        <th>CET/JEE Score</th>
+                        <th>12th PCM Marks</th>
+                        </tr>
+                        <tr>
+                            <td>{{s.cet_marks}}</td>
+                            <td>{{s.pcm_marks}}</td>
+                            
+                        </tr>
+                        
+                    </table>
+                
+            </div>
+        </div>
+    </div>
+</div>
+</div>    
+

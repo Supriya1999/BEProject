@@ -31,26 +31,24 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-              <td>Danish Shaikh</td>
-              <td>5/1/2021</td>
-              <td>9890032075</td>
-              <td>danish2000ds@gmail.com</td>
-              <td>1/5/2000</td>
-              <td>OBC</td>
-              <td>100000</td>
-              <td>180</td>
-              <td>300</td>
-              <td>Online</td>
-              <td>BE(Computer Engineering)</td>
+          <tr *ngFor="let q of enquires">
+              <td>{{q.candidate_name}}</td>
+              <td>{{q.enquiry_date}}</td>
+              <td>{{q.mobile_number}}</td>
+              <td>{{q.email}}</td>
+              <td>{{q.birth_date}}</td>
+              <td>{{q.category_name}}</td>
+              <td>{{q.annual_income}}</td>
+              <td>{{q.cet_marks}}</td>
+              <td>{{q.pcm_marks}}</td>
+              <td>{{q.lead_sources}}</td>
+              <td>{{q.technologies}}</td>
               <td class="social-media">
-                <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-              
+                <a [routerLink]='["../enquiry_view",q.enquiry_id]'  style="text-decoration: none;"><i class="fa fa-eye social-iconnn " ></i></a>
+                <a data-toggle="modal" data-target="#openingModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
                 <i class="fa fa-trash  social-iconn   " ></i>
-              </td>
-             
-          </tr>
-          
+            </td>
+         </tr>
         </tbody>
       </table>            
     </section>

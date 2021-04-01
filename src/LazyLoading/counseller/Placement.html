@@ -104,6 +104,7 @@
     
 
 <!-- Modal -->
+<form [formGroup]="placementform" (submit)="SubmitPlacementData(placementform.value)">
 <div class="modal fade" id="placedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog " role="document">
     <div class="modal-content">
@@ -118,34 +119,51 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                   <label>Selection ID</label>
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" formControlName="select_id" class="form-control" disabled>
                 </div>
             </div>  
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label >Course</label>
+                    <select class="form-control" [(ngModel)]="course_id" formControlName="course_id" (change)="GetYears(course_id)">
+                        <option selected disabled>
+                            Select Course Name
+                        </option>
+                        <option *ngFor="let c of course" value="{{c.course_id}}">{{c.course_name}}</option>
+                    </select>
+                  </div> 
+                  <div class="form-group col-md-12">
+                    <label >Year Of Study </label>
+                    <select class="form-control" [(ngModel)]="year_id" formControlName="year_id" (change)="GetStudents(year_id)">
+                        <option selected disabled>
+                            Select Year Name
+                        </option>
+                        <option *ngFor="let y of year" value="{{y.year_id}}">{{y.year_name}}</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="form-row">
                 
                 <div class="form-group col-md-6">
                     <label >Student Name</label>
-                    <select class="form-control" >
+                    <select class="form-control" formControlName="registeration_id" >
                         <option>Select Student Name</option>
+                        <option *ngFor="let s of students" value={{s.registeration_id}}>{{s.first_name}} {{s.last_name}}</option>
                     </select>
                   </div>
-                <div class="form-group col-md-6">
-                    <label >Course</label>
-                    <select class="form-control">
-                        <option>Selct course </option>
-                    </select>
-                </div>
+              
             </div>
             <div class="form-row">
                 
                 <div class="form-group col-md-6 ">
                     <label >Company Name</label>
-                    <input type="text" class="form-control" >
+                    <input type="text" formControlName="company_name" class="form-control" >
                   </div>
                   
                 <div class="form-group col-md-6 ">
                     <label >Package</label>
-                    <input type="text" class="form-control" >
+                    <input type="text" formControlName="package" class="form-control" >
                   </div>
             </div>
             
@@ -153,24 +171,25 @@
                 
                 <div class="form-group col-md-6 ">
                     <label >Placement Date</label>
-                    <input type="date" class="form-control" >
+                    <input type="date" formControlName="placement_date" class="form-control" >
                   </div>
                   
                 <div class="form-group col-md-6 ">
                     <label >Student Pic</label>
-                    <input type="file" class="form-control" >
+                    <input type="file" (change)="onSelectFile($event.target.files)" class="form-control" >
                   </div>
             </div>
             </div>
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!placementform.valid">Save</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         
         </div>
     </div>
     </div>
 </div>
+</form>
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
     <li class="nav-item ">
@@ -212,7 +231,6 @@
                         <a data-toggle="modal" data-target="#openingModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
                         <i class="fa fa-trash  social-iconn   " ></i>
                     </td>
-                    
                 </tr>
                 </tbody>
             </table>            
@@ -233,20 +251,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Danish Shaikh</td>
-                    <td>Computer</td>
-                    <td>NTT DATA</td>
-                    <td>5 LPA</td>
-                    <td>9/11/2020</td>
-                    <td>danish.jpg</td>
-                    <td class="social-media">
-                        <a data-toggle="modal" data-target="#placedModal"><i class="fa fa-plus social-iconnn " ></i></a>
-                        <a data-toggle="modal" data-target="#placedModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                        <i class="fa fa-trash  social-iconn   " ></i>
-                    </td>
-                    
-                </tr>
+                    <tr *ngFor="let o of placements">
+                        <td>{{o.first_name}}</td>
+                        <td>{{o.course_name}}</td>
+                        <td>{{o.company_name}}</td>
+                        <td>{{o.package}}</td>
+                        <td>{{o.placement_date}}</td>
+                        <td>
+                            <img src="{{server}}{{o.path}}/{{o.photo}}" height="100px" width="100px"/>
+                        </td>
+                        <td class="social-media">
+                            <a data-toggle="modal" data-target="#placedModal"><i class="fa fa-plus social-iconnn " ></i></a>
+                            <a data-toggle="modal" data-target="#placedModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                            <i class="fa fa-trash  social-iconn   " ></i>
+                        </td>
+                    </tr>
                 </tbody>
             </table>            
             </section>

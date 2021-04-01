@@ -1,0 +1,31 @@
+<h4>Exams</h4>
+<hr>
+        <div class="card rounded" style="margin-bottom: 20px;" *ngFor="let q of s">
+            <div class="card-header bg-dark text-white"><h6>Question- {{q.question}}</h6></div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <div class="radio">
+                    <label>1. {{q.option1}}</label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="radio">
+                        <label>2. {{q.option2}}</label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="radio">
+                        <label>3. {{q.option3}}</label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="radio">
+                        <label>4. {{q.option4}}</label>
+                    </div>
+                </li>
+              </ul>
+              <div class="card-header bg-dark text-white"><h6>correct answer option- {{q.correct_answer_option}}</h6></div>
+              
+          </div>
+          <br>
+          <br>

@@ -1,72 +1,75 @@
-<main>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
-        Add Qualification
-    </button>
-    <hr/>
-    <!-- Modal -->
-    <form [formGroup]="qualificationform" (submit)="SubmitData(qualificationform.value)">
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Qualification  </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label>Qualification ID</label>
-                    <input type="text" formControlName="qualification_id" class="form-control" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Qualification</label>
-                    <span *ngIf="qualificationform.get('qualification').errors && qualificationform.get('qualification').dirty">
-                        <span *ngIf="qualificationform.get('qualification').errors.required" style="color:red;"> please enter state name</span>
-                        <span *ngIf="qualificationform.get('qualification').errors.pattern" style="color:red;"> only characters are allowed</span>
-                    </span>
-                      <input type="text" formControlName="qualification" class="form-control" >
-                </div>
-                    
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" [disabled]="!qualificationform.valid">Save</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            
-            </div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn"  (click)="OpenModal()">
+    Add Qualification
+</button>
+<hr/>
+<!-- Modal -->
+<form [formGroup]="qualificationform" (submit)="SubmitData(qualificationform.value)">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+    <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Qualification  </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
         </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Qualification ID</label>
+                <input type="text" formControlName="qualification_id" class="form-control" disabled>
+            </div>
+            <div class="form-group">
+                <label>Qualification</label>
+                <span *ngIf="qualificationform.get('qualification').errors && qualificationform.get('qualification').dirty">
+                    <span *ngIf="qualificationform.get('qualification').errors.required" style="color:red;"> please enter state name</span>
+                    <span *ngIf="qualificationform.get('qualification').errors.pattern" style="color:red;"> only characters are allowed</span>
+                </span>
+                  <input type="text" formControlName="qualification" class="form-control" >
+            </div>
+                
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="!qualificationform.valid">Save</button>
+        <button type="button" class="btn btn-danger" (click)="CloseModal()">Close</button>
+        
         </div>
     </div>
-    </form>
+    </div>
+</div>
+</form>
+
+<!--filter-->
+<div class="row">
+    <div class="col-md-3">
+    <label>Filter Data</label><br>
+    <input type="text" placeholder="Filter data by name" class="form-control"/>
+    </div>
+</div>
+<br><br>
+<!--table-->
+<section class="table" style="background-color: white;">
+    <table class="table table-hover table-bordered" >
+        <thead>
+          <tr>
+            <th scope="col">Qualification Name</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let s of qualification_names">
+                <td>{{s.qualification}}</td>
+                <td class="social-media">
+                    <a  (click)="View(s)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                    <a  (click)="Delete(s)"><i class="fa fa-trash  social-iconn" ></i></a>  
+                </td>
+               
+            </tr>
+        </tbody>
+      </table>            
+    </section>
+
     
-    <!--filter-->
-    <div class="row">
-        <div class="col-md-3">
-        <label>Filter Data</label><br>
-        <input type="text" placeholder="Filter data by name" class="form-control"/>
-        </div>
-    </div>
-    <br><br>
-    <!--table-->
-    <section class="table" style="background-color: white;">
-        <table class="table table-hover table-bordered" >
-            <thead>
-              <tr>
-                <th scope="col">Qualification Name</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let s of qualification_names">
-                    <td>{{s.qualification}}</td>
-                    <td class="social-media">
-                      <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                      <i class="fa fa-trash  social-iconn   " ></i>
-                    </td>
-                   
-                </tr>
-            </tbody>
-          </table>            
-        </section>
-</main>
+
+    

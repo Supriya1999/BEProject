@@ -12,6 +12,9 @@ export class StudyMaterialClass{
     subjects:any;
     units:any;
     studymaterial:any
+    ppt:any;
+    server:any="http://localhost:8000/";
+
     constructor(private api:GenericApi,private fb:FormBuilder){
         this.GetCourses();
         this.GetYear();
@@ -24,14 +27,25 @@ export class StudyMaterialClass{
         this.studyform=this.fb.group({
             ppt_id:[null],
             unit_id:[null],
-            description:[null,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z ]*")])]]
+            description:[null,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z ]*")])]],
+            ppt:[null]
         })
     }
     AddStudy(s){
-            this.api.PostApi("studymaterial",s).subscribe(e=>{
+            var data =new FormData();
+            data.append("unit_id",s.unit_id)
+            data.append("unit_title",s.unit_title)
+            data.append("description",s.description)
+            data.append("ppt",this.ppt[0])
+            this.api.PostApi("studymaterial",data).subscribe(e=>{
             this.NewStudyForm();
             this.GetStudy();
         })
+    }
+    
+    onSelectFile(e:any){
+        this.ppt=e;
+        //console.log(this.photo[0])
     } 
     GetCourses(){
         this.api.GetApi("courses").subscribe(e=>this.courses=e)

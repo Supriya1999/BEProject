@@ -6,12 +6,14 @@ import {FormGroup,FormControl,Validators, FormBuilder,Validator} from "@angular/
     templateUrl:'Subjects.html'
 })
 export class SubjectsClass{
-    subjects:any;
+    subjects:any; 
     courses:any;
     years:any;
     subjectform:any;
     description:any;
+    photo:any;
     msg:any;
+    server:any="http://localhost:8000/";
     constructor(private fb:FormBuilder,private api:GenericApi){
         this.NewSubjectForm();
         this.GetCourses();
@@ -28,12 +30,21 @@ export class SubjectsClass{
         })
     }
     AddSubject(s){
-        this.api.PostApi("subjects",s).subscribe(e=>{
+        var data =new FormData();
+        data.append("year_id",s.year_id)
+        data.append("subject_name",s.subject_name)
+        data.append("description",s.description)
+        data.append("photo",this.photo[0])
+        this.api.PostApi("subjects",data).subscribe(e=>{
             this.NewSubjectForm();
             this.GetSubject();
+            this.photo=null
         })
     } 
-
+    onSelectFile(e:any){
+        this.photo=e;
+        //console.log(this.photo[0])
+      }
     GetSubject(){
         this.api.GetApi("subjects").subscribe(e=>this.subjects=e)
 

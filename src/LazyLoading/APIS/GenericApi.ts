@@ -14,7 +14,7 @@ export class GenericApi{
     PutApi(apiurl:any,dt:any):any{
         return this.http.put(this.url.getUrl()+apiurl,dt);
     }
-    DeleteApi(apiurl:any,dt:any):any{
-        return this.http.delete(this.url.getUrl()+apiurl,dt);
+    DeleteApi(apiurl:any):any{
+        return this.http.delete(this.url.getUrl()+apiurl);
     }
 }

@@ -35,11 +35,22 @@
               
               <div class="form-group ">
                 <label>Year of Study</label>
-                <span *ngIf="yearform.get('year_name').errors && yearform.get('year_name').dirty">
-                  <span *ngIf="yearform.get('year_name').errors.required" style="color:red;"> please enter year name</span>
-                  <span *ngIf="yearform.get('year_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                <select class="form-control" formControlName="year_name">
+                  <option selected disabled >Select Year of study</option>
+                  <option value="First Year">First Year</option>
+                  <option value="Second Year">Second Year</option>
+                  <option value="Third Year">Third Year</option>
+                  <option value="Fourth Year">Fourth Year</option>
+                </select>
+              </div>
+
+              <div class="form-group ">
+                <label>Year Code</label>
+                <span *ngIf="yearform.get('year_code').errors && yearform.get('year_code').touched">
+                  <span *ngIf="yearform.get('year_code').errors.required" style="color:red;"> please enter year code for e.g BE(Computer) First Year=CO01</span>
+                  <span *ngIf="yearform.get('year_code').errors.pattern" style="color:red;"> only characters are allowed</span>
                 </span>
-                <input type="text" formControlName="year_name" class="form-control" >
+                <input type="text" formControlName="year_code" class="form-control" >
               </div>
 
             </div>
@@ -68,6 +79,8 @@
           <tr>
             <th scope="col">Course Name</th>
             <th scope="col">Year Of Study</th>
+            <th scope="col">Year Code</th>
+
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -75,6 +88,8 @@
           <tr *ngFor="let y of years">
               <td>{{y.course_name}}</td>
               <td>{{y.year_name}}</td>
+              <td>{{y.year_code}}</td>
+
               <td class="social-media">
                 <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
                 <i class="fa fa-trash  social-iconn   " ></i>

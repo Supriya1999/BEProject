@@ -1,6 +1,7 @@
 import {Component} from "@angular/core"
 import {GenericApi} from "../APIS/GenericApi"
 import {FormGroup,FormControl,Validators, FormBuilder,Validator} from "@angular/forms"
+import { $ } from "protractor";
 @Component({
     selector:'app-root',
     templateUrl:'Admin_State.html',
@@ -8,9 +9,11 @@ import {FormGroup,FormControl,Validators, FormBuilder,Validator} from "@angular/
 export class StateClass{
 
     states:any; 
-    stateform:FormGroup;
+    stateform:FormGroup; 
+    display:any="none"
+    action:any=""
     constructor(private api:GenericApi,private fb:FormBuilder){
-        this.GetStates();
+        this.GetStates(); 
         this.NewStateForm();
     }  
     NewStateForm(){ 
@@ -20,13 +23,66 @@ export class StateClass{
         })
     }
     SubmitData(s){
+        switch(this.action)
+        {
+            case "Add":
+                {
         this.api.PostApi("state",s).subscribe(e=>{
-     //       console.log(e);
-            this.NewStateForm();
-            this.GetStates();
+            //       console.log(e);
+                alert(e.msg)
+                this.NewStateForm();
+                this.GetStates();
+                this.CloseModal();
         })
+    break;
     }
-    GetStates(){
-        this.api.GetApi("state").subscribe(e=>this.states=e)
+    case "Update":
+        {
+this.api.PutApi("state",s).subscribe(e=>{
+    alert(e.msg);
+    this.NewStateForm();
+    this.GetStates();
+    this.CloseModal();
+})
+break;
+}
+        }
+        }
+        GetStates(){
+            this.api.GetApi("state").subscribe(e=>this.states=e)
+        }
+    ViewStateForm(s){
+        this.stateform=this.fb.group({
+            state_id:[s.state_id],
+            state_name:[s.state_name,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]]
+        })
+      
+        // $("#exampleModalLabel").modal("show")
+    }
+    View(s){
+        //  alert("")
+          this.ViewStateForm(s);
+          this.action="Update";
+          this.display="block"
+  
+      }
+    OpenModal(){
+        this.NewStateForm();
+        this.action="Add";
+        this.display="block"
+
+    }
+    CloseModal(){
+        this.action="";
+        this.display="none"
+    }
+    Delete(s){
+        this.api.DeleteApi("state?state_id="+s.state_id).subscribe(e=>{
+            alert(e.msg)
+        //    this.NewQualificationForm();
+           this.GetStates();
+         
+   
+       })
     }
 }

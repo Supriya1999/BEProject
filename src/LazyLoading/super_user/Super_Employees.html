@@ -1,193 +1,299 @@
-<main>
-    <a routerLink="../employee_view" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" >
-        View Employees
-    </a>
-    <hr/>
-    <section class="enquiry_form">
-      <!--Employee basic info-->
-      <div class="card ">
-          <div class="card-header bg-dark text-white text-center">
-              Employee Basic Information
-          </div>
-          <div class="card-body">
-              <div class="container">
-                <div class="form-row">
-                  <div class="form-group col-md-8 ">
-                    <label>Center Name</label>
-                    <select class="form-control" >
-                      <option>Select Center Name</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label >Employee ID</label>
-                    <input type="text" class="form-control"  disabled>
-                  </div>
-                  
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-4">
-                      <label>First Name</label>
-                      <input type="text" class="form-control" >
-                  </div>
-                  <div class="form-group col-md-4">
-                      <label>Middle Name</label>
-                      <input type="text" class="form-control" >
-                  </div>
-                  <div class="form-group col-md-4">
-                      <label>Last Name</label>
-                      <input type="text" class="form-control" >
-                  </div>
-                    
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-4">
-                      <label>Birth Date</label>
-                      <input type="date" class="form-control" >
-                  </div>
-                  <div class="form-group col-md-4">
-                      <label>Mobile Number</label>
-                      <input type="text" class="form-control" >
-                  </div>
-                  <div class="form-group col-md-4">
-                      <label>Email Address</label>
-                      <input type="text" class="form-control" >
-                  </div>
-                    
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                      <label>Role</label>
-                      <select class="form-control" >
-                        <option>Select Role</option>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label >Joining Date</label>
-                      <input type="date" class="form-control" >
-                    </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-4">
-                      <label>State</label>
-                      <select class="form-control">
-                          <option></option>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label >City</label>
-                      <select class="form-control">
-                          <option></option>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                      <label >Location</label>
-                      <select class="form-control">
-                          <option></option>
-                      </select>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                      <label>Permanent Address</label>
-                      <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label >Local Address</label>
-                      <input type="text" class="form-control">
-                      
-                    </div>
-                </div>
-                <div class="form-group ">
-                  <label>Upload Photo</label>
-                  <input type="file" class="form-control" >
-               </div>  
-              </div>
-          </div>    
-      </div>
-      
-      <br>
-      <!--candidate education info-->
-      <div class="card ">
-          <div class="card-header bg-dark text-white text-center">
-             Employee Educational Details
-          </div>
-          <div class="card-body" style="overflow-y: auto;">
-              <div class="container">
-                  <table class="table table-bordered"> 
-                      <th>Qualification</th>
-                      <th>Specialization</th>
-                      <th>Medium</th>
-                      <th>University</th>
-                      <th>Year</th>
-                      <th>Percentage</th>
-                  </table>
-                  
-              </div>    
-          </div>
-      </div>
-      <br>
-      <!--candidate education info-->
-      <div class="card ">
-        <div class="card-header bg-dark text-white text-center">
-           Employee Documents Details
-        </div>
-        <div class="card-body" style="overflow-y: auto;">
-            <div class="container">
-                <table class="table table-bordered"> 
-                    <th>Document Name</th>
-                    <th>File Upload</th>
-                </table>
-                
-            </div>    
-        </div>
-    </div>
-    <br>
-    <!--candidate education info-->
-    <div class="card ">
-        <div class="card-header bg-dark text-white text-center">
-           Employee Salary Details
-        </div>
-        <div class="card-body" style="overflow-y: auto;">
-            <div class="container">
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label >Salary Date</label>
-                        <input type="date" class="form-control"  >
-                      </div>
-                    
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label>Actual Salary</label>
-                        <input type="text" class="form-control" >
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>Incentive Amount</label>
-                        <input type="text" class="form-control" >
-                    </div>
-                    
-                      
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label>Tax Deduction</label>
-                        <input type="text" class="form-control" >
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>Total Present Days</label>
-                        <input type="text" class="form-control" >
-                    </div>
-                  </div>
-                </div>                        
-            </div>    
-        </div>
-    <br>
-    
-          
-  </section>
-  <button type="submit" class="btn btn-dark">Submit</button>
-    
 
+
+<section class="enquiry_form" >
+
+
+<!--Employee basic info-->
+<div class="card ">
+    <div class="card-header bg-dark text-white text-center">
+        Employee Basic Information
+    </div> 
+    <div class="card-body">
+        <div class="container">
+          <div class="form-row"> 
+            
+            <div class="form-group col-md-4">
+              <label >Employee ID</label>
+              <input type="text" class="form-control" [(ngModel)]="employee_id" disabled>
+            </div>
+            
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>First Name</label>
+                
+                <input type="text" [(ngModel)]="first_name" class="form-control" >
+            </div>
+            <div class="form-group col-md-4">
+                <label>Middle Name</label>
+                
+                <input type="text" [(ngModel)]="middle_name" class="form-control" >
+            </div>
+            <div class="form-group col-md-4">
+                <label>Last Name</label>
+                
+                <input type="text" [(ngModel)]="last_name" class="form-control" >
+            </div>
+              
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>Birth Date</label>
+                
+                <input type="date" [(ngModel)]="birth_date" class="form-control" >
+            </div>
+            <div class="form-group col-md-4">
+              <label >Joining Date</label>
+              
+              <input type="date" [(ngModel)]="joining_date" class="form-control" >
+            </div>
+            <div class="form-group col-md-4">
+              <label>Role</label>
+              <select class="form-control" [(ngModel)]="role_id">
+                <option>Select Role</option>
+                <option *ngFor="let s of role" value={{s.role_id}}>{{s.role}}</option>
+  
+            </select>
+            
+            </div>
+            <div class="form-group col-md-4">
+                <label>Mobile Number</label>
+                
+                <input type="text" [(ngModel)]="mobile_number" class="form-control" >
+            </div>
+            <div class="form-group col-md-4">
+                <label>Email Address</label>
+                
+                <input type="text" [(ngModel)]="email_address" class="form-control" >
+            </div>
+            
+            <div class="form-group col-md-4 ">
+              <label>Center Name</label>
+              <select class="form-control" [(ngModel)]="center_id">
+                <option selected disabled>Select Center name</option>
+                <option *ngFor="let s of centers" value={{s.center_id}}>{{s.college_name}}</option>
+              </select>
+            </div>
+              
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+                <label>State</label>
+                <select class="form-control"  [(ngModel)]="state_id"  (change)="GetCities(state_id)">
+                  <option>Select State</option>
+                  <option *ngFor="let s of states" value={{s.state_id}}>{{s.state_name}}</option>
     
-</main>
+              </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label >City</label>
+                <select class="form-control" [(ngModel)]="city_id"  (change)="GetLocations(city_id)">
+                    <option>select city</option>
+                    <option *ngFor="let s of cities" value={{s.city_id}}>{{s.city_name}}</option>
+                    <input type="text" formControlName="city_id" class="form-control">
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <label >Location</label>
+                <select class="form-control" [(ngModel)]="location_id" >
+                    <option>select location</option>
+                    <option *ngFor="let s of locations" value={{s.location_id}}>{{s.location_name}}</option>
+                </select>
+              </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Permanent Address</label>
+                <input type="text" [(ngModel)]="permanent_address" class="form-control">
+              </div>
+              <div class="form-group col-md-6">
+                <label >Local Address</label>
+                <input type="text" [(ngModel)]="local_address" class="form-control">
+                
+              </div>
+              <div class="form-group col-md-12">
+                <label>Upload Photo</label>
+                <input type="file" (change)="onSelectFile($event.target.files)" class="form-control"/>
+              </div>
+          </div>
+        </div>
+    </div>    
+</div>
+
+
+<br>
+<!--candidate education info-->
+<div class="card ">
+  <div class="card-header bg-dark text-white text-center">
+     Employee Educational Details
+  </div>
+  <div class="card-body" style="overflow-y: auto;">
+      <div class="container">
+          <table class="table table-bordered"> 
+            <tr>
+              <td><select class="form-control"  [(ngModel)]="qualification_id" (change)="GetSpecializations(qualification_id)" >
+                    <option selected disabled>Qualification</option>
+                    <option *ngFor="let q of qualification" value="{{q.qualification_id+'_'+q.qualification}}">{{q.qualification}}</option>
+                  </select>
+            </td>
+              
+              <td><select class="form-control" [(ngModel)]="specialization_id">
+                    <option selected disabled>Specialization</option>
+                    <option *ngFor="let s of specialization" value="{{s.specialization_id+'_'+s.specialization}}">{{s.specialization}}</option>
+                  </select>
+                
+              </td>
+              
+              <td>
+                <input type="text" placeholder="Medium" class="form-control"[(ngModel)]="medium" />
+              </td>
+              
+              <td>
+                <input type="text" placeholder="University" class="form-control" [(ngModel)]="university"/>
+
+              </td>
+              
+              <td>
+                <input type="text" placeholder="Year" class="form-control" [(ngModel)]="year"/>
+
+              </td>
+              <td>
+                <input type="text" placeholder="Percentage" class="form-control" [(ngModel)]="percentage"/>
+
+              </td>
+              
+              <td>
+                <button type="button" class="btn btn-dark"(click)="AddQulification(qualification_id,specialization_id,medium,university,year,percentage)">
+                  <i class="fa fa-plus"></i>
+                </button>
+                
+              </td>
+            </tr>
+          </table>
+          <table class="table table-bordered" >
+            <thead>
+              <tr>
+                <th>Qualification</th>
+                <th>Specialization</th>
+                <th>Medium</th>
+                <th>University</th>
+                <th>Year</th>
+                <th>Percentage</th>
+              </tr>  
+            </thead>
+            <tbody>
+              <tr *ngFor="let q of qualifications">
+                <td>{{q.qualification_name}}</td>
+                <td>{{q.specialization_name}}</td>
+                <td>{{q.medium}}</td>
+                <td>{{q.university}}</td>
+                <td>{{q.year}}</td>
+                <td>{{q.percentage}}</td>
+              </tr>   
+                
+            </tbody>
+            
+          </table>
+          
+      </div>    
+  </div>
+</div>
+<br>
+<!--candidate education info-->
+<div class="card ">
+<div class="card-header bg-dark text-white text-center">
+   Employee Documents Details
+</div>
+      <div class="card-body" style="overflow-y: auto;">
+        <div class="container">
+            <table class="table table-bordered"> 
+              <tr>
+                <td>
+                  <input type="text" class="form-control" [(ngModel)]="document_name"/>
+
+                </td>
+                <td>
+                  <input type="file" class="form-control" (change)="onSelectMultipleFile($event.target.files)" />
+
+                </td>
+                
+                <td>
+                  <button type="button" class="btn btn-dark"(click)="AddDocuments(document_name)">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                  
+                </td>
+              </tr>
+            </table>
+            <table class="table table-bordered" >
+              <thead>
+                <tr>
+                  <th>Document</th>
+                  <th>File</th>
+                 
+                </tr>  
+              </thead>
+              <tbody>
+                <tr *ngFor="let q of documents">
+                  <td>{{q.document_name}}</td>
+                  <td>{{q.image_name}}</td>
+                 
+                </tr>   
+                  
+              </tbody>
+              
+            </table>
+            
+        </div>    
+    </div>
+</div>    
+
+<br>
+<!--candidate education info-->
+<div class="card ">
+<div class="card-header bg-dark text-white text-center">
+   Employee Salary Details
+</div>
+<div class="card-body" style="overflow-y: auto;">
+    <div class="container">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label >Salary Date</label>
+                <input type="date" class="form-control" [(ngModel)]="salary_date" >
+              </div>
+            
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Actual Salary</label>
+                <input type="text" class="form-control" [(ngModel)]="actual_salary">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Incentive Amount</label>
+                <input type="text" class="form-control"[(ngModel)]="incentive_amount" >
+            </div>
+            
+              
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Tax Deduction</label>
+                <input type="text" class="form-control"[(ngModel)]="tax_deduction">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Total Present Days</label>
+                <input type="text" class="form-control"[(ngModel)]="total_present_days">
+            </div>
+          </div>
+        </div>                        
+    </div>    
+</div>
+<br>
+
+  
+
+<button type="submit" class="btn btn-dark" (click)="AddEmployee(first_name,middle_name,last_name,birth_date,joining_date,mobile_number,email_address,role_id,state_id,city_id,location_id,permanent_address,local_address,center_id,photo,salary_date,actual_salary,incentive_amount,tax_deduction,total_present_days)" >Submit</button>
+
+
+</section> 

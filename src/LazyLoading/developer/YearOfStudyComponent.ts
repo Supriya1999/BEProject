@@ -19,7 +19,8 @@ export class YearOfStudyClass{
         this.yearform=this.fb.group({
             year_id:[null],
             course_id:[null],
-            year_name:[null,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z ]*")])]]
+            year_name:[null,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z ]*")])]],
+            year_code:[null,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z0-9 ]*")])]]
         })
     }
     AddYear(s){

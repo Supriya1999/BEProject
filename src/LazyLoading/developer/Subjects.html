@@ -2,7 +2,7 @@
     Add Subjects
 </button>
 <hr/>
-<form [formGroup]="subjectform" (submit)="AddSubject(subjectform.value)">
+<form [formGroup]="subjectform" (submit)="AddSubject(subjectform.value)" enctype="multipart/form-data">
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog " role="document">
@@ -55,7 +55,7 @@
             
             <div class="form-group">
                 <label>Subject Pic</label>
-                <input type="file" class="form-control" >
+                <input type="file"  (change)="onSelectFile($event.target.files)" class="form-control" >
             </div>
         
             </div>
@@ -72,7 +72,7 @@
 <!--filter-->
 <div class="row">
     <div class="col-md-3">
-    <label>Filter Data</label><br>
+    <label>Filter Data</label><br> 
     <input type="text" placeholder="Filter data by name" class="form-control"/>
     </div>
 </div>
@@ -96,12 +96,14 @@
               <td>{{s.year_name}}</td>
               <td>{{s.subject_name}}</td>
               <td>{{s.description}}</td>
-              <td>null</td>
+              <td>
+                    <img src="{{server}}{{s.path}}/{{s.picture}}" height="100px" width="100px" />
+                </td>
               <td class="social-media">
                 <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
                 <i class="fa fa-trash  social-iconn   " ></i>
-              </td>
+              </td> 
           </tr>
-        </tbody>
+        </tbody> 
       </table>            
     </section>

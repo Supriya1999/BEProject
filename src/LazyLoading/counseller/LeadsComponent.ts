@@ -23,7 +23,7 @@ export class LeadsClass{
     leadform:FormGroup;
     constructor(private api:GenericApi,private fb:FormBuilder){
         this.GetLeads();
-        // this.GetCenters();
+        this.GetCenters();
         this.GetQualifications();
         this.NewLeadForm();
     }  
@@ -61,12 +61,15 @@ export class LeadsClass{
     GetSpecializations(qid:any){
         this.api.GetApi("specialization?qualification_id="+qid).subscribe(e=>this.specializations=e)
     }
+    GetCenters(){
+        this.api.GetApi("center_details").subscribe(e=>this.centers=e)
+    }
     CreateLead(lead_id,center_id,candidate_name,mobile_number,email,qualification_id,specialization_id,address){
         var cl={"lead_id":lead_id,"center_id":center_id,"candidate_name":candidate_name,"mobile_number":mobile_number,
         "email":email,"qualification_id":qualification_id,
         "specialization_id":specialization_id,"address":address
         }
         this.api.PostApi("leads",cl).subscribe(e=>console.log(e));
-
+        this.lead_id=this.center_id=this.candidate_name=this.mobile_number=this.email=this.qualification_id=this.specialization_id=this.address=null;
     }
 } 

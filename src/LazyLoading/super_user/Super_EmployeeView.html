@@ -1,197 +1,208 @@
-<main>
-    <div class="header">
-        <h5>Employee Code-</h5>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs"> 
+<li class="nav-item ">
+  <a class="nav-link "  data-toggle="tab" href="#home">Profile</a>
+</li>
+
+<li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#menu1">Qualification</a>
+  </li>
+<li class="nav-item">
+  <a class="nav-link" data-toggle="tab" href="#menu2">Documentation</a>
+</li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#menu3">Salary</a>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content mt-3">
+<div class="tab-pane container " id="home">
+    <section class="profile">
+        <img src="{{server}}{{s.path}}/{{s.photo}}" class="rounded img-fluid" height="150px" width="150px"><br><br>
+        <label class="text-dark"><b>Hi {{s.first_name}} {{s.last_name}}</b></label><br>
+        <label class="text-dark"><b>Employee Code</b>-{{s.employee_code}}</label>
+    </section>
+    <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+            Employee Details
+        </div>
+    <div class="card-body">
+        <div class="container">
+            <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered" style="overflow-x: auto;background-color: white;">
+                    <tr>
+                        <th>Action</th>
+                        <td class="social-media">
+                            <a href="employee.html"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                             <i class="fa fa-trash  social-iconn   " ></i>
+                           </td>
+                    </tr>
+                    <tr>
+                        <th>College Name</th>
+                        <td>{{s.college_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Employee Name</th>
+                        <td>{{s.first_name}} {{s.middle_name}} {{s.last_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Birth Date</th>
+                        <td>{{s.birth_date}}</td>
+                    </tr>
+                    <tr>
+                        <th>Mobile Number</th>
+                        <td>{{s.mobile_number}}</td>
+                    </tr>
+                    <tr>
+                        <th>Email Address</th>
+                        <td>{{s.email_address}}</td>
+                    </tr>
+                    <tr>
+                        <th>Role</th>
+                        <td>{{s.role}}</td>
+                    </tr>
+                    <tr>
+                        <th>Joining Date</th>
+                        <td>{{s.joining_date}}</td>
+                    </tr>
+                    <!--
+                    <tr>
+                        <th>State</th>
+                        <td>Maharashtra</td>
+                    </tr>
+                    <tr>
+                        <th>City</th>
+                        <td>Pune</td>
+                    </tr>-->
+                    <tr>
+                        <th>Location</th>
+                        <td>{{s.location_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Permanent Address</th>
+                        <td>{{s.permanent_address}}</td>
+                    </tr>
+                    <tr>
+                        <th>Local Address</th>
+                        <td>{{s.local_address}}</td>
+                    </tr>
+                </table>
+        </div>
     </div>
-    <div class="tabContainer">
-        <div class="buttonContainer" >
-            <button class="button" onclick="showPanel(0)">Profile</button>
-            <button class="button" onclick="showPanel(1)">Qualification</button>
-            <button  class="button" onclick="showPanel(2)">Documents</button>
-            <button class="button" onclick="showPanel(3)">Salary </button>
+    </div>
+</div>
+<div class="tab-pane container fade" id="menu1">
+    <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+           Employee Qualification  Details
         </div>
-        <div class="tabPanel" >
-            <div class="card ">
-                <div class="card-header bg-dark text-white text-center">
-                    Employee Details
-                </div>
-            <div class="card-body">
-                <div class="container">
-                    <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered" style="overflow-x: auto;background-color: white;">
-                            <tr>
-                                <th>Action</th>
-                                <td class="social-media">
-                                    <a href="employees.html"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                                     <i class="fa fa-trash  social-iconn   " ></i>
-                                   </td>
-                            </tr>
-                            <tr>
-                                <th>Center Name</th>
-                                <td>TCOER</td>
-                            </tr>
-                            <tr>
-                                <th>Employee Name</th>
-                                <td>Danish Shaikh</td>
-                            </tr>
-                            <tr>
-                                <th>Birth Date</th>
-                                <td>1/5/2000</td>
-                            </tr>
-                            <tr>
-                                <th>Mobile Number</th>
-                                <td>9890032075</td>
-                            </tr>
-                            <tr>
-                                <th>Email Address</th>
-                                <td>danish2000ds@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <th>Role</th>
-                                <td>Admin</td>
-                            </tr>
-                            <tr>
-                                <th>Joining Date</th>
-                                <td>2/1/2021</td>
-                            </tr>
-                            <tr>
-                                <th>State</th>
-                                <td>Maharashtra</td>
-                            </tr>
-                            <tr>
-                                <th>City</th>
-                                <td>Pune</td>
-                            </tr>
-                            <tr>
-                                <th>Location</th>
-                                <td>Swaragate</td>
-                            </tr>
-                            <tr>
-                                <th>Permanent Address</th>
-                                <td>Saswad - Bopdev - Pune Rd, Yewalewadi, Kondhwa Budruk, Pune, Maharashtra 411048</td>
-                            </tr>
-                            <tr>
-                                <th>Local Address</th>
-                                <td>Saswad - Bopdev - Pune Rd, Yewalewadi, Kondhwa Budruk, Pune, Maharashtra 411048</td>
-                            </tr>
-                        </table>
-                </div>
-            </div>
-            </div>
-            
-        </div>
-        <div class="tabPanel">
-            <div class="card ">
-                <div class="card-header bg-dark text-white text-center">
-                   Employee Qualification  Details
-                </div>
-                <div class="card-body" style="overflow-y: auto;">
-                    <div class="container">
-                        <table class="table table-bordered" > 
-                            <tr>
-                            <th>Qualification</th>
-                            <th>Specialization</th>
-                            <th>Medium</th>
-                            <th>University</th>
-                            <th>Year</th>
-                            <th>Percentage</th>
-                            <th>Action</th>
-                                
-                            </tr>
-                            <tr>
-                                <td>SSC</td>
-                                <td>NA</td>
-                                <td>Marathi</td>
-                                <td>State Board</td>
-                                <td>2015</td>
-                                <td>83%</td>
-                                <td class="social-media">
-                                    
-                                    <a href="employees.html"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                                    <i class="fa fa-trash  social-iconn   " ></i>
-                               
-                            </td>
-                            </tr>
-                            
-                        </table>
+        <div class="card-body" style="overflow-y: auto;">
+            <div class="container">
+                <table class="table table-bordered" > 
+                    <tr>
+                    <th>Qualification</th>
+                    <th>Specialization</th>
+                    <th>Medium</th>
+                    <th>University</th>
+                    <th>Year</th>
+                    <th>Percentage</th>
+                    <th>Action</th>
                         
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tabPanel">
-            <div class="card ">
-                <div class="card-header bg-dark text-white text-center">
-                    Documents Details
-                </div>
-                <div class="card-body" style="overflow-y: auto;">
-                    <div class="container">
-                        <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered">
-                            <tr>
-                                <th>Action</th>
-                                <td class="social-media">
-                                    
-                                        <a href="employees.html"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                                        <i class="fa fa-trash  social-iconn   " ></i>
-                                   
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Document Name</th>
-                                <th>Image Name</th>
-                            </tr>
-                            <tr>
-                                <td>LC</td>
-                                <td>danish.jpg</td>
-                            </tr>
+                    </tr>
+                    <tr *ngFor="let q of s.qualifications">
+                        <td>{{q.qualification}}</td>
+                        <td>{{q.specialization}}</td>
+                        <td>{{q.medium}}</td>
+                        <td>{{q.university}}</td>
+                        <td>{{q.passing_year}}</td>
+                        <td>{{q.percentage}}</td>
+                        <td class="social-media">
                             
-                        </table>
-                    </div>
-                </div>
+                            <a href="employee.html"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                            <i class="fa fa-trash  social-iconn   " ></i>
+                       
+                    </td>
+                    </tr>
+                    
+                </table>
+                
             </div>
         </div>
-        <div class="tabPanel">
-                    <div class="card ">
-                        <div class="card-header bg-dark text-white text-center">
-                            Salary Details
-                        </div>
-                        <div class="card-body" style="overflow-y: auto;">
-                            <div class="container">
-                                <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered">
-                                    <tr>
-                                        <th>Action</th>
-                                        <td class="social-media">
-                                            
-                                                <a href="employees.html"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                                                <i class="fa fa-trash  social-iconn   " ></i>
-                                           
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Salary Date</th>
-                                        <td>2/1/2021</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Actual Salary</th>
-                                        <td>2021</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Incentive Amount</th>
-                                        <td>5000</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Tax Deduction</th>
-                                        <td>2%</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Total Present Dats</th>
-                                        <td>60</td>
-                                    </tr>
-                                </table>
-                             </div>
-                        </div>
-                    </div>
-                
-        </div>
-
-
     </div>
-    </main>
+</div>
+<div class="tab-pane container fade" id="menu2">
+    <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+            Documents Details
+        </div>
+        <div class="card-body" style="overflow-y: auto;">
+            <div class="container">
+                <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered">
+                    <tr>
+                        <th>Action</th>
+                        <td class="social-media">
+                            
+                                <a href="employee.html"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                                <i class="fa fa-trash  social-iconn   " ></i>
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Document Name</th>
+                        <th>Image Name</th>
+                    </tr>
+                    <tr *ngFor="let d of s.documents">
+                        <td>{{d.document_name}}</td>
+                        <td><img src="{{server}}{{path}}/{{d.image_name}}" height="100px" width="100px"/></td>
+                    </tr>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tab-pane container fade" id="menu3">
+    <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+            Salary Details
+        </div>
+        <div class="card-body" style="overflow-y: auto;">
+            <div class="container">
+                <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered">
+                    <tr>
+                        <th>Action</th>
+                        <td class="social-media">
+                            
+                                <a href="employee.html"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                                <i class="fa fa-trash  social-iconn   " ></i>
+                           
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Salary Date</th>
+                        <td>{{s.salary.salary_date}}</td>
+                    </tr>
+                    <tr>
+                        <th>Actual Salary</th>
+                        <td>{{s.salary.actual_salary}}</td>
+                    </tr>
+                    <tr>
+                        <th>Incentive Amount</th>
+                        <td>{{s.salary.incentive_ammount}}</td>
+                    </tr>
+                    <tr>
+                        <th>Tax Deduction</th>
+                        <td>{{s.salary.tax_deduction}}</td>
+                    </tr>
+                    <tr>
+                        <th>Total Present Days</th>
+                        <td>{{s.salary.total_present_days}}</td>
+                    </tr>
+                </table>
+             </div>
+        </div>
+    </div>
+</div>
+
+</div>    
+

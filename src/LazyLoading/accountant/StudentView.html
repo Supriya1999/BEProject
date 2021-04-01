@@ -1,0 +1,222 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+    <li class="nav-item ">
+      <a class="nav-link "  data-toggle="tab" href="#home">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu1">Qualification</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu2">Registeration</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#menu3">Payment</a>
+    </li>
+  </ul>
+  
+  <div class="tab-content mt-3">
+    <div class="tab-pane container " id="home">
+        <section class="profile">
+            <img src="{{server}}{{s.path}}/{{s.photo}}" class="rounded img-fluid" height="150px" width="150px"><br><br>
+            <label class="text-dark"><b>Hi {{s.first_name}} {{s.last_name}}</b></label><br>
+            <label class="text-dark"><b>Student Code</b>-{{s.student_code}}</label>
+        </section>
+        <div class="card ">
+            <div class="card-header bg-dark text-white text-center">
+               Student Personal Details
+            </div>
+            <div class="card-body" style="overflow-y: auto;">
+                <div class="container">
+                            <section class="table mt-2" style="background-color: white;" >
+                                <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered" style="overflow-x: auto;background-color: white;">
+                                    <tr>
+                                        <th>Student Code</th>
+                                        <td>{{s.student_code}}</td>
+                                    </tr>
+                                    <tr> 
+                                        <th>Student Name</th>
+                                        <td>{{s.first_name}} {{s.middle_name}} {{s.last_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Birth Date</th>
+                                        <td>{{s.birth_date}}</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th>Email Address</th>
+                                        <td>{{s.email_address}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mobile Number</th>
+                                        <td>{{s.mobile_number}}/{{s.alternative_number}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Father Name</th>
+                                        <td>{{s.parents.father_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Mother Name</th>
+                                        <td>{{s.parents.mother_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Father Contact Number</th>
+                                        <td>{{s.parents.father_number}}</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th>Mother Contact Number</th>
+                                        <td>{{s.parents.mother_number}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Father Occupation</th>
+                                        <td>{{s.parents.occupation}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Annual Income</th>
+                                        <td>{{s.parents.annual_income}}</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th>Father/Mother Email ID</th>
+                                        <td>{{s.parents.email_address}}</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th>Permanent Address</th>
+                                        <td>{{s.local_address}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Local Address</th>
+                                        <td>{{s.permanent_address}}</td>
+                                    </tr>
+                                </table>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    <div class="tab-pane container " id="menu1">
+        <div class="card ">
+            <div class="card-header bg-dark text-white text-center">
+               Previous Educational Details
+            </div>
+            <div class="card-body" style="overflow-y: auto;">
+                <div class="container">
+                    <table class="table table-bordered" > 
+                      <thead>
+                        <tr>
+                            <th>Qualification</th>
+                            <th>Specialization</th>
+                            <th>Medium</th>
+                            <th>University</th>
+                            <th>Year</th>
+                            <th>Percentage</th>
+                            </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let q of s.qualifications">
+                            <td>{{q.qualification}}</td>
+                            <td>{{q.specialization}}</td>
+                            <td>{{q.medium}}</td>
+                            <td>{{q.university}}</td>
+                            <td>{{q.passing_year}}</td>
+                            <td>{{q.percentage}}</td>
+                        </tr>
+                      </tbody>
+                        
+                    </table>
+                    <br>
+                     <table class="table table-bordered" > 
+                        <tr>
+                        <th>CET/JEE Score</th>
+                        <th>12th PCM Marks</th>
+                        </tr>
+                        <tr>
+                            <td>{{s.cet_marks}}</td>
+                            <td>{{s.pcm_marks}}</td>
+                            
+                        </tr>
+                        
+                    </table> 
+                    
+                </div>
+            </div>
+        </div> 
+    </div>
+    <div class="tab-pane container " id="menu2">
+        <div class="card ">
+            <div class="card-header bg-dark text-white text-center">
+               Student Registeration Details
+            </div>
+            <div class="card-body" style="overflow-y: auto;">
+                <div class="container">
+                            <section class="table mt-2" style="background-color: white;">
+                                <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered" style="overflow-x: auto;background-color: white;">
+                                    <tr>
+                                        <th>Registeration Code</th>
+                                        <td>{{s.registration.registeration_code}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Joining Date</th>
+                                        <td>{{s.registration.joining_date}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Course Fee</th>
+                                        <td>{{s.registration.course_fee}}</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <th>Course Name</th>
+                                        <td>{{s.registration.course_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Year Name</th>
+                                        <td>{{s.registration.year_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Category Name</th>
+                                        <td>{{s.registration.category_name}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Description</th>
+                                        <td>{{s.registration.description}}</td>
+                                    </tr>
+                                </table>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+        
+    </div>
+    <div class="tab-pane container " id="menu3">
+        <div class="card ">
+            <div class="card-header bg-dark text-white text-center">
+               Student Payment Details
+            </div>
+            <div class="card-body" style="overflow-y: auto;">
+                <div class="container">
+                            <section class="table mt-2" style="background-color: white;">
+                                <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered" style="overflow-x: auto;background-color: white;">
+                                    <tr>
+                                        <th>Payment No</th>
+                                        <th>Amount Paid</th>
+                                        <th>Payment Mode</th>
+                                        <th>Payment Type</th>
+                                        <th>Payment Date</th>
+                                    </tr>
+                                    <tr *ngFor="let p of s.payments">
+                                        <td>{{p.payment_id}}</td>
+                                        <td>{{p.payment_amount}}</td>
+                                        <td>{{p.payment_mode}}</td>
+                                        <td>{{p.payment_type}}</td>
+                                        <td>{{p.payment_date}}</td>
+
+                                    </tr>
+                                </table>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+        
+    </div>
+</div>

@@ -1,72 +1,70 @@
-<main>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
-        Add Category
-    </button>
-    <hr/>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Category  </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label>Category ID</label>
-                    <input type="text" name="qid" class="form-control" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Category Name</label>
-                    <input type="text" name="qualification" class="form-control" >
-                </div>
-                    
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Save</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            
-            </div>
-        </div>
-        </div>
-    </div>
-    
-    <!--filter-->
-    <div class="row">
-        <div class="col-md-3">
-        <label>Filter Data</label><br>
-        <input type="text" placeholder="Filter data by name" class="form-control"/>
-        </div>
-    </div>
-    <br><br>
-    <!--table-->
-    <section class="table" style="background-color: white;">
-        <table class="table table-hover table-bordered" >
-            <thead>
-              <tr>
-                <th scope="col">Category Name</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                  <td>OPEN</td>
-                  <td class="social-media">
-                    <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                    <i class="fa fa-trash  social-iconn   " ></i>
-                  </td>
-                 
-              </tr>
-              <tr>
-                <td>OBC</td>
-                <td class="social-media"><i class="fa fa-pencil-square-o social-icon " ></i> 
-                    <i class="fa fa-trash  social-iconn   " ></i>
-                  </td>
-            </tr>
-            </tbody>
-          </table>            
-        </section>
-</main>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" (click)="OpenModal()">
+  Add Category
+</button>
+<hr/>
+<!-- Modal -->
+<form [formGroup]="categoryform" (submit)="SubmitData(categoryform.value)">
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+  <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Category  </h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+              <label>Category ID</label>
+              <input type="text" formControlname="category_id" class="form-control" disabled>
+          </div>
+          <div class="form-group">
+              <label>Category Name</label>
+              <span *ngIf="categoryform.get('category_name').errors && categoryform.get('category_name').dirty">
+                <span *ngIf="categoryform.get('category_name').errors.required" style="color:red;"> please enter category name</span>
+                <span *ngIf="categoryform.get('category_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+              
+              </span>
+              <input type="text" formControlName="category_name" class="form-control" >
+          </div>
+              
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" [disabled]="!categoryform.valid">Save</button>
+      <button type="button" class="btn btn-danger" (click)="CloseModal()">Close</button>
+      
+      </div>
+  </div>
+  </div>
+</div>
+</form>
+<!--filter-->
+<div class="row">
+  <div class="col-md-3">
+  <label>Filter Data</label><br>
+  <input type="text" placeholder="Filter data by name" class="form-control"/>
+  </div>
+</div>
+<br><br>
+<!--table-->
+<section class="table" style="background-color: white;">
+  <table class="table table-hover table-bordered" >
+      <thead>
+        <tr>
+          <th scope="col">Category Name</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of category">
+          <td>{{c.category_name}}</td>
+          <td class="social-media">
+            <a  (click)="View(c)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+            <a  (click)="Delete(c)"><i class="fa fa-trash  social-iconn" ></i></a>
+          </td>
+         
+      </tr>
+      </tbody>
+    </table>            
+  </section>

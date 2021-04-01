@@ -1,79 +1,75 @@
-<main>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
-        Add Exam Level
-    </button>
-    <hr/>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Exam Level  </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label>Exam Level ID</label>
-                    <input type="text" name="qid" class="form-control" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Exam Level</label>
-                    <input type="text" name="qualification" class="form-control" >
-                </div>
-                    
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Save</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" (click)="OpenModal()">
+  Add Exam Level
+</button>
+<hr/>
+<!-- Modal -->
+<form [formGroup]="examform" (submit)="SubmitData(examform.value)">
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+  <div class="modal-dialog" role="document">
+  <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Exam  </h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+              <label>Exam Level ID</label>
+              <input type="text" formControlName="level_id" class="form-control" disabled>
+          </div>
+          <div class="form-group">
+            <label>Exam Level</label>
+            <span *ngIf="examform.get('level').errors && examform.get('level').dirty">
+              <span *ngIf="examform.get('level').errors.required" style="color:red;"> please enter exam level</span>
+              <span *ngIf="examform.get('level').errors.pattern" style="color:red;"> only characters are allowed</span>
             
-            </div>
+            </span>
+            <input type="text" formControlName="level" class="form-control" >
         </div>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" [disabled]="!examform.valid">Save</button>
+        <button type="button" class="btn btn-danger" (click)="CloseModal()">Close</button>
+      
     </div>
-    
-    <!--filter-->
-    <div class="row">
-        <div class="col-md-3">
-        <label>Filter Data</label><br>
-        <input type="text" placeholder="Filter data by name" class="form-control"/>
-        </div>
-    </div>
-    <br><br>
-    <!--table-->
-    <section class="table" style="background-color: white;">
-        <table class="table table-hover table-bordered" >
-            <thead>
-              <tr>
-                <th scope="col">Exam Level</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                  <td>Simple</td>
-                  <td class="social-media">
-                    <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a> 
-                    <i class="fa fa-trash  social-iconn   " ></i>
-                  </td>
-                 
-              </tr>
-              <tr>
-                <td>Average</td>
-                <td class="social-media"><i class="fa fa-pencil-square-o social-icon " ></i> 
-                    <i class="fa fa-trash  social-iconn   " ></i>
-                  </td>
-            </tr>
-            <tr>
-                <td>Complex</td>
-                <td class="social-media"><i class="fa fa-pencil-square-o social-icon " ></i> 
-                    <i class="fa fa-trash  social-iconn   " ></i>
-                  </td>
-            </tr>
-            
-            </tbody>
-          </table>            
-        </section>
-</main>
+  
+  </div>
+</div>
+</div>
+</form>
+
+
+<!--filter-->
+<div class="row">
+  <div class="col-md-3">
+  <label>Filter Data</label><br>
+  <input type="text" placeholder="Filter data by name" class="form-control"/>
+  </div>
+</div>
+<br><br>
+<!--table-->
+<section class="table" style="background-color: white;">
+  <table class="table table-hover table-bordered" >
+      <thead>
+        <tr>
+          <th scope="col">Exam Level</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr *ngFor="let s of exams">
+            <td>{{s.level}}</td>
+            <td class="social-media">
+              <a  (click)="View(s)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+              <a  (click)="Delete(s)"><i class="fa fa-trash  social-iconn" ></i></a>  
+            </td>
+           
+        </tr>
+      
+      
+      </tbody>
+    </table>            
+  </section>

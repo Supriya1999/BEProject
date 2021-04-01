@@ -1,0 +1,47 @@
+<a routerLink="../new_registration" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" >
+  New Registration
+</a>
+<hr/>
+
+<!--filter-->
+<div class="row">
+  <div class="col-md-3">
+  <label>Filter Data</label><br>
+  <input type="text" placeholder="Search student by name,student code,location,mobile number,etc" class="form-control"/>
+  </div>
+</div>
+<br><br>
+<!--table-->
+<section class="table" style="background-color: white; overflow-y: auto; ">
+  <table class="table  table-hover table-bordered" >
+      <thead>
+        <tr> 
+          <th scope="col">Student Code</th>
+          <th scope="col">Student Name</th>
+          <th scope="col">Email Address</th>
+          <th scope="col">Mobile Number</th>
+          <th scope="col">Birth date</th>
+          <th scope="col">Location</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of student">
+          <td>{{s.student_code}}</td>
+            <td>{{s.first_name }}  {{s.last_name}}</td>
+            <td>{{s.email_address}}</td>
+            <td>{{s.mobile_number}}</td>
+            <td>{{s.birth_date}}</td>
+            <td>{{s.location_name}}</td>
+            <td class="social-media">
+              <a [routerLink]='["../student_view",s.student_id]'  style="text-decoration: none;"><i class="fa fa-eye  social-iconnn"></i></a>
+              <i class="fa fa-pencil-square-o  social-icon   " ></i>
+              <i class="fa fa-trash  social-iconn   " ></i>
+            </td>
+           
+        </tr>
+        
+      </tbody>
+    </table>            
+  </section>
+

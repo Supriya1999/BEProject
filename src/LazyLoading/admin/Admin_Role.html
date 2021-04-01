@@ -1,11 +1,11 @@
-<main>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
+<!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" (click)="OpenModal()">
         Add Role
     </button>
     <hr/>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form [formGroup]="roleform" (submit)="SubmitData(roleform.value)">
+      <div class="modal" id="exampleModal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
         <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -17,23 +17,28 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>Role ID</label>
-                    <input type="text" name="qid" class="form-control" disabled>
+                    <input type="text" formControlName="role_id" class="form-control" disabled>
                 </div>
                 <div class="form-group">
                     <label>Role Name</label>
-                    <input type="text" name="qualification" class="form-control" >
+                    <span *ngIf="roleform.get('role').errors && roleform.get('role').dirty">
+                      <span *ngIf="roleform.get('role').errors.required" style="color:red;"> please enter role</span>
+                      <span *ngIf="roleform.get('role').errors.pattern" style="color:red;"> only characters are allowed</span>
+                    
+                    </span>
+                    <input type="text" formControlName="role" class="form-control" >
                 </div>
                     
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Save</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!roleform.valid">Save</button>
+            <button type="button" class="btn btn-danger"  (click)="CloseModal()">Close</button>
             
             </div>
         </div>
         </div>
     </div>
-    
+    </form>
     <!--filter-->
     <div class="row">
         <div class="col-md-3">
@@ -52,39 +57,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                  <td>Admin</td>
-                  <td class="social-media">
-                    <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a> 
-                    <i class="fa fa-trash  social-iconn   " ></i>
-                  </td>
-                 
-              </tr>
-              <tr>
-                <td>Accountant</td>
-                <td class="social-media"><i class="fa fa-pencil-square-o social-icon " ></i> 
-                    <i class="fa fa-trash  social-iconn   " ></i>
-                  </td>
-            </tr>
-            <tr>
-                <td>Super user</td>
-                <td class="social-media"><i class="fa fa-pencil-square-o social-icon " ></i> 
-                    <i class="fa fa-trash  social-iconn   " ></i>
-                  </td>
-            </tr>
-            <tr>
-                <td>Counsellor</td>
-                <td class="social-media"><i class="fa fa-pencil-square-o social-icon " ></i> 
-                    <i class="fa fa-trash  social-iconn   " ></i>
-                  </td>
-            </tr>
-            <tr>
-                <td>Developer</td>
-                <td class="social-media"><i class="fa fa-pencil-square-o social-icon " ></i> 
-                    <i class="fa fa-trash  social-iconn   " ></i>
-                  </td>
+              <tr *ngFor="let s of roles">
+                <td>{{s.role}}</td>
+                <td class="social-media">
+                  <a  (click)="View(s)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                  <a  (click)="Delete(s)"><i class="fa fa-trash  social-iconn" ></i></a>
+                </td>
+               
             </tr>
             </tbody>
           </table>            
         </section>
-</main>

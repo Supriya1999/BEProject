@@ -242,13 +242,13 @@
                   </div>
                   <div class="form-group">
                     <label>Upload Picture</label>
-                    <input type="file" class="form-control" placeholder="Permanent Address">
+                    <input type="file" class="form-control" (change)="onSelectFile($event.target.files)" placeholder="Permanent Address">
                   </div>
               </div>
               </div>    
           </div>
       
-      <br>
+      <br> 
       <!--candidate education info-->
       <div class="card ">
           <div class="card-header bg-dark text-white text-center">
@@ -261,7 +261,7 @@
                       <td>
                         <select class="form-control" [(ngModel)]="qualification_id" (change)="GetSpecializations(qualification_id)">
                           <option selected disabled>Select Qualification</option>
-                        <option *ngFor="let q of qualifications" value="{{q.qualification_id}}">{{q.qualification}}</option>
+                        <option *ngFor="let q of qualifications" value="{{q.qualification_id+'_'+q.qualification}}">{{q.qualification}}</option>
 
                       </select>
                     </td>
@@ -269,7 +269,7 @@
                       <td>
                         <select class="form-control" [(ngModel)]="specialization_id" >
                           <option selected disabled>Select Specialization</option>
-                          <option *ngFor="let s of specializations" value="{{s.specialization_id}}">{{s.specialization}}</option>
+                          <option *ngFor="let s of specializations" value="{{s.specialization_id+'_'+s.specialization}}">{{s.specialization}}</option>
   
                         </select>
                       </td>
@@ -303,6 +303,7 @@
                         </button>
                         
                       </td>
+                      
                     </tr>
                   </table>
                   <table class="table table-bordered" >
@@ -315,8 +316,8 @@
 
                     <tbody>
                       <tr *ngFor="let q of studentqualifications">
-                          <td>{{q.qualifications}}</td>
-                          <td>{{q.specializations}}</td>
+                          <td>{{q.qualification_name}}</td>
+                          <td>{{q.specialization_name}}</td>
                           <td>{{q.medium}}</td>
                           <td>{{q.university}}</td>
                           <td>{{q.passing_year}}</td>
@@ -331,17 +332,19 @@
                 </table>
                   <div class="form-row">
                     <div class="form-group col-md-6">
-                      <input type="text" class="form-control" placeholder="CET/JEE Marks"/>
+                        <input type="text" class="form-control" [(ngModel)]="cet_marks" placeholder="CET/JEE Marks">
                     </div>
                     <div class="form-group col-md-6">
-                      <input type="text" class="form-control" placeholder="12th PCM Marks"/>
-                    </div> 
+                        <input type="text" class="form-control" [(ngModel)]="pcm_marks" placeholder="12th PCM Marks">
+                      </div>
                   </div>
-              </div>    
+                </div>    
           </div>
       </div>
     
       <br>
+    
+  
           <!--Parent basic info-->
           <div class="card ">
             <div class="card-header bg-dark text-white text-center">
@@ -387,9 +390,15 @@
           <br>
          
     </section>
+      <a class="text-decoration-none "  data-toggle="tab" href="#menu2" >
+        <i class="fa  fa-arrow-circle-right" style="font-size: 50px;" >
+      </i>
+          
+      </a>    
     
+   
     </div>
-  
+   
   <div class="tab-pane container fade" id="menu2">
     <section class="enquiry_form">
       <!--candidate bank info-->
@@ -402,14 +411,17 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label>Course</label>
-                    <select class="form-control">
-                      <option>Select Course</option>
+                    <select class="form-control" [(ngModel)]="course_id" (change)=GetYears(course_id)>
+                      <option selected disabled>Select Course</option>
+                      <option *ngFor="let c of courses" value="{{c.course_id}}">{{c.course_name}}</option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
                     <label>Year of Study</label>
-                    <select class="form-control">
-                      <option>Select Year of Study</option>
+                    <select class="form-control" [(ngModel)]="year_id" >
+                      <option selected disabled>Select Year of Study</option>
+                      <option *ngFor="let c of years" value="{{c.year_id}}">{{c.year_name}}</option>
+
                     </select>
                   </div> 
                 </div>
@@ -418,24 +430,26 @@
                   
                   <div class="form-group col-md-4">
                     <label>Category</label>
-                    <select class="form-control">
-                      <option>Select Category</option>
+                    <select class="form-control" [(ngModel)]="category_id">
+                      <option selected disabled>Select Category</option>
+                      <option *ngFor="let c of category" value="{{c.category_id}}">{{c.category_name}}</option>
+
                     </select>
                   </div>
                   <div class="form-group col-md-4">
                     <label>Course Fees</label>
-                    <input type="text" class="form-control" placeholder="Course Fees"/>
+                    <input type="text" class="form-control" [(ngModel)]="course_fees" placeholder="Course Fees"/>
                   </div>
                   
                   <div class="form-group col-md-4">
                     <label>Joining Date</label>
-                    <input type="date" class="form-control" />
+                    <input type="date" [(ngModel)]="joining_date" class="form-control" />
                   </div>
                   
                 </div>
                 <div class="form-group ">
                   <label>Description</label>
-                  <input type="text" class="form-control" placeholder="Description"/>
+                  <input type="text" [(ngModel)]="description" class="form-control" placeholder="Description"/>
                 </div>  
               </div>
               </div>    
@@ -451,7 +465,7 @@
       <div class="card ">
           <div class="card-header bg-dark text-white text-center">
               Student Payment Details
-          </div>
+          </div> 
           <div class="card-body">
               <div class="container">
                       
@@ -459,7 +473,7 @@
                       
                       <div class="form-group col-md-6">
                         <label>Payment Date</label>
-                          <input type="date" class="form-control">
+                          <input type="date"  [(ngModel)]="payment_date" class="form-control">
                       </div>
                       
                   </div>
@@ -467,25 +481,25 @@
                       
                     <div class="form-group col-md-6">
                         <label>Payment Mode</label>
-                        <select class="form-control">
-                          <option>Select Payment Mode</option>
-                          <option>Cash</option>
-                          <option>Online</option>
+                        <select class="form-control" [(ngModel)]="payment_mode">
+                          <option selected disabled>Select Payment Mode</option>
+                          <option value="cash">Cash</option>
+                          <option value="online">Online</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                       <label>Payment Type</label>
-                      <select class="form-control">
-                        <option>Select Payment Type</option>
-                        <option>Lumsum</option>
-                        <option>Installments</option>
+                      <select class="form-control" [(ngModel)]="payment_type">
+                        <option selected disabled>Select Payment Type</option>
+                        <option value="lumsum">Lumsum</option>
+                        <option value="installments">Installments</option>
                       </select>
                   </div>
                 </div>
                   <div class="form-row">
                     <div class="form-group col-md-12">
-                      <label>Ammpunt Paid</label>
-                      <input type="text" class="form-control" placeholder="Amount Paid">
+                      <label>Ammount Paid</label>
+                      <input type="text" [(ngModel)]="ammount_paid" class="form-control" placeholder="Amount Paid">
                     </div>
                       
                   </div>
@@ -497,7 +511,8 @@
           <div class="form-group">
         
          
-            <input type="button" value="Save" class="btn btn-primary btn-lg btn-sm btn-xs" (click)="CreateStudent(first_name,middle_name,last_name,email_address,mobile_number,alternative_number,birth_date,state_id,location_id,city_id,local_address,permanent_address,center_id,father_name,father_number,mother_name,mother_number,occupation,annual_income,email_addresss)">
+            <input type="button" value="Save" class="btn btn-dark btn-lg btn-sm btn-xs" 
+            (click)="CreateStudent(first_name,middle_name,last_name,email_address,mobile_number,alternative_number,birth_date,state_id,location_id,city_id,local_address,permanent_address,center_id,father_name,father_number,mother_name,mother_number,occupation,annual_income,email_addresss,year_id,category_id,course_fees,joining_date,description,payment_date,payment_mode,payment_type,ammount_paid,cet_marks,pcm_marks)">
            
            
         </div>

@@ -18,6 +18,10 @@
                 </div>
                 <div class="form-group col-md-9">
                   <label >Group Name</label>
+                  <span *ngIf="groupform.get('group_name').errors && groupform.get('group_name').dirty">
+                    <span *ngIf="groupform.get('group_name').errors.required" style="color:red;"> please enter Group name</span>
+                    <span *ngIf="groupform.get('group_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                  </span>
                   <input type="text" formControlName="group_name" class="form-control" >
                 </div>
             </div>  
@@ -64,6 +68,7 @@
 </div>
 </form>
 <!-- Modal -->
+
 <div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog " role="document">
     <div class="modal-content">
@@ -78,29 +83,49 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                   <label>Member ID</label>
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" [(ngModel)]="member_id" class="form-control" disabled>
                 </div>
                 <div class="form-group col-md-12">
                   <label >Group Name</label>
-                  <select class="form-control" >
-                      <option>
-                          Select Group Name
-                      </option>
+                  <select class="form-control" [(ngModel)]="group_id">
+                      <option selected disabled>Select Group Name</option>
+                      <option *ngFor="let g of group"  value="{{g.group_id}}">{{g.group_name}}</option>
                   </select>
                 </div>
-                
                 <div class="form-group col-md-12">
-                    <label >Student Name</label>
-                    <select class="form-control" >
-                        <option>Select Student Name</option>
+                    <label >Course Name</label>
+                    <select class="form-control" [(ngModel)]="course_id"  (change)="GetYears(course_id)">
+                        <option selected disabled>
+                            Select Course Name
+                        </option>
+                        <option *ngFor="let c of courses" value="{{c.course_id}}">{{c.course_name}}</option>
                     </select>
+                  </div> 
+                  <div class="form-group col-md-12">
+                    <label >Year Of Study </label>
+                    <select class="form-control" [(ngModel)]="year_id"  (change)="GetStudents(year_id)">
+                        <option selected disabled>
+                            Select Year Name
+                        </option>
+                        <option *ngFor="let y of years" value="{{y.year_id}}">{{y.year_name}}</option>
+                    </select>
+                  </div> 
+                  <div class="form-group">
+                  <label>Student Name</label>  
+                  <div class="checkbox">
+                    <label *ngFor="let s of students"><br>
+                        <input type="checkbox" style="width: auto;" (change)="GetId(s.student_id)" >&nbsp;{{s.first_name}}
+                    </label>
                   </div>
-                  
+                  </div>
+                      
               </div>
-            </div>
+              
+              </div>
+              
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-primary" (click)="GroupMembers(group_id)" >Save</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         
         </div>
@@ -108,8 +133,8 @@
     </div>
 </div>
 
-
 <!-- Modal -->
+<form [formGroup]="groupassignmentform" (submit)="AddGroupAssignment(groupassignmentform.value)">
 <div class="modal fade" id="asgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog " role="document">
     <div class="modal-content">
@@ -124,62 +149,102 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                   <label>Assignment ID</label>
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" formControlName="assignment_id" class="form-control" disabled>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label >Group Name</label>
-                    <select class="form-control" >
-                        <option>Select Group name</option>
+                    <select class="form-control" formControlName="group_id">
+                        <option selected disabled>Select Group name</option>
+                        <option *ngFor="let g of group" value="{{g.group_id}}">{{g.group_name}}</option>
                     </select>
                   </div>
                   
                   <div class="form-group col-md-6">
-                      <label >Unit Name</label>
-                      <select class="form-control" >
-                          <option>Select Unit Name</option>
+                      <label >Course Name</label>
+                      <select class="form-control" [(ngModel)]="cid" formControlName="course_id" (change)="GetYears(cid)">
+                          <option selected disabled>Select Course Name</option>
+                          <option *ngFor="let c of courses" value="{{c.course_id}}">{{c.course_name}}</option>
                       </select>
                     </div>
             </div>
-                
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label >Year Name</label>
+                    <select class="form-control" [(ngModel)]="yid" formControlName="year_id" (change)="GetSubjects(yid)">
+                        <option selected disabled>Select Year name</option>
+                        <option *ngFor="let y of years" value="{{y.year_id}}">{{y.year_name}}</option>
+                    </select>
+                  </div>
+                  
+                  <div class="form-group col-md-6">
+                      <label >Subject Name</label>
+                      <select class="form-control" [(ngModel)]="sid" formControlName="subject_id" (change)="GetUnits(sid)">
+                          <option selected disabled>Select Subject Name</option>
+                          <option *ngFor="let s of subject" value="{{s.subject_id}}">{{s.subject_name}}</option>
+                      </select>
+                    </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label >Unit Name</label>
+                    <select class="form-control" formControlName="unit_id">
+                        <option selected disabled>Select Unit name</option>
+                        <option *ngFor="let u of unit" value="{{u.unit_id}}">{{u.unit_name}}</option>
+                    </select>
+                  </div>
+                  
+            </div>
+            
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label >Assignment Date</label>
-                    <input type="date" class="form-control" >
+                    <input type="date" formControlName="assignment_date" class="form-control" >
                 </div>
                 <div class="form-group col-md-6">
                     <label >Mail</label>
-                    <input type="text" class="form-control" >
+                    <span *ngIf="groupassignmentform.get('mail').errors && groupassignmentform.get('mail').dirty">
+                        <span *ngIf="groupassignmentform.get('mail').errors.required" style="color:red;"> please enter mail address</span>
+                        <span *ngIf="groupassignmentform.get('mail').errors.pattern" style="color:red;"> only characters are allowed</span>
+                      </span>
+                    <input type="text" formControlName="mail" class="form-control" >
                 </div>
             </div>      
             <div class="form-row">
                 
                 <div class="form-group col-md-12">
                     <label >Assignment Question</label>
-                    <input type="text" class="form-control" >
+                    <span *ngIf="groupassignmentform.get('assignment_question').errors && groupassignmentform.get('assignment_question').dirty">
+                        <span *ngIf="groupassignmentform.get('assignment_question').errors.required" style="color:red;"> please enter mail address</span>
+                        <span *ngIf="groupassignmentform.get('assignment_question').errors.pattern" style="color:red;"> only characters are allowed</span>
+                      </span>
+                    <input type="text" formControlName="assignment_question" class="form-control" >
                 </div>
                 
                 
                 <div class="form-group col-md-12">
                     <label >Document</label>
-                    <input type="file" class="form-control" >
+                    <input type="file" formControlName="document" (change)="onSelectFile($event.target.files)" class="form-control" >
                 </div>
             </div>
             </div>
-        </div>
+        </div> 
         <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary"[disabled]=!groupassignmentform.value >Save</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         
         </div>
     </div>
     </div>
 </div>
+</form>
 
 
 <!-- Modal -->
+<form [formGroup]="groupmessageform" (submit)="AddGroupMessage(groupmessageform.value)">
+
 <div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog " role="document">
     <div class="modal-content">
@@ -194,41 +259,50 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                   <label>Message ID</label>
-                  <input type="text" class="form-control" disabled>
+                  <input type="text" class="form-control" formComtrolName="message_id" disabled>
                 </div>
                 <div class="form-group col-md-12">
                   <label >Group Name</label>
-                  <select class="form-control" >
-                      <option>Select Group Name</option>
+                  <select class="form-control" formControlName="group_id">
+                      <option selected disabled>Select Group Name</option>
+                      <option *ngFor="let g of group" value="{{g.group_id}}">{{g.group_name}}</option>
                   </select>
                 </div>
                 
                 <div class="form-group col-md-12">
                     <label >Message Date</label>
-                    <input type="date" class="form-control" >
+                    <input type="date" formControlName="message_date" class="form-control" >
                   </div>
                   
                 <div class="form-group col-md-12">
                     <label >Message For</label>
-                    <input type="text" class="form-control" >
+                    <span *ngIf="groupmessageform.get('message_for').errors && groupmessageform.get('message_for').dirty">
+                        <span *ngIf="groupmessageform.get('message_for').errors.required" style="color:red;"> please enter message for</span>
+                        <span *ngIf="groupmessageform.get('message_for').errors.pattern" style="color:red;"> only characters are allowed</span>
+                      </span>
+                    <input type="text" formControlName="message_for" class="form-control" >
                   </div>
                   <div class="form-group col-md-12">
                     <label >Message </label>
-                    <input type="text" class="form-control" >
+                    <span *ngIf="groupmessageform.get('message').errors && groupmessageform.get('message').dirty">
+                        <span *ngIf="groupmessageform.get('message').errors.required" style="color:red;"> please enter message</span>
+                        <span *ngIf="groupmessageform.get('message').errors.pattern" style="color:red;"> only characters are allowed</span>
+                      </span>
+                    <input type="text" formControlName="message" class="form-control" >
                   </div>
 
               </div>
             </div>
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary" [disabled]=!groupmessageform.valid>Save</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         
         </div>
     </div>
     </div>
 </div>
-
+</form>
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
     <li class="nav-item ">
@@ -252,7 +326,7 @@
         <!--table-->
         <section class="table" style="background-color: white; overflow-y: auto; ">
             <table class="table  table-hover table-bordered" >
-                <thead>
+                <thead> 
                 <tr>
                     <th scope="col">Group Name</th>
                     <th scope="col">Course Name</th>
@@ -275,7 +349,7 @@
                         <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus social-iconnn " ></i></a>
                         <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
                         <i class="fa fa-trash  social-iconn   " ></i>
-                    </td>
+                    </td> 
                     
                 </tr>
                 </tbody>
@@ -296,9 +370,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>BE Comp 2020-21</td>
-                    <td>Danish Shaikh</td>
+                <tr *ngFor="let m of groupmember">
+                    <td>{{m.group_name}}</td>
+                    <td>{{m.first_name}} {{m.last_name}}</td>
                     <td class="social-media">
                         <a data-toggle="modal" data-target="#memberModal"><i class="fa fa-plus social-iconnn " ></i></a>
                         <a data-toggle="modal" data-target="#memberModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
@@ -325,13 +399,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>BE Comp 2020-21</td>
-                    <td>Normalization</td>
-                    <td>8/1/21</td>
-                    <td>what is nor?</td>
-                    <td>danish2000ds@gmail.com</td>
-                    <td>Normalization.pdf</td>
+                <tr *ngFor="let g of groupassignment">
+                    <td>{{g.group_name}}</td>
+                    <td>{{g.unit_name}}</td>
+                    <td>{{g.assignment_date}}</td>
+                    <td>{{g.assignment_question}}</td>
+                    <td>{{g.mail}}</td>
+                    <td>
+                        <a href="{{server}}{{g.path}}/{{g.document}}" target="_blank" class="text-decoration-none">{{g.document}}
+                        </a>
+                    </td>
                     <td class="social-media">
                         <a data-toggle="modal" data-target="#asgModal"><i class="fa fa-plus social-iconnn " ></i></a>
                         <a data-toggle="modal" data-target="#asgModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
@@ -360,11 +437,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>BE Comp 2020-21</td>
-                    <td>8/1/21</td>
-                    <td>Scholarship</td>
-                    <td>hi nice</td>
+                <tr *ngFor="let m of groupmessage">
+                    <td>{{m.group_name}}</td>
+                    <td>{{m.message_date}}</td>
+                    <td>{{m.message_for}}</td>
+                    <td>{{m.message}}</td>
                     <td class="social-media">
                         <a data-toggle="modal" data-target="#msgModal"><i class="fa fa-plus social-iconnn " ></i></a>
                         <a data-toggle="modal" data-target="#msgModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>

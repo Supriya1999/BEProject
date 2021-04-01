@@ -30,7 +30,7 @@
                <td>{{s.year_name}}</td>
                <td>{{s.subject_name}}</td>
                <td>{{s.unit_name}}</td>
-               <td></td>
+               <td><a href="{{server}}{{s.path}}/{{s.images}}" target="_blank" class="text-decoration-none">{{s.images}}</a></td>
                <td>{{s.description}}</td>
                <td class="social-media">
                  <a ><i class="fa fa-eye social-iconnn " ></i></a>
@@ -75,7 +75,7 @@
                         <select class="form-control">
                             <option selected disabled>select year of study</option>
                             <option *ngFor="let y of years">{{y.year_name}}</option>
-                        </select>
+                        </select> 
                     </div>
                 </div>
                 <br>
@@ -97,7 +97,7 @@
                     </div>
                 </div>
                 <label><b>Upload PDF/PPT</b></label>
-                <input type="file" class="form-control" id="exampleFormControlFile1">
+                <input type="file" class="form-control" formControlName="ppt" (change)="onSelectFile($event.target.files)">
                 <br>
                 <label><b>Description</b></label>
                 <span *ngIf="studyform.get('description').errors && studyform.get('description').dirty">
