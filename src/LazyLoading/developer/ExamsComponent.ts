@@ -8,10 +8,92 @@ import {FormGroup,FormControl,Validators, FormBuilder,Validator} from "@angular/
 })
 export class ExamsClass{
     exams:any;
+    examform:FormGroup;
+    subjects:any;
+    units:any;
+    years:any;
+    examlevels:any;
+    courses:any;
+    cid:any;
+    yid:any;
+    sid:any;
+    display:any="none";
     constructor(private fb:FormBuilder,private api:GenericApi){
         this.GetExam();
+        this.NewExamForm();
+        this.GetCourses();
+        this.GetExamLevels();
     }
-    GetExam(){
+    NewExamForm()
+    {
+        this.examform=this.fb.group({
+            exam_id:[null],
+            course_id:[null],
+            year_id:[null],
+            subject_id:[null],
+            unit_id:[null],
+            level_id:[null]       
+        })
+    }
+    GetExam(){ 
         this.api.GetApi("exam").subscribe(e=>this.exams=e)
+    }
+    GetCourses(){
+        this.api.GetApi("courses").subscribe(e=>this.courses=e)
+        this.subjects=[];
+        this.units=[];
+    }
+    GetYears(cid:any){
+        this.api.GetApi("years?course_id="+cid).subscribe(e=>this.years=e)
+        this.units=[];
+    }
+    GetSubjects(yid:any){
+        this.api.GetApi("subjects?year_id="+yid).subscribe(e=>this.subjects=e)
+    }
+    GetUnits(sid:any){
+        this.api.GetApi("units?subject_id="+sid).subscribe(e=>this.units=e)
+    }
+    GetExamLevels(){
+        this.api.GetApi("examlevels").subscribe(e=>this.examlevels=e)
+    }
+    SubmitData(s){
+        var data =new FormData();
+        data.append("exam_id",s.exam_id)
+        data.append("level_id",s.level_id)
+        data.append("unit_id",s.unit_id)
+        this.api.PutApi("exam",data).subscribe(e=>{
+            alert(e.msg)
+            this.NewExamForm();
+            this.GetExam();
+            this.CloseModal();
+        })
+    }
+    ViewExamForm(e)
+    {
+        this.examform=this.fb.group({
+            exam_id:[e.exam_id],
+            course_id:[e.course_id],
+            year_id:[e.year_id],
+            subject_id:[e.subject_id],
+            unit_id:[e.unit_id],
+            level_id:[e.level_id]
+        })
+    }
+    View(e)
+    {
+        console.log(e)
+        this.ViewExamForm(e)
+        this.display="block"
+    }
+    CloseModal(){
+        this.display="none";
+
+    }    
+    Delete(e)
+    {
+        this.api.DeleteApi("exam?exam_id="+e.exam_id).subscribe(e=>{
+            alert(e.msg)
+            this.GetExam();
+        })
     }
 }

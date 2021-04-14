@@ -15,5 +15,13 @@ export class StudentClass{
     GetStudent(){
         this.api.GetApi("student_details").subscribe(e=>this.student=e)
     }
-    
-}
+    DeleteAll(s)
+    {
+        this.api.DeleteApi("student_details?student_id="+s.student_id).subscribe(e=>{
+            alert(e.msg)
+            this.GetStudent();
+          
+   
+       })
+    }   
+} 

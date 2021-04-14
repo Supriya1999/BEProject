@@ -21,7 +21,7 @@ export class HomeClass{
         })
     }
     SubmitData(s){
-            this.api.PostApi("http://localhost:8000/website_enquiry",s).subscribe(e=>{
+            this.api.PostApi("website_enquiry",s).subscribe(e=>{
             this.NewWebsiteForm();
             
         })

@@ -15,4 +15,13 @@ export class EnquiryClass{
     GetEnquires(){
         this.api.GetApi("enquiry").subscribe(e=>this.enquires=e)
     }
+    DeleteAll(q)
+    {
+        this.api.DeleteApi("enquiry?enquiry_id="+q.enquiry_id).subscribe(e=>{
+            alert(e.msg)
+            this.GetEnquires();
+          
+   
+       })
+    }
 }

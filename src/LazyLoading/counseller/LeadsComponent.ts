@@ -14,13 +14,16 @@ export class LeadsClass{
     mobile_number:any;
     email:any;
     qualifications:any=[];
-    qualification_id:any;
+    qualification_id:any; 
     specializations:any=[];
     specialization_id:any;
     specialization:any;
     address:any;
     leads:any;
-    leadform:FormGroup;
+    qid:any;
+    leadform:FormGroup; 
+    display:any="none";
+    action:any="";
     constructor(private api:GenericApi,private fb:FormBuilder){
         this.GetLeads();
         this.GetCenters();
@@ -34,16 +37,34 @@ export class LeadsClass{
             candidate_name:[null],
             mobile_number:[null],
             email:[null],
+            qualification_id:[null],
+            specialization_id:[null],
             address:[null,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
         })
     }
     SubmitData(s){
-        this.api.PostApi("leads",s).subscribe(e=>{
-     //       console.log(e);
-            this.NewLeadForm();
-            // this.GetCenters();
-            this.GetQualifications();
-        })
+        switch(this.action){
+            case "Add":
+            {
+                this.api.PostApi("leads",s).subscribe(e=>{
+                            alert(e.msg)
+                           this.NewLeadForm();
+                           this.GetLeads();
+                           this.CloseModal();
+                       })
+                       break;
+                    }
+            case "Update":
+            {
+                this.api.PutApi("leads",s).subscribe(e=>{
+                            alert(e.msg)
+                           this.NewLeadForm(); 
+                           this.GetLeads();
+                           this.CloseModal();
+                       })
+                       break;
+                    }
+        }
     }
     GetLeads(){
         this.api.GetApi("leads").subscribe(e=>this.leads=e)  
@@ -72,4 +93,42 @@ export class LeadsClass{
         this.api.PostApi("leads",cl).subscribe(e=>console.log(e));
         this.lead_id=this.center_id=this.candidate_name=this.mobile_number=this.email=this.qualification_id=this.specialization_id=this.address=null;
     }
+    ViewLeadForm(q){
+        this.leadform=this.fb.group({
+            lead_id:[q.lead_id],
+            center_id:[q.center_id],
+            candidate_name:[q.candidate_name],
+            mobile_number:[q.mobile_number],
+            email:[q.email],
+            qualification_id:[q.qualification_id],
+            specialization_id:[q.specialization_id],
+            address:[q.address,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
+        })
+    }
+
+    View(q){
+        console.log(q)
+          this.ViewLeadForm(q);
+          this.action="Update";
+          this.display="block"
+  
+      }  
+    OpenModal(){
+        this.NewLeadForm();
+        this.action="Add";
+        this.display="block"
+
+     }
+    CloseModal(){
+        this.action="";
+        this.display="none"
+     }
+    Delete(q){
+        this.api.DeleteApi("leads?lead_id="+q.lead_id).subscribe(e=>{
+            alert(e.msg)
+            this.GetLeads();
+          
+   
+       })
+    } 
 } 

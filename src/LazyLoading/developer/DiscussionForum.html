@@ -1,11 +1,13 @@
 <form [formGroup]="groupform" (submit)="AddGroup(groupform.value)">
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog " role="document">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+    <div class="modal " tabindex="-1" role="dialog" [ngStyle]="{'display':displaygroup}">
+    
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
         <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Group</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" (click)="CloseGroupModal()">
             <span aria-hidden="true">&times;</span>
         </button>
         </div>
@@ -28,9 +30,9 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label >Courses</label>
-                    <select class="form-control" >
+                    <select class="form-control" [(ngModel)]="cid" formControlName="course_id" (change)="GetYears(cid)">
                         <option selected disabled>select Course</option>
-                        <option *ngFor="let c of courses"  >{{c.course_name}}</option>
+                        <option *ngFor="let c of courses"  value="{{c.course_id}}">{{c.course_name}}</option>
                     </select>
                 </div>
 
@@ -60,7 +62,7 @@
         </div>
         <div class="modal-footer">
         <button type="submit" class="btn btn-primary" [disabled]="!groupform.valid">Save</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger"(click)="CloseGroupModal()">Close</button>
         
         </div>
     </div>
@@ -68,13 +70,16 @@
 </div>
 </form>
 <!-- Modal -->
+<form [formGroup]="groupmemberform" (submit)="AddGroupMembers(groupmemberform.value)">
 
-<div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog " role="document">
+<!-- <div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+    <div class="modal " tabindex="-1" role="dialog" [ngStyle]="{'display':displaymember}">
+    
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
         <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Group Members</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" (click)="CloseMemberModal()">
             <span aria-hidden="true">&times;</span>
         </button>
         </div>
@@ -83,18 +88,18 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                   <label>Member ID</label>
-                  <input type="text" [(ngModel)]="member_id" class="form-control" disabled>
+                  <input type="text" formControlName="member_id" class="form-control" disabled>
                 </div>
                 <div class="form-group col-md-12">
                   <label >Group Name</label>
-                  <select class="form-control" [(ngModel)]="group_id">
+                  <select class="form-control" formControlName="group_id">
                       <option selected disabled>Select Group Name</option>
                       <option *ngFor="let g of group"  value="{{g.group_id}}">{{g.group_name}}</option>
                   </select>
                 </div>
                 <div class="form-group col-md-12">
                     <label >Course Name</label>
-                    <select class="form-control" [(ngModel)]="course_id"  (change)="GetYears(course_id)">
+                    <select class="form-control" formControlName="course_id" [(ngModel)]="cid" (change)="GetYears(cid)">
                         <option selected disabled>
                             Select Course Name
                         </option>
@@ -103,7 +108,7 @@
                   </div> 
                   <div class="form-group col-md-12">
                     <label >Year Of Study </label>
-                    <select class="form-control" [(ngModel)]="year_id"  (change)="GetStudents(year_id)">
+                    <select class="form-control" formControlName="year_id" [(ngModel)]="yid" (change)="GetStudents(yid)">
                         <option selected disabled>
                             Select Year Name
                         </option>
@@ -114,7 +119,7 @@
                   <label>Student Name</label>  
                   <div class="checkbox">
                     <label *ngFor="let s of students"><br>
-                        <input type="checkbox" style="width: auto;" (change)="GetId(s.student_id)" >&nbsp;{{s.first_name}}
+                        <input type="checkbox" style="width: auto;" formControlName="student_id" (change)="GetId(s.student_id)" >&nbsp;{{s.first_name}}
                     </label>
                   </div>
                   </div>
@@ -125,22 +130,23 @@
               
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="GroupMembers(group_id)" >Save</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" >Save</button>
+        <button type="button" class="btn btn-danger" (click)="CloseMemberModal()">Close</button>
         
         </div>
     </div>
     </div>
 </div>
-
+</form>
 <!-- Modal -->
 <form [formGroup]="groupassignmentform" (submit)="AddGroupAssignment(groupassignmentform.value)">
-<div class="modal fade" id="asgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog " role="document">
+<!-- <div class="modal fade" id="asgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+    <div class="modal " tabindex="-1" role="dialog" [ngStyle]="{'display':displayassignment}">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
         <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Group Assignemnet</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" (click)="CloseAssignmentModal()">
             <span aria-hidden="true">&times;</span>
         </button>
         </div>
@@ -177,7 +183,7 @@
                         <option selected disabled>Select Year name</option>
                         <option *ngFor="let y of years" value="{{y.year_id}}">{{y.year_name}}</option>
                     </select>
-                  </div>
+                  </div> 
                   
                   <div class="form-group col-md-6">
                       <label >Subject Name</label>
@@ -186,7 +192,7 @@
                           <option *ngFor="let s of subject" value="{{s.subject_id}}">{{s.subject_name}}</option>
                       </select>
                     </div>
-            </div>
+            </div> 
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label >Unit Name</label>
@@ -203,7 +209,7 @@
                     <label >Assignment Date</label>
                     <input type="date" formControlName="assignment_date" class="form-control" >
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6"> 
                     <label >Mail</label>
                     <span *ngIf="groupassignmentform.get('mail').errors && groupassignmentform.get('mail').dirty">
                         <span *ngIf="groupassignmentform.get('mail').errors.required" style="color:red;"> please enter mail address</span>
@@ -225,15 +231,17 @@
                 
                 
                 <div class="form-group col-md-12">
-                    <label >Document</label>
-                    <input type="file" formControlName="document" (change)="onSelectFile($event.target.files)" class="form-control" >
+                    <label>Upload Document</label>
+                    <input type="file" (change)="onSelectFile($event.target.files)" class="form-control" >
+                    <span [ngStyle]="{'display':displaymsg}">Note-If you don't want to update the document then keep the upload document field blank</span>
+                    
                 </div>
             </div>
             </div>
         </div> 
         <div class="modal-footer">
         <button type="submit" class="btn btn-primary"[disabled]=!groupassignmentform.value >Save</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" (click)="CloseAssignmentModal()">Close</button>
         
         </div>
     </div>
@@ -245,12 +253,14 @@
 <!-- Modal -->
 <form [formGroup]="groupmessageform" (submit)="AddGroupMessage(groupmessageform.value)">
 
-<div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog " role="document">
+<!-- <div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+    <div class="modal " tabindex="-1" role="dialog" [ngStyle]="{'display':displaymessage}">
+    
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
         <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Group Message</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" (click)="CloseMessageModal()">
             <span aria-hidden="true">&times;</span>
         </button>
         </div>
@@ -259,7 +269,7 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                   <label>Message ID</label>
-                  <input type="text" class="form-control" formComtrolName="message_id" disabled>
+                  <input type="text" class="form-control" formControlName="message_id" disabled>
                 </div>
                 <div class="form-group col-md-12">
                   <label >Group Name</label>
@@ -296,7 +306,7 @@
         </div>
         <div class="modal-footer">
         <button type="submit" class="btn btn-primary" [disabled]=!groupmessageform.valid>Save</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" (click)="CloseMessageModal()">Close</button>
         
         </div>
     </div>
@@ -323,6 +333,9 @@
   <!-- Tab panes -->
   <div class="tab-content mt-3">
     <div class="tab-pane container " id="home">
+        <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" style="margin-bottom: 10px;" id="btnn" (click)="OpenGroupModal()" >
+            Create Group
+         </button>
         <!--table-->
         <section class="table" style="background-color: white; overflow-y: auto; ">
             <table class="table  table-hover table-bordered" >
@@ -346,9 +359,8 @@
                     <td>{{g.start_date}}</td>
                     <td>{{g.end_date}}</td>
                     <td class="social-media">
-                        <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus social-iconnn " ></i></a>
-                        <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                        <i class="fa fa-trash  social-iconn   " ></i>
+                        <a (click)="ViewGroup(g)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                        <a (click)="DeleteGroup(g)"><i class="fa fa-trash  social-iconn   " ></i></a>
                     </td> 
                     
                 </tr>
@@ -357,6 +369,9 @@
             </section>
     </div>
     <div class="tab-pane container fade" id="menu1">
+        <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" style="margin-bottom: 10px;" id="btnn" (click)="OpenMemberModal()" >
+            Group Members
+         </button>
         <!--table-->
         <section class="table" style="background-color: white; overflow-y: auto; ">
             <table class="table  table-hover table-bordered" >
@@ -372,11 +387,10 @@
                 <tbody>
                 <tr *ngFor="let m of groupmember">
                     <td>{{m.group_name}}</td>
-                    <td>{{m.first_name}} {{m.last_name}}</td>
+                    <td>{{m.student_name}}</td>
                     <td class="social-media">
-                        <a data-toggle="modal" data-target="#memberModal"><i class="fa fa-plus social-iconnn " ></i></a>
-                        <a data-toggle="modal" data-target="#memberModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                        <i class="fa fa-trash  social-iconn   " ></i>
+                        <a (click)="ViewMembers(m)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                        <a (click)="DeleteMembers(m)"><i class="fa fa-trash  social-iconn   " ></i></a>
                     </td>
                     
                 </tr>
@@ -385,6 +399,9 @@
             </section>
     </div>
     <div class="tab-pane container fade" id="menu2">
+        <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" style="margin-bottom: 10px;" id="btnn" (click)="OpenAssignmentModal()">
+            Group Assignments
+         </button>
         <section class="table" style="background-color: white; overflow-y: auto; ">
             <table class="table  table-hover table-bordered" >
                 <thead>
@@ -410,9 +427,8 @@
                         </a>
                     </td>
                     <td class="social-media">
-                        <a data-toggle="modal" data-target="#asgModal"><i class="fa fa-plus social-iconnn " ></i></a>
-                        <a data-toggle="modal" data-target="#asgModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                        <i class="fa fa-trash  social-iconn   " ></i>
+                        <a (click)="ViewAssignment(g)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                        <a (click)="DeleteAssignment(g)"><i class="fa fa-trash  social-iconn   " ></i></a>
                     </td>
                     
                 </tr>
@@ -422,6 +438,9 @@
         
     </div>
     <div class="tab-pane container fade" id="menu3">
+        <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" style="margin-bottom: 10px;" id="btnn" (click)="OpenMessageModal()">
+            Group Message
+         </button>
         <!--table-->
         <section class="table" style="background-color: white; overflow-y: auto; ">
             <table class="table  table-hover table-bordered" >
@@ -443,9 +462,8 @@
                     <td>{{m.message_for}}</td>
                     <td>{{m.message}}</td>
                     <td class="social-media">
-                        <a data-toggle="modal" data-target="#msgModal"><i class="fa fa-plus social-iconnn " ></i></a>
-                        <a data-toggle="modal" data-target="#msgModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                        <i class="fa fa-trash  social-iconn   " ></i>
+                        <a (click)="ViewMessage(m)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                        <a (click)="DeleteMessage(m)"><i class="fa fa-trash  social-iconn"></i></a>
                     </td>
                     
                 </tr>

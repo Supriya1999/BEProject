@@ -1,116 +1,118 @@
-<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
-    Add Leads
+<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" (click)="OpenModal()">
+  Add Leads
 </button>
 <hr/>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Lead Details  </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-        <div class="modal-body ">
-            <div class="container">
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                  <label>Lead ID</label>
-                  <input type="text" [(ngModel)]="lead_id" placeholder="Lead ID" class="form-control" disabled >
+<form [formGroup]="leadform" (submit)="SubmitData(leadform.value)">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">  
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Lead Details  </h5>
+      <button type="button" class="close" (click)="CloseModal()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body ">
+          <div class="container">
+          <div class="form-row">
+              <div class="form-group col-md-4">
+                <label>Lead ID</label>
+                <input type="text" formControlName="lead_id" class="form-control" disabled >
+              </div>
+              
+              <div class="form-group col-md-8">
+                  <label>College Name</label> 
+                  <select class="form-control" formControlName="center_id" >
+                    <option selected disabled>Select College Name</option>
+                    <option *ngFor="let s of centers" value="{{s.center_id}}" >{{s.college_name}}</option>
+                  </select>
                 </div>
-                
-                <div class="form-group col-md-8">
-                    <label>Center Type</label>
-                    <select class="form-control" [(ngModel)]="center_id">
-                      <option selected disabled>Select Center Type</option>
-                      <option *ngFor="let s of centers" value="{{s.center_id}}" >{{s.center_name}}</option>
-                    </select>
-                  </div>
-              </div>
-              <div class="form-group ">
-                <label>Candidate Name</label>
-                <input type="text" [(ngModel)]="candidate_name" placeholder="Candidate name" class="form-control" >
-                </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label>Mobile Number</label>
-                    <input type="text" [(ngModel)]="mobile_number" placeholder="Mobile Number" class="form-control" >
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label >Email Address</label>
-                    <input type="text" [(ngModel)]="email" placeholder="Email Address" class="form-control" >
-                  </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label>Qualification</label>
-                    <select class="form-control" [(ngModel)]="qualification_id" (change)="GetSpecializations(qualification_id)">
-                      <option selected disabled>Select Qualification</option>
-                      <option *ngFor="let q of qualifications" value="{{q.qualification_id}}">{{q.qualification}}</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label>Specialization</label>
-                    <select class="form-control" [(ngModel)]="specialization_id" >
-                      <option selected disabled>Select Specialization</option>
-                      <option *ngFor="let s of specializations" value="{{s.specialization_id}}">{{s.specialization}}</option>
-                    </select> 
-                  </div>
-              </div>
-              <div class="form-group ">
-                <label>Local Address</label>
-                <input type="text" [(ngModel)]="address" class="form-control" placeholder="Local Address" >
-             </div> 
             </div>
-                
-        </div>
-        <div class="modal-footer">
-          <input type="button" value="Save" class="btn btn-primary btn-lg btn-sm btn-xs" (click)="CreateLead(lead_id,center_id,candidate_name,mobile_number,email,qualification_id,specialization_id,address)">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        
-        </div>
-    </div>
-    </div>
+            <div class="form-group ">
+              <label>Candidate Name</label>
+              <input type="text" formControlName="candidate_name" class="form-control" >
+              </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label>Mobile Number</label>
+                  <input type="text" formControlName="mobile_number"  class="form-control" >
+                </div>
+                <div class="form-group col-md-6">
+                  <label >Email Address</label>
+                  <input type="text" formControlName="email" class="form-control" >
+                </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label>Qualification</label>
+                  <select class="form-control" formControlName="qualification_id" [(ngModel)]="qid" (change)="GetSpecializations(qid)"> 
+                    <option selected disabled>Select Qualification</option>
+                    <option *ngFor="let q of qualifications" value="{{q.qualification_id}}">{{q.qualification}}</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Specialization</label>
+                  <select class="form-control" formControlName="specialization_id" >
+                    <option selected disabled>Select Specialization</option>
+                    <option *ngFor="let s of specializations" value="{{s.specialization_id}}">{{s.specialization}}</option>
+                  </select> 
+                </div>
+            </div>
+            <div class="form-group ">
+              <label>Local Address</label>
+              <input type="text" formControlName="address" class="form-control" >
+           </div> 
+          </div>
+              
+      </div>
+      <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-danger" (click)="CloseModal()">Close</button>
+      
+      </div>
+  </div>
+  </div>
 </div>
-
+</form>
 <!--filter-->
 <div class="row">
-    <div class="col-md-3">
-    <label>Filter Data</label><br>
-    <input type="text" placeholder="Filter data by name" class="form-control"/>
-    </div>
+  <div class="col-md-3">
+  <label>Filter Data</label><br>
+  <input type="text" placeholder="Filter data by name" class="form-control"/>
+  </div>
 </div>
 <br><br>
 <!--table-->
 <section class="table" style="background-color: white; overflow-y: auto; ">
-    <table class="table  table-hover table-bordered" >
-        <thead>
-          <tr>
-            <th scope="col">Candidate Name</th>
-            <th scope="col">Center Name</th>
-            <th scope="col">Qualification</th>
-            <th scope="col">Email Address</th>
-            <th scope="col">Mobile Number</th>
-            <th scope="col">Local Address</th>
-            <th scope="col">Action</th>
+  <table class="table  table-hover table-bordered" >
+      <thead>
+        <tr>
+          <th scope="col">Candidate Name</th>
+          <th scope="col">College Name</th>
+          <th scope="col">Qualification</th>
+          <th scope="col">Email Address</th>
+          <th scope="col">Mobile Number</th>
+          <th scope="col">Local Address</th>
+          <th scope="col">Action</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let q of leads">
+            <td>{{q.candidate_name}}</td>
+            <td>{{q.college_name}}</td>
+            <td>{{q.specialization}}</td>
+            <td>{{q.email}}</td>
+            <td>{{q.mobile_number}}</td> 
+            <td>{{q.address}}</td>
+            <td class="social-media">
+              <a (click)="View(q)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+              <a (click)="Delete(q)"><i class="fa fa-trash  social-iconn   " ></i></a>
+            </td>
             
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let q of leads">
-              <td>{{q.candidate_name}}</td>
-              <td>{{q.center_name}}</td>
-              <td>{{q.specialization}}</td>
-              <td>{{q.email}}</td>
-              <td>{{q.mobile_number}}</td>
-              <td>{{q.address}}</td>
-              <td class="social-media">
-                <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                <i class="fa fa-trash  social-iconn   " ></i>
-              </td>
-             
-          </tr>
-        </tbody>
-      </table>            
-    </section>
+        </tr>
+      </tbody> 
+    </table>            
+  </section>

@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" (click)="OpenModal()">
     Study Material
  </button>
  <hr/>
@@ -33,11 +33,10 @@
                <td><a href="{{server}}{{s.path}}/{{s.images}}" target="_blank" class="text-decoration-none">{{s.images}}</a></td>
                <td>{{s.description}}</td>
                <td class="social-media">
-                 <a ><i class="fa fa-eye social-iconnn " ></i></a>
-                 <a ><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                 <a ><i class="fa fa-trash social-iconn " ></i></a>
+                <a (click)="View(s)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                 <a (click)="Delete(s)"><i class="fa fa-trash social-iconn " ></i></a>  
                </td>
-               </tr>
+               </tr> 
            </tbody>
        </table>            
      </section>
@@ -45,12 +44,14 @@
 <form [formGroup]="studyform" (submit)="AddStudy(studyform.value)">
 
      <!-- Modal -->
-     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
+     <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+    <div class="modal " tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+        
+        <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content ">
             <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Study Material</h5><br>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" (click)="CloseModal()">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
@@ -62,19 +63,19 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6"> 
                         <label><b>Course Name</b></label>
-                        <select class="form-control">
+                        <select class="form-control" [(ngModel)]="cid" formControlName="course_id" (change)="GetYear(cid)">
                             <option selected disabled>select Course</option>
-                            <option *ngFor="let c of courses" >{{c.course_name}}</option>
+                            <option *ngFor="let c of courses" value="{{c.course_id}}">{{c.course_name}}</option>
                         </select>
                     </div>
                     <br>
                     <div class="form-group col-md-6">
                         <label><b>Year of Study</b></label>
-                        <select class="form-control">
+                        <select class="form-control" [(ngModel)]="yid" formControlName="year_id" (change)="GetSubject(yid)">
                             <option selected disabled>select year of study</option>
-                            <option *ngFor="let y of years">{{y.year_name}}</option>
+                            <option *ngFor="let y of years" value="{{y.year_id}}">{{y.year_name}}</option>
                         </select> 
                     </div>
                 </div>
@@ -82,8 +83,8 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label><b>Subject Name</b></label>
-                        <select class="form-control">
-                            <option selected disabled>select subjects</option>
+                        <select class="form-control" [(ngModel)]="sid" formControlName="subject_id" (change)="GetUnit(sid)">
+                            <option >select subjects</option>
                             <option *ngFor="let s of subjects">{{s.subject_name}}</option>
                         </select>
                     </div>
@@ -97,7 +98,8 @@
                     </div>
                 </div>
                 <label><b>Upload PDF/PPT</b></label>
-                <input type="file" class="form-control" formControlName="ppt" (change)="onSelectFile($event.target.files)">
+                <input type="file" class="form-control"  (change)="onSelectFile($event.target.files)">
+                <span class="text-dark" [ngStyle]="{'display':displaymsg}">Note-If you don't want to update the PDF/PPT then keep the upload PDF/PPT field blank...</span>
                 <br>
                 <label><b>Description</b></label>
                 <span *ngIf="studyform.get('description').errors && studyform.get('description').dirty">
@@ -108,7 +110,7 @@
             </div>
             <div class="modal-footer">
             <button type="submit" class="btn btn-primary" [disabled]="!studyform.valid">Save</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
+            <button type="button" class="btn btn-danger" (click)="CloseModal()" >Close</button>
             </div>
         </div>
         </div>

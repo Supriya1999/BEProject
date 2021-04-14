@@ -64,7 +64,8 @@ export class SpecializationClass{
     ViewSpecializationForm(s){
         this.specializationform=this.fb.group({
             specialization_id:[s.specialization_id],
-            specialization:[s.specialization,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]]
+            specialization:[s.specialization,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
+            qualification_id:[s.qualification_id]
         })
       
         // $("#exampleModalLabel").modal("show")

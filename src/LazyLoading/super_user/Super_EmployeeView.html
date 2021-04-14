@@ -1,3 +1,311 @@
+<!-- Modal -->
+<form [formGroup]="profileform" (submit)="SubmitProfileData(profileform.value)">
+    <div class="modal " tabindex="-1" role="dialog"  [ngStyle]="{'display':displayprofile}">
+    <div class="modal-dialog modal-dialog-scrollable " role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Profile</h5>
+          <button type="button" class="close" (click)="CloseProfileModal()">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body ">
+              <div class="container">
+                  <div class="form-row">
+                      <div class="form-group col-md-6">
+                          <label style="color:#000">Employee Id</label>
+                          <input type="text" formControlName="employee_id" placeholder="First Name" class="form-control" disabled>
+                      </div>
+                      <div class="form-group col-md-6">
+                          <label style="color:#000">Employee Code</label>
+                          <input type="text" formControlName="employee_code" placeholder="Middle Name" class="form-control" disabled >
+                      </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>First Name</label>
+                        
+                        <input type="text" formControlName="first_name" class="form-control" >
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Middle Name</label>
+                        
+                        <input type="text" formControlName="middle_name" class="form-control" >
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Last Name</label>
+                        
+                        <input type="text" formControlName="last_name" class="form-control" >
+                    </div>
+                      
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Birth Date</label>
+                        <input type="date" formControlName="birth_date" class="form-control" >
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label >Joining Date</label>
+                      <input type="date" formControlName="joining_date" class="form-control" >
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Role</label>
+                      <select class="form-control" formControlName="role_id">
+                        <option>Select Role</option>
+                        <option *ngFor="let s of role" value={{s.role_id}}>{{s.role}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Mobile Number</label>
+                        <input type="text" formControlName="mobile_number" class="form-control" >
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Email Address</label>
+                        <input type="text" formControlName="email_address" class="form-control" >
+                    </div>
+                    
+                    <div class="form-group col-md-4 ">
+                      <label>Center Name</label>
+                      <select class="form-control" formControlName="center_id">
+                        <option selected disabled>Select Center name</option>
+                        <option *ngFor="let s of centers" value={{s.center_id}}>{{s.college_name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>State</label>
+                        <select class="form-control"  formControlName="state_id" [(ngModel)]="sid"  (change)="GetCities(sid)">
+                          <option>Select State</option>
+                          <option *ngFor="let s of states" value={{s.state_id}}>{{s.state_name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label >City</label>
+                        <select class="form-control" formControlName="city_id"  [(ngModel)]="cid" (change)="GetLocations(cid)">
+                            <option>select city</option>
+                            <option *ngFor="let s of cities" value={{s.city_id}}>{{s.city_name}}</option>
+                            <input type="text" formControlName="city_id" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label >Location</label>
+                        <select class="form-control" formControlName="location_id" >
+                            <option>select location</option>
+                            <option *ngFor="let s of locations" value={{s.location_id}}>{{s.location_name}}</option>
+                        </select>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Permanent Address</label>
+                        <input type="text" formControlName="permanent_address" class="form-control">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label >Local Address</label>
+                        <input type="text" formControlName="local_address" class="form-control">
+                      </div>
+                        <div class="form-group col-md-12">
+                        <label>Upload Photo</label>
+                        <input type="file" (change)="onSelectFile($event.target.files)" class="form-control"/>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-danger" (click)="CloseProfileModal()">Close</button>
+  
+          </div>
+      </div>
+      </div> 
+  </div>
+  </form>
+
+  <!-- Modal -->
+<form [formGroup]="salaryform" (submit)="SubmitSalaryData(salaryform.value)">
+    <div class="modal " tabindex="-1" role="dialog"  [ngStyle]="{'display':displaysalary}">
+    <div class="modal-dialog modal-dialog-scrollable " role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Salary</h5>
+          <button type="button" class="close" (click)="CloseSalaryModal()">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body ">
+              <div class="container">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label >Salary Id</label>
+                        <input type="text" class="form-control" formControlName="salary_id" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label >Employee Id</label>
+                        <input type="text" class="form-control" formControlName="employee_id" disabled >
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label >Salary Date</label>
+                        <input type="date" class="form-control" formControlName="salary_date" >
+                    </div>
+                    
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Actual Salary</label>
+                        <input type="text" class="form-control" formControlName="actual_salary">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Incentive Amount</label>
+                        <input type="text" class="form-control"formControlName="incentive_amount" >
+                    </div>
+                    
+                      
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Tax Deduction</label>
+                        <input type="text" class="form-control"formControlName="tax_deduction">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Total Present Days</label>
+                        <input type="text" class="form-control"formControlName="total_present_days">
+                    </div>
+                        
+              </div>
+          </div>
+          </div>
+          <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-danger" (click)="CloseSalaryModal()">Close</button>
+  
+          </div>
+      </div>
+      </div> 
+  </div>
+  </form>
+<!-- qualification update form -->
+<!-- Modal -->
+<form [formGroup]="qualificationform" (submit)="SubmitQualificationData(qualificationform.value)">
+    <div class="modal " tabindex="-1" role="dialog"  [ngStyle]="{'display':displayqualification}">
+    <div class="modal-dialog modal-dialog-scrollable " role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Employee Qualification Details</h5>
+          <button type="button" class="close" (click)="CloseQualificationModal()">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body ">
+            <div class="container">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Employee Qualification Id</label>
+                  <input type="text" formControlName="employee_qualification_id" class="form-control"  disabled>
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Employee Id</label>
+                  <input type="text" formControlName="employee_id" class="form-control"  disabled>
+                </div>
+              </div>
+              
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Qualification</label>
+                    <select class="form-control" formControlName="qualification_id" [(ngModel)]="qid" (change)="GetSpecializations(qid)">
+                      <option selected disabled>Select Qualification</option>
+                    <option *ngFor="let q of qualification" value="{{q.qualification_id}}">{{q.qualification}}</option>
+                    </select>
+                  </div> 
+                  <div class="form-group col-md-6">
+                    <label>Specialization</label>
+                    <select class="form-control" formControlName="specialization_id">
+                      <option selected disabled>Select Specialization</option>
+                      <option *ngFor="let s of specialization" value="{{s.specialization_id}}">{{s.specialization}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Medium</label>
+                    <input type="text" formControlName="medium" class="form-control" placeholder="Medium">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>University</label>
+                    <input type="text" formControlName="university" class="form-control" placeholder="university">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Passing Year</label>
+                    <input type="text" formControlName="passing_year" class="form-control" placeholder="passing_year">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Percentage</label>
+                    <input type="text" formControlName="percentage" class="form-control" placeholder="percentage">
+                  </div>
+                </div>  
+            </div>   
+          </div>
+          <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-danger" (click)="CloseQualificationModal()">Close</button>
+    
+          </div>
+      </div>
+      </div> 
+    </div>
+    </form>
+    
+<!-- qualification update form -->
+<!-- Modal -->
+<form [formGroup]="documentform" (submit)="SubmitDocumentData(documentform.value)">
+    <div class="modal " tabindex="-1" role="dialog"  [ngStyle]="{'display':displaydocument}">
+    <div class="modal-dialog modal-dialog-scrollable " role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Empoyee Document Details</h5>
+          <button type="button" class="close" (click)="CloseDocumentModal()">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body ">
+            <div class="container">
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Document Id</label>
+                  <input type="text" formControlName="document_id" class="form-control"  disabled>
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Employee Id</label>
+                  <input type="text" formControlName="employee_id" class="form-control"  disabled>
+                </div>
+              </div>
+              
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Document Name</label>
+                    <input type="text" class="form-control" formControlName="document_name">
+                    
+                  </div> 
+                  <div class="form-group col-md-6">
+                    <label>Upload Document</label>
+                    <input type="file" (change)="onSelectFile($event.target.files)" class="form-control" >
+                  </div>
+                </div>
+                  
+            </div>   
+          </div>
+          <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-danger" (click)="CloseDocumentModal()">Close</button>
+    
+          </div>
+      </div>
+      </div> 
+    </div>
+    </form>
+    
 <!-- Nav tabs -->
 <ul class="nav nav-tabs"> 
 <li class="nav-item ">
@@ -30,12 +338,11 @@
     <div class="card-body">
         <div class="container">
             <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered" style="overflow-x: auto;background-color: white;">
-                    <tr>
+                    <tr> 
                         <th>Action</th>
                         <td class="social-media">
-                            <a href="employee.html"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                             <i class="fa fa-trash  social-iconn   " ></i>
-                           </td>
+                            <a (click)="ViewProfile(s)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                            </td>
                     </tr>
                     <tr>
                         <th>College Name</th>
@@ -59,7 +366,7 @@
                     </tr>
                     <tr>
                         <th>Role</th>
-                        <td>{{s.role}}</td>
+                        <td>{{s.role}}</td> 
                     </tr>
                     <tr>
                         <th>Joining Date</th>
@@ -98,6 +405,9 @@
         </div>
         <div class="card-body" style="overflow-y: auto;">
             <div class="container">
+                <button type="button" style="margin-bottom: 10px;" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" (click)="OpenQualificationModal()">
+                    Add Qualification
+                  </button>
                 <table class="table table-bordered" > 
                     <tr>
                     <th>Qualification</th>
@@ -118,8 +428,8 @@
                         <td>{{q.percentage}}</td>
                         <td class="social-media">
                             
-                            <a href="employee.html"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                            <i class="fa fa-trash  social-iconn   " ></i>
+                            <a (click)="ViewQualification(q)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                            <a (click)="DeleteQualification(q)"><i class="fa fa-trash  social-iconn"></i></a>
                        
                     </td>
                     </tr>
@@ -137,26 +447,28 @@
         </div>
         <div class="card-body" style="overflow-y: auto;">
             <div class="container">
-                <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered">
+                <button type="button" style="margin-bottom: 10px;" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" (click)="OpenDocumentModal()">
+                    Add Documents
+                  </button>
+                <table class="table table-bordered" > 
                     <tr>
-                        <th>Action</th>
-                        <td class="social-media">
-                            
-                                <a href="employee.html"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                                <i class="fa fa-trash  social-iconn   " ></i>
-                           
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Document Name</th>
-                        <th>Image Name</th>
+                    <th>Document Name</th>
+                    <th>Document</th>
+                    <th>Action</th>
+                        
                     </tr>
                     <tr *ngFor="let d of s.documents">
                         <td>{{d.document_name}}</td>
-                        <td><img src="{{server}}{{path}}/{{d.image_name}}" height="100px" width="100px"/></td>
+                        <td>
+                            <a style="text-decoration: none;" href="{{server}}{{s.path}}/{{d.image_name}}">{{d.image_name}}</a></td>
+                        <td class="social-media">
+                            <a (click)="ViewDocument(d)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                            <a (click)="DeleteDocument(d)"><i class="fa fa-trash  social-iconn"></i></a>
+                    </td>
                     </tr>
                     
                 </table>
+
             </div>
         </div>
     </div>
@@ -168,36 +480,33 @@
         </div>
         <div class="card-body" style="overflow-y: auto;">
             <div class="container">
-                <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered">
+                <button type="button" style="margin-bottom: 10px;" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" (click)="OpenSalaryModal()">
+                    Add Salary
+                  </button>
+                <table class="table table-bordered" > 
                     <tr>
-                        <th>Action</th>
+                    <th>Salary Date</th>
+                    <th>Actual Salary</th>
+                    <th>Incentive Amount</th>
+                    <th>Tax Deduction</th>
+                    <th>Total Present Days</th>
+                    <th>Action</th>
+                        
+                    </tr>
+                    <tr *ngFor="let s of s.salary">
+                        <td>{{s.salary_date}}</td>
+                        <td>{{s.actual_salary}}</td>
+                        <td>{{s.incentive_ammount}}</td>
+                        <td>{{s.tax_deduction}}</td>
+                        <td>{{s.total_present_days}}</td>
                         <td class="social-media">
                             
-                                <a href="employee.html"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                                <i class="fa fa-trash  social-iconn   " ></i>
-                           
-                        </td>
+                            <a (click)="ViewSalary(s)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                            <a (click)="DeleteSalary(s)"><i class="fa fa-trash  social-iconn"></i></a>
+                       
+                    </td>
                     </tr>
-                    <tr>
-                        <th>Salary Date</th>
-                        <td>{{s.salary.salary_date}}</td>
-                    </tr>
-                    <tr>
-                        <th>Actual Salary</th>
-                        <td>{{s.salary.actual_salary}}</td>
-                    </tr>
-                    <tr>
-                        <th>Incentive Amount</th>
-                        <td>{{s.salary.incentive_ammount}}</td>
-                    </tr>
-                    <tr>
-                        <th>Tax Deduction</th>
-                        <td>{{s.salary.tax_deduction}}</td>
-                    </tr>
-                    <tr>
-                        <th>Total Present Days</th>
-                        <td>{{s.salary.total_present_days}}</td>
-                    </tr>
+                    
                 </table>
              </div>
         </div>

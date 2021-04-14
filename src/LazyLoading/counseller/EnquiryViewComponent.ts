@@ -1,23 +1,264 @@
 import {Component} from "@angular/core"
-import { FormBuilder } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import {ActivatedRoute} from "@angular/router" 
 import { GenericApi } from "../APIS/GenericApi";
+import {FormControl,Validators,Validator, Form} from "@angular/forms"
+
 @Component({
     selector:'app-root',
     templateUrl:'EnquiryView.html',
 })
 export class EnquiryViewClass{
-     id:any=0;
-     s:any; 
-     qualifications:any;
+    id:any=0;
+    s:any; 
+    qid:any;
+    qualification_id:any;
+    qualifications:any; 
+    displayenquiry:any="none";
+    enquiryform:FormGroup;
+    categories:any;
+    category_id:any;
+    center_id:any;
+    cet_marks:any;
+    specializations:any=[];
+    specialization_id:any;
+    studentqualifications:any=[];
+    medium:any;
+    passing_year:any;
+    percentage:any;
+    university:any;
+    pcm_marks:any;
+    candidate_name:any;
+    email:any;
+    mobile_number:any;
+    birth_date:any;
+    address:any;
+    enquiry_date:any;
+    annual_income:any;
+    center:any;
+    sources:any;
+    source_id:any;
+    technology_id:any;
+    technology:any;
+    checkarraysource:any=[];
+    checkarraytech:any=[];
+    displayqualification:any="none";
+    action=""
+    qualificationform:FormGroup;
+
      constructor(private rt:ActivatedRoute,private api:GenericApi,private fb:FormBuilder)
     {
+        this.NewEnquiryForm()
+        this.NewQualificationForm();
+
         this.rt.params.subscribe(e=>{
             this.id=e["id"]
         })
         this.GetEnquiryById(this.id)
+        this.GetQualifications();
+        this.GetCategories();
+        this.GetSources();
+        this.GetTechnology();
+        this.GetCenter();
+    
+    }
+    NewEnquiryForm(){
+        this.enquiryform=this.fb.group({
+            enquiry_id:[null],
+            candidate_name:[null],
+            birth_date:[null],
+            enquiry_date:[null],
+            mobile_number:[null],
+            email:[null],
+            annual_income:[null],
+            center_id:[null],
+            category_id:[null],
+            cet_marks:[null],
+            pcm_marks:[null],
+            address:[null,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
+            source_id:[null],
+            technology_id:[null]
+        })
+    }
+    
+    NewQualificationForm(){
+        this.qualificationform=this.fb.group({
+            enquiry_qualification_id:[null],
+            enquiry_id:[null],
+            qualification_id:[null],
+            specialization_id:[null],
+            medium:[null],
+            university:[null],
+            passing_year:[null],
+            percentage:[null],
+        })
     }
     GetEnquiryById(id){
         this.api.GetApi("enquiry?enquiry_id="+id).subscribe(e=>this.s=e)
     }
+    GetQualifications(){
+        this.api.GetApi("qualification").subscribe(e=>this.qualifications=e)
+        this.specializations=[]
+    }
+    
+    GetSpecializations(qid:any){
+        alert(qid)
+        this.api.GetApi("specialization?qualification_id="+qid).subscribe(e=>this.specializations=e)
+    }
+    GetCategories(){
+        this.api.GetApi("category").subscribe(e=>this.categories=e)
+    }
+    GetCenter(){
+        this.api.GetApi("center_details").subscribe(e=>this.center=e)
+
+    }
+    GetSources(){
+        this.api.GetApi("leadsources").subscribe(e=>this.sources=e)
+    }
+    GetTechnology(){
+        this.api.GetApi("technology").subscribe(e=>this.technology=e)
+    }
+    GetSourceId(e){
+        var i=this.checkarraysource.indexOf(e);
+        if(i==-1){
+            this.checkarraysource.push(e);
+        }
+        else{
+            this.checkarraysource.splice(i,1);
+        }
+        console.log(this.checkarraysource)
+    }
+    
+    GetTechnologyId(e){
+        var i=this.checkarraytech.indexOf(e);
+        if(i==-1){
+            this.checkarraytech.push(e);
+        }
+        else{
+            this.checkarraytech.splice(i,1);
+        }
+        console.log(this.checkarraytech)
+    }
+    SubmitEnquiryData(s)
+    {
+        var data=new FormData()
+        data.append("enquiry_id",s.enquiry_id)
+        data.append("candidate_name",s.candidate_name)
+        data.append("email",s.email)
+        data.append("mobile_number",s.mobile_number)
+        data.append("birth_date",s.birth_date)
+        data.append("address",s.address)
+        data.append("technology_id",this.checkarraytech)
+        data.append("source_id",this.checkarraysource) 
+        data.append("enquiry_date",s.enquiry_date)
+        data.append("center_id",s.center_id)
+        data.append("category_id",s.category_id)
+        data.append("annual_income",s.annual_income)
+        data.append("cet_marks",s.cet_marks)
+        data.append("pcm_marks",s.pcm_marks)
+        this.api.PutApi("enquiry",data).subscribe(e=>{
+            alert(e.msg)
+            this.NewEnquiryForm();
+            this.GetEnquiryById(this.id) 
+            this.CloseProfileModal();
+        })
+    }
+    SubmitQualificationData(q){
+        switch(this.action)
+        {
+            case "Add":
+                var data=new FormData();
+                data.append("enquiry_id",this.id)
+                data.append("specialization_id",q.specialization_id)
+                data.append("medium",q.medium)
+                data.append("university",q.university)
+                data.append("passing_year",q.passing_year)
+                data.append("percentage",q.percentage)
+                this.api.PostApi("enquiryqualification",data).subscribe(e=>{
+                    alert(e.msg)
+                    this.NewQualificationForm();
+                    this.GetEnquiryById(this.id) 
+                    this.CloseQualificationModal();
+                })
+                break;
+            case "Update":
+                var data=new FormData();
+                data.append("enquiry_qualification_id",q.enquiry_qualification_id)
+                data.append("enquiry_id",q.enquiry_id)
+                data.append("specialization_id",q.specialization_id)
+                data.append("medium",q.medium)
+                data.append("university",q.university)
+                data.append("passing_year",q.passing_year)
+                data.append("percentage",q.percentage)
+                this.api.PutApi("enquiryqualification",data).subscribe(e=>{
+                    alert(e.msg)
+                    this.NewQualificationForm();
+                    this.GetEnquiryById(this.id) 
+                    this.CloseQualificationModal();
+                })
+                break;
+        }
+    }
+    ViewEnquiryForm(s)
+    {
+        this.enquiryform=this.fb.group({
+            enquiry_id:[s.enquiry_id],
+            candidate_name:[s.candidate_name],
+            birth_date:[s.birth_date],
+            enquiry_date:[s.enquiry_date],
+            mobile_number:[s.mobile_number],
+            email:[s.email],
+            category_id:[s.category_id],
+            annual_income:[s.annual_income],
+            center_id:[s.center_id],
+            cet_marks:[s.cet_marks],
+            pcm_marks:[s.pcm_marks],
+            source_id:[s.source_id],
+            technology_id:[s.technology_id],
+            address:[s.address,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
+        })
+    }
+    ViewEnquiry(s){
+        console.log(s);
+        this.ViewEnquiryForm(s);
+        this.displayenquiry="block"
+    }
+    CloseProfileModal(){
+        this.displayenquiry="none"
+    }
+    ViewQualificationForm(q){
+        this.qualificationform=this.fb.group({
+            enquiry_qualification_id:[q.enquiry_qualification_id],
+            enquiry_id:[q.enquiry_id],
+            qualification_id:[q.qualification_id],
+            specialization_id:[q.specialization_id],
+            medium:[q.medium],
+            university:[q.university],
+            passing_year:[q.passing_year],
+            percentage:[q.percentage],
+        })
+    }
+    ViewQualification(q){
+        console.log(q);
+        this.ViewQualificationForm(q);
+        this.displayqualification="block"
+        this.action="Update"
+
+    }
+    CloseQualificationModal(){
+        this.displayqualification="none" 
+    }
+    OpenQualificationModal(){
+        this.NewQualificationForm()
+        this.action="Add"
+        this.displayqualification="block"   
+    }
+    DeleteQualification(q){
+        this.api.DeleteApi("enquiryqualification?enquiry_qualification_id="+q.enquiry_qualification_id).subscribe(e=>{
+            alert(e.msg)
+            this.GetEnquiryById(this.id);
+          
+   
+       })
+    }   
 }

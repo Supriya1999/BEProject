@@ -1,15 +1,16 @@
-<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" (click)="OpenModal()">
     Add Subjects
 </button>
 <hr/>
 <form [formGroup]="subjectform" (submit)="AddSubject(subjectform.value)" enctype="multipart/form-data">
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog " role="document">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+  <div class="modal " tabindex="-1" role="dialog" style="overflow-y:auto;" [ngStyle]="{'display':display}">
+    <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Subjects</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" (click)="CloseModal()">
             <span aria-hidden="true">&times;</span>
         </button>
         </div> 
@@ -19,21 +20,23 @@
                   <label>Subject ID</label>
                   <input type="text" formControlName="subject_id" class="form-control" disabled>
                 </div>
+            <div class="form-row">
                 
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label>Course Name</label>
-                <select class="form-control" formControlName="course_id">
+                <select class="form-control" [(ngModel)]="cid" formControlName="course_id" (change)="GetYear(cid)">
                     <option selected disabled>Select Course</option>
                     <option *ngFor="let c of courses" value="{{c.course_id}}">{{c.course_name}}</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label>Year of Study</label>
                 <select class="form-control" formControlName="year_id">
                     <option selected disabled>Select Year</option>
                     <option *ngFor="let y of years" value="{{y.year_id}}">{{y.year_name}}</option>
                 </select>
-            </div>
+            </div> 
+            </div>    
             <div class="form-group">
             
                 <label>Subject Name</label>
@@ -56,13 +59,15 @@
             <div class="form-group">
                 <label>Subject Pic</label>
                 <input type="file"  (change)="onSelectFile($event.target.files)" class="form-control" >
+                <span class="text-dark" [ngStyle]="{'display':displaymsg}">Note-If you don't want to update an image keep the upload image field blank...</span>
+
             </div>
-        
+            
             </div>
         </div>
         <div class="modal-footer">
         <button type="submit" class="btn btn-primary" [disabled]="!subjectform.valid">Save</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger"  (click)="CloseModal()">Close</button>
         
         </div>
     </div>
@@ -100,8 +105,8 @@
                     <img src="{{server}}{{s.path}}/{{s.picture}}" height="100px" width="100px" />
                 </td>
               <td class="social-media">
-                <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                <i class="fa fa-trash  social-iconn   " ></i>
+                <a (click)="View(s)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                <a (click)="Delete(s)"><i class="fa fa-trash  social-iconn   " ></i></a>
               </td> 
           </tr>
         </tbody> 

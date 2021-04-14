@@ -87,7 +87,7 @@ break;
             alert(e.msg)
         //    this.NewQualificationForm();
            this.GetQualification();
-         
+          
    
        })
     }

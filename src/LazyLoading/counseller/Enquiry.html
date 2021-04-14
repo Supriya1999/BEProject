@@ -45,9 +45,8 @@
               <td>{{q.technologies}}</td>
               <td class="social-media">
                 <a [routerLink]='["../enquiry_view",q.enquiry_id]'  style="text-decoration: none;"><i class="fa fa-eye social-iconnn " ></i></a>
-                <a data-toggle="modal" data-target="#openingModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                <i class="fa fa-trash  social-iconn   " ></i>
-            </td>
+                <a (click)="DeleteAll(q)"><i class="fa fa-trash  social-iconn   " ></i></a>
+            </td> 
          </tr>
         </tbody>
       </table>            

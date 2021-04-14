@@ -1,222 +1,769 @@
-<!-- Nav tabs -->
-<ul class="nav nav-tabs">
-    <li class="nav-item ">
-      <a class="nav-link "  data-toggle="tab" href="#home">Profile</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#menu1">Qualification</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#menu2">Registeration</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#menu3">Payment</a>
-    </li>
-  </ul>
-  
-  <div class="tab-content mt-3">
-    <div class="tab-pane container " id="home">
-        <section class="profile">
-            <img src="{{server}}{{s.path}}/{{s.photo}}" class="rounded img-fluid" height="150px" width="150px"><br><br>
-            <label class="text-dark"><b>Hi {{s.first_name}} {{s.last_name}}</b></label><br>
-            <label class="text-dark"><b>Student Code</b>-{{s.student_code}}</label>
-        </section>
-        <div class="card ">
-            <div class="card-header bg-dark text-white text-center">
-               Student Personal Details
-            </div>
-            <div class="card-body" style="overflow-y: auto;">
-                <div class="container">
-                            <section class="table mt-2" style="background-color: white;" >
-                                <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered" style="overflow-x: auto;background-color: white;">
-                                    <tr>
-                                        <th>Student Code</th>
-                                        <td>{{s.student_code}}</td>
-                                    </tr>
-                                    <tr> 
-                                        <th>Student Name</th>
-                                        <td>{{s.first_name}} {{s.middle_name}} {{s.last_name}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Birth Date</th>
-                                        <td>{{s.birth_date}}</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <th>Email Address</th>
-                                        <td>{{s.email_address}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Mobile Number</th>
-                                        <td>{{s.mobile_number}}/{{s.alternative_number}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Father Name</th>
-                                        <td>{{s.parents.father_name}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Mother Name</th>
-                                        <td>{{s.parents.mother_name}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Father Contact Number</th>
-                                        <td>{{s.parents.father_number}}</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <th>Mother Contact Number</th>
-                                        <td>{{s.parents.mother_number}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Father Occupation</th>
-                                        <td>{{s.parents.occupation}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Annual Income</th>
-                                        <td>{{s.parents.annual_income}}</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <th>Father/Mother Email ID</th>
-                                        <td>{{s.parents.email_address}}</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <th>Permanent Address</th>
-                                        <td>{{s.local_address}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Local Address</th>
-                                        <td>{{s.permanent_address}}</td>
-                                    </tr>
-                                </table>
-                            </section>
+
+<!-- Modal -->
+<form [formGroup]="profileform" (submit)="SubmitProfileData(profileform.value)">
+  <div class="modal " tabindex="-1" role="dialog"  [ngStyle]="{'display':displayprofile}">
+  <div class="modal-dialog modal-dialog-scrollable " role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Profile</h5>
+        <button type="button" class="close" (click)="CloseProfileModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body ">
+            <div class="container">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label style="color:#000">Student Id</label>
+                        <input type="text" formControlName="student_id" placeholder="First Name" class="form-control" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label style="color:#000">Student Code</label>
+                        <input type="text" formControlName="student_code" placeholder="Middle Name" class="form-control" disabled >
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label style="color:#000">Birth Date</label>
+                        <input type="date" class="form-control" formControlName="birth_date" placeholder="Birth Date">
+                      </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                      <label style="color:#000">First Name</label>
+
+                      <span *ngIf="profileform.get('first_name').errors && profileform.get('first_name').dirty">
+                        <span *ngIf="profileform.get('first_name').errors.required" style="color:red;"> please enter first name</span>
+                        <span *ngIf="profileform.get('first_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                      </span> 
+                      <input type="text" formControlName="first_name" placeholder="First Name" class="form-control" >
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label style="color:#000">Middle Name</label>
+                      <span *ngIf="profileform.get('middle_name').errors && profileform.get('middle_name').dirty">
+                        <span *ngIf="profileform.get('middle_name').errors.required" style="color:red;"> please enter middle name</span>
+                        <span *ngIf="profileform.get('middle_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                      </span> 
+                      <input type="text" formControlName="middle_name" placeholder="Middle Name" class="form-control" >
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label style="color:#000">Last Name</label>
+                      <span *ngIf="profileform.get('last_name').errors && profileform.get('last_name').dirty">
+                        <span *ngIf="profileform.get('last_name').errors.required" style="color:red;"> please enter last name</span>
+                        <span *ngIf="profileform.get('last_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                      </span> 
+                      <input type="text" formControlName="last_name" placeholder="Last Name" class="form-control" >
+                    </div>
+                   
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label style="color:#000">Email Address</label>
+                    
+                      <span *ngIf="profileform.get('email_address').errors && profileform.get('email_address').dirty">
+                        <span *ngIf="profileform.get('email_addre').errors.required" style="color:red;"> please enter email address</span>
+                        <span *ngIf="profileform.get('email_address').errors.pattern" style="color:red;"> only characters are allowed</span>
+                      </span> 
+                      <input type="text" formControlName="email_address" placeholder="Email Address" class="form-control" >
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label style="color:#000">Center Name</label>
+                      <select class="form-control" formControlName="center_id">
+                        <option selected disabled>Select Center Name</option>
+                        <option *ngFor="let c of centers" value={{c.center_id}}>{{c.college_name}}</option>
+                      </select>
+                    </div> 
+                  </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                      <label style="color:#000">Mobile Number</label>
+
+                        <span *ngIf="profileform.get('mobile_number').errors && profileform.get('mobile_number').dirty">
+                          <span *ngIf="profileform.get('mobile_number').errors.required" style="color:red;"> please enter mobile number</span>
+                          <span *ngIf="profileform.get('mobile_number').errors.pattern" style="color:red;"> only characters are allowed</span>
+                        </span> 
+                        <input type="text" formControlName="mobile_number" placeholder="Mobile Number" class="form-control" >
                         </div>
+                        <div class="form-group col-md-6">
+                      <label style="color:#000"> Alternative Number</label>
+
+                      <span *ngIf="profileform.get('alternative_number').errors && profileform.get('alternative_number').dirty">
+                        <span *ngIf="profileform.get('alternative_number').errors.required" style="color:red;"> please enter mobile number</span>
+                        <span *ngIf="profileform.get('alternative_number').errors.pattern" style="color:red;"> only characters are allowed</span>
+                      </span> 
+                      <input type="text" formControlName="alternative_number" placeholder="Alternative Number" class="form-control" >
+                      </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label style="color:#000">State</label>
+                    
+                    <select class="form-control" [(ngModel)]="sid" formControlName="state_id"  (change)="GetCities(sid)">
+                      <option selected disabled>Select State</option>
+                      <option *ngFor="let s of states" value="{{s.state_id}}" >{{s.state_name}}</option>
+                    </select>
+                    </div>
+                  <div class="form-group col-md-4">
+                    <label style="color:#000"> City</label>
+                   
+                    <select class="form-control" [(ngModel)]="cid" formControlName="city_id" (change)="GetLocations(cid)">
+                      <option selected disabled>Select City</option>
+                      <option *ngFor="let c of cities" value="{{c.city_id}}">{{c.city_name}}</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label style="color:#000"> Location</label>
+                    
+                    <select class="form-control" formControlName="location_id">
+                      <option selected disabled>Select Location</option>
+                      <option *ngFor="let l of locations" value={{l.location_id}}>{{l.location_name}}</option>
+                    </select>
+                </div>
+              </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label style="color:#000">Local Address</label>
+
+                    <span *ngIf="profileform.get('local_address').errors && profileform.get('local_address').dirty">
+                      <span *ngIf="profileform.get('local_address').errors.required" style="color:red;"> please enter mobile number</span>
+                      <span *ngIf="profileform.get('local_address').errors.pattern" style="color:red;"> only characters are allowed</span>
+                    </span> 
+                    <input type="text" formControlName="local_address" class="form-control" placeholder="Local Address" >
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label style="color:#000"> Permanent Address</label>
+
+                    <span *ngIf="profileform.get('permanent_address').errors && profileform.get('permanent_address').dirty">
+                      <span *ngIf="profileform.get('permanent_address').errors.required" style="color:red;"> please enter mobile number</span>
+                      <span *ngIf="profileform.get('permanent_address').errors.pattern" style="color:red;"> only characters are allowed</span>
+                    </span> 
+                    <input type="text" formControlName="permanent_address" class="form-control" placeholder="Permanent Address">
                     </div>
                 </div>
-    </div>
-    <div class="tab-pane container " id="menu1">
-        <div class="card ">
-            <div class="card-header bg-dark text-white text-center">
-               Previous Educational Details
-            </div>
-            <div class="card-body" style="overflow-y: auto;">
-                <div class="container">
-                    <table class="table table-bordered" > 
-                      <thead>
-                        <tr>
-                            <th>Qualification</th>
-                            <th>Specialization</th>
-                            <th>Medium</th>
-                            <th>University</th>
-                            <th>Year</th>
-                            <th>Percentage</th>
-                            </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let q of s.qualifications">
-                            <td>{{q.qualification}}</td>
-                            <td>{{q.specialization}}</td>
-                            <td>{{q.medium}}</td>
-                            <td>{{q.university}}</td>
-                            <td>{{q.passing_year}}</td>
-                            <td>{{q.percentage}}</td>
-                        </tr>
-                      </tbody>
-                        
-                    </table>
-                    <br>
-                     <table class="table table-bordered" > 
-                        <tr>
-                        <th>CET/JEE Score</th>
-                        <th>12th PCM Marks</th>
-                        </tr>
-                        <tr>
-                            <td>{{s.cet_marks}}</td>
-                            <td>{{s.pcm_marks}}</td>
-                            
-                        </tr>
-                        
-                    </table> 
-                    
+                
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label style="color:#000">Cet Marks</label>
+
+                      <span *ngIf="profileform.get('cet_marks').errors && profileform.get('cet_marks').dirty">
+                        <span *ngIf="profileform.get('cet_marks').errors.required" style="color:red;"> please enter mobile number</span>
+                        <span *ngIf="profileform.get('cet_marks').errors.pattern" style="color:red;"> only characters are allowed</span>
+                      </span> 
+                      <input type="text" formControlName="cet_marks" class="form-control" placeholder="Local Address" >
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label style="color:#000"> Pcm Marks</label>
+
+                      <span *ngIf="profileform.get('pcm_marks').errors && profileform.get('pcm_marks').dirty">
+                        <span *ngIf="profileform.get('pcm_marks').errors.required" style="color:red;"> please enter mobile number</span>
+                        <span *ngIf="profileform.get('pcm_marks').errors.pattern" style="color:red;"> only characters are allowed</span>
+                      </span> 
+                      <input type="text" formControlName="pcm_marks" class="form-control" placeholder="Permanent Address">
+                      </div> 
+                  </div>
+                <div class="form-group">
+                  <label style="color: black;">Upload Picture</label>
+                  <input type="file" class="form-control" (change)="onSelectFile($event.target.files)" placeholder="Permanent Address">
                 </div>
+                
             </div>
+        </div>
+        <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" [disabled]="!profileform.valid">Save</button>
+        <button type="button" class="btn btn-danger" (click)="CloseProfileModal()">Close</button>
+
         </div> 
     </div>
-    <div class="tab-pane container " id="menu2">
-        <div class="card ">
-            <div class="card-header bg-dark text-white text-center">
-               Student Registeration Details
-            </div>
-            <div class="card-body" style="overflow-y: auto;">
-                <div class="container">
-                            <section class="table mt-2" style="background-color: white;">
-                                <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered" style="overflow-x: auto;background-color: white;">
-                                    <tr>
-                                        <th>Registeration Code</th>
-                                        <td>{{s.registration.registeration_code}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Joining Date</th>
-                                        <td>{{s.registration.joining_date}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Course Fee</th>
-                                        <td>{{s.registration.course_fee}}</td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <th>Course Name</th>
-                                        <td>{{s.registration.course_name}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Year Name</th>
-                                        <td>{{s.registration.year_name}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Category Name</th>
-                                        <td>{{s.registration.category_name}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Description</th>
-                                        <td>{{s.registration.description}}</td>
-                                    </tr>
-                                </table>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-        
+    </div> 
+</div>
+</form>
+ 
+<!-- parent update form -->
+<!-- Modal -->
+<form [formGroup]="parentform" (submit)="SubmitParentData(parentform.value)">
+<div class="modal " tabindex="-1" role="dialog"  [ngStyle]="{'display':displayparent}">
+<div class="modal-dialog modal-dialog-scrollable " role="document">
+<div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Parent</h5>
+    <button type="button" class="close" (click)="CloseParentModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
     </div>
-    <div class="tab-pane container " id="menu3">
-        <div class="card ">
-            <div class="card-header bg-dark text-white text-center">
-               Student Payment Details
+    <div class="modal-body ">
+        <div class="container">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+                  <label style="color: black;">Parent Id</label>
+              <input type="text" formControlName="parent_id" class="form-control" disabled>
             </div>
-            <div class="card-body" style="overflow-y: auto;">
-                <div class="container">
-                            <section class="table mt-2" style="background-color: white;">
-                                <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered" style="overflow-x: auto;background-color: white;">
-                                    <tr>
-                                        <th>Payment No</th>
-                                        <th>Amount Paid</th>
-                                        <th>Payment Mode</th>
-                                        <th>Payment Type</th>
-                                        <th>Payment Date</th>
-                                    </tr>
-                                    <tr *ngFor="let p of s.payments">
-                                        <td>{{p.payment_id}}</td>
-                                        <td>{{p.payment_amount}}</td>
-                                        <td>{{p.payment_mode}}</td>
-                                        <td>{{p.payment_type}}</td>
-                                        <td>{{p.payment_date}}</td>
+            <div class="form-group col-md-6">
+              <label style="color: black;">Student Id</label>
+              <input type="number" formControlName="student_id" class="form-control" disabled>
+            </div>
+            
+        </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label style="color: black;">Father Name</label>
+              <input type="text" formControlName="father_name" class="form-control" placeholder="Father Name">
+            </div>
+            <div class="form-group col-md-6">
+              <label style="color: black;">Father Number</label>
+              <input type="number" formControlName="father_number" class="form-control" placeholder="Father Contact Number">
+            </div>
+            
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label style="color: black;">Mother Name</label>
+            <input type="text" formControlName="mother_name" class="form-control" placeholder="Mother Name">
+          </div>
+          <div class="form-group col-md-6">
+            <label style="color: black;">Mother Number</label>
+            <input type="number" formControlName="mother_number" class="form-control" placeholder="Mother Contact Number">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label style="color: black;">Occupation</label>
+            <input type="text" formControlName="occupation" class="form-control" placeholder="Father Occupation">
+          </div>
+          <div class="form-group col-md-4">
+            <label style="color: black;">annual Income</label>
+            <input type="text" formControlName="annual_income" class="form-control" placeholder="Annual Income(Last Year)">
+          </div>
+          <div class="form-group col-md-4">
+            <label style="color: black;">Email Address</label>
+            <input type="text" formControlName="email_addresss" class="form-control" placeholder="Father/Mother Email ID">
+         
+          </div>
+        </div>
 
-                                    </tr>
-                                </table>
-                            </section>
-                        </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" >Save</button>
+    <button type="button" class="btn btn-danger" (click)="CloseParentModal()">Close</button>
+
+    </div>
+</div>
+</div> 
+</div>
+</form>
+
+<!-- registeration update form -->
+<!-- Modal -->
+<form [formGroup]="registerationform" (submit)="SubmitRegisterationData(registerationform.value)">
+<div class="modal " tabindex="-1" role="dialog"  [ngStyle]="{'display':displayregisteration}">
+<div class="modal-dialog modal-dialog-scrollable " role="document">
+  <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Student Registeration Details</h5>
+      <button type="button" class="close" (click)="CloseRegisterationModal()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body ">
+        <div class="container">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+                  <label style="color: black;">Registeration Id</label>
+              <input type="text" formControlName="registeration_id" class="form-control" disabled>
+            </div>
+            <div class="form-group col-md-6">
+              <label style="color: black;">Registeration Code</label>
+              <input type="number" formControlName="registeration_code" class="form-control" disabled>
+            </div>
+            
+        </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Course</label>
+              <select  formControlName="course_id" [(ngModel)]="cid" class="form-control" (change)=GetYears(cid)>
+                <option selected disabled>Select Course</option>
+                <option *ngFor="let c of courses" value="{{c.course_id}}">{{c.course_name}}</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Year of Study</label>
+              <select formControlName="year_id" class="form-control" >
+                <option selected disabled>Select Year of Study</option>
+                <option *ngFor="let c of years" value="{{c.year_id}}">{{c.year_name}}</option>
+
+              </select>
+            </div> 
+          </div>
+          
+          <div class="form-row">
+            
+            <div class="form-group col-md-4">
+              <label>Category</label>
+              <select formControlName="category_id" class="form-control">
+                <option selected disabled>Select Category</option>
+                <option *ngFor="let c of category" value="{{c.category_id}}">{{c.category_name}}</option>
+
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label>Course Fees</label>
+              <input type="text" formControlName="course_fees" class="form-control" placeholder="Course Fees"/>
+            </div>
+            
+            <div class="form-group col-md-4">
+              <label>Joining Date</label>
+              <input type="date" formControlName="joining_date" class="form-control" />
+            </div>
+            
+          </div>
+          <div class="form-group ">
+            <label>Description</label>
+            <input type="text" formControlName="description" class="form-control" placeholder="Description"/>
+          </div>  
+        </div>
+      </div>
+      <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-danger" (click)="CloseRegisterationModal()">Close</button>
+
+      </div>
+  </div>
+  </div> 
+</div>
+</form>
+
+
+<!-- payment update form -->
+<!-- Modal -->
+<form [formGroup]="paymentform" (submit)="SubmitPaymentData(paymentform.value)">
+<div class="modal " tabindex="-1" role="dialog"  [ngStyle]="{'display':displaypayment}">
+<div class="modal-dialog modal-dialog-scrollable " role="document">
+  <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Student Payment Details</h5>
+      <button type="button" class="close" (click)="ClosePaymentModal()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body ">
+        <div class="container">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+                  <label style="color: black;">Payment Id</label>
+              <input type="text" formControlName="payment_id" class="form-control" disabled>
+            </div>
+            <div class="form-group col-md-6">
+              <label style="color: black;">Registeration Id</label>
+          <input type="text" formControlName="registeration_id" class="form-control" disabled>
+        </div>
+            
+            
+        </div>
+                    
+          <div class="form-row">
+              
+              <div class="form-group col-md-6">
+                <label>Payment Date</label>
+                  <input type="date"  formControlName="payment_date" class="form-control">
+              </div>
+              
+          </div>
+          <div class="form-row">
+              
+            <div class="form-group col-md-6">
+                <label>Payment Mode</label>
+                <select class="form-control" formControlName="payment_mode">
+                  <option selected disabled>Select Payment Mode</option>
+                  <option value="cash">Cash</option>
+                  <option value="online">Online</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Payment Type</label>
+              <select class="form-control" formControlName="payment_type">
+                <option selected disabled>Select Payment Type</option>
+                <option value="lumsum">Lumsum</option>
+                <option value="installments">Installments</option>
+              </select>
+          </div>
+        </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Ammount Paid</label>
+              <input type="text" formControlName="payment_amount" class="form-control" placeholder="Amount Paid">
+            </div>
+              
+          </div>
+          
+      </div>
+      </div>
+      <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-danger" (click)="ClosePaymentModal()">Close</button>
+
+      </div>
+  </div>
+  </div> 
+</div>
+</form>
+
+
+<!-- qualification update form -->
+<!-- Modal -->
+<form [formGroup]="qualificationform" (submit)="SubmitQualificationData(qualificationform.value)">
+<div class="modal " tabindex="-1" role="dialog"  [ngStyle]="{'display':displayqualification}">
+<div class="modal-dialog modal-dialog-scrollable " role="document">
+  <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Student Qualification Details</h5>
+      <button type="button" class="close" (click)="CloseQualificationModal()">
+          <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body ">
+        <div class="container">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Qualification Id</label>
+              <input type="text" formControlName="qualification" class="form-control"  disabled>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Student Id</label>
+              <input type="text" formControlName="student_id" class="form-control"  disabled>
+            </div>
+          </div>
+          
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Qualification</label>
+                <select class="form-control" formControlName="qualification_id" [(ngModel)]="qid" (change)="GetSpecializations(qid)">
+                  <option selected disabled>Select Qualification</option>
+                <option *ngFor="let q of qualifications" value="{{q.qualification_id}}">{{q.qualification}}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label>Specialization</label>
+                <select class="form-control" formControlName="specialization_id">
+                  <option selected disabled>Select Specialization</option>
+                  <option *ngFor="let s of specializations" value="{{s.specialization_id}}">{{s.specialization}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Medium</label>
+                <input type="text" formControlName="medium" class="form-control" placeholder="Medium">
+              </div>
+              <div class="form-group col-md-6">
+                <label>University</label>
+                <input type="text" formControlName="university" class="form-control" placeholder="university">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label>Passing Year</label>
+                <input type="text" formControlName="passing_year" class="form-control" placeholder="passing_year">
+              </div>
+              <div class="form-group col-md-6">
+                <label>Percentage</label>
+                <input type="text" formControlName="percentage" class="form-control" placeholder="percentage">
+              </div>
+            </div>  
+        </div>   
+      </div>
+      <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-danger" (click)="CloseQualificationModal()">Close</button>
+
+      </div>
+  </div>
+  </div> 
+</div>
+</form>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs">
+<li class="nav-item ">
+  <a class="nav-link "  data-toggle="tab" href="#home">Profile</a>
+</li>
+<li class="nav-item ">
+    <a class="nav-link "  data-toggle="tab" href="#parent">Parent</a>
+  </li>
+<li class="nav-item">
+  <a class="nav-link" data-toggle="tab" href="#menu1">Qualification</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" data-toggle="tab" href="#menu2">Registeration</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" data-toggle="tab" href="#menu3">Payment</a>
+</li>
+</ul>
+
+<div class="tab-content mt-3">
+<div class="tab-pane container " id="home">
+    <section class="profile">
+        <img src="{{server}}{{s.path}}/{{s.photo}}" class="rounded img-fluid" height="150px" width="150px"><br><br>
+        <label class="text-dark"><b>Hi {{s.first_name}} {{s.last_name}}</b></label><br>
+        <label class="text-dark"><b>Student Code</b>-{{s.student_code}}</label>
+    </section>
+    <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+           Student Personal Details
+        </div>
+        <div class="card-body" style="overflow-y: auto;">
+            <div class="container"> 
+                        <section class="table mt-2" style="background-color: white;" >
+                            <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered" style="overflow-x: auto;background-color: white;">
+                                
+                                <tr>
+                                    <th>Action</th>
+                                    <td class="social-media">
+                                        <a (click)="ViewProfile(s)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Student Code</th>
+                                    <td>{{s.student_code}}</td>
+                                </tr>
+                                <tr> 
+                                    <th>Student Name</th>
+                                    <td>{{s.first_name}} {{s.middle_name}} {{s.last_name}}</td>
+                                </tr>
+                                <tr> 
+                                    <th>College Name</th>
+                                    <td>{{s.college_name}}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Birth Date</th>
+                                    <td>{{s.birth_date}}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Email Address</th>
+                                    <td>{{s.email_address}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Mobile Number</th>
+                                    <td>{{s.mobile_number}}/{{s.alternative_number}}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Location</th>
+                                    <td>{{s.location_name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Permanent Address</th>
+                                    <td>{{s.local_address}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Local Address</th>
+                                    <td>{{s.permanent_address}}</td>
+                                </tr>
+                            </table>
+                        </section>
+
                     </div>
                 </div>
-        
-    </div>
+            </div>
+</div>
+<div class="tab-pane container " id="parent">
+    <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+           Student Parent Details
+        </div>
+        <div class="card-body" style="overflow-y: auto;">
+            <div class="container">
+                        <section class="table mt-2" style="background-color: white;" >
+                            <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered" style="overflow-x: auto;background-color: white;">
+                                <tr>
+                                    <th>Action</th>
+                                    <td class="social-media">
+                                        <a (click)="ViewParent(s)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Father Name</th>
+                                    <td>{{s.parents.father_name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Mother Name</th>
+                                    <td>{{s.parents.mother_name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Father Contact Number</th>
+                                    <td>{{s.parents.father_number}}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Mother Contact Number</th>
+                                    <td>{{s.parents.mother_number}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Father Occupation</th>
+                                    <td>{{s.parents.occupation}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Annual Income</th>
+                                    <td>{{s.parents.annual_income}}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Father/Mother Email ID</th>
+                                    <td>{{s.parents.email_address}}</td>
+                                </tr>
+                                
+                            </table>
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+</div>
+<div class="tab-pane container " id="menu1">
+    <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+           Previous Educational Details
+        </div>
+        <div class="card-body" style="overflow-y: auto;">
+            <div class="container">
+              <button type="button" style="margin-bottom: 10px;" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" (click)="OpenQualificationModal()">
+                Add Qualification
+              </button>
+                <table class="table table-bordered" > 
+                  <thead>
+                    <tr>
+                        <th>Qualification</th>
+                        <th>Specialization</th>
+                        <th>Medium</th>
+                        <th>University</th>
+                        <th>Year</th>
+                        <th>Percentage</th>
+                        <th>Action</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let q of s.qualifications">
+                        <td>{{q.qualification}}</td>
+                        <td>{{q.specialization}}</td>
+                        <td>{{q.medium}}</td>
+                        <td>{{q.university}}</td>
+                        <td>{{q.passing_year}}</td>
+                        <td>{{q.percentage}}</td>
+                        <td class="social-media">
+                            <a (click)="ViewQualification(q)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                             <a (click)="DeleteQualification(q)"><i class="fa fa-trash  social-iconn   " ></i></a>
+                        </td>
+                    </tr>
+                  </tbody>
+                    
+                </table>
+                <br> 
+                 <table class="table table-bordered" > 
+                    <tr>
+                    <th>CET/JEE Score</th>
+                    <th>12th PCM Marks</th>
+                    </tr>
+                    <tr>
+                        <td>{{s.cet_marks}}</td>
+                        <td>{{s.pcm_marks}}</td>
+                        
+                    </tr>
+                    
+                </table> 
+                
+            </div>
+        </div>
+    </div> 
+</div>
+<div class="tab-pane container " id="menu2">
+    <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+           Student Registeration Details
+        </div>
+        <div class="card-body" style="overflow-y: auto;">
+            <div class="container">
+                        <section class="table mt-2" style="background-color: white;">
+                            <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered" style="overflow-x: auto;background-color: white;">
+                                <tr>
+                                    <th>Action</th>
+                                    <td class="social-media">
+                                        <a (click)="ViewRegisteration(s)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Registeration Code</th>
+                                    <td>{{s.registration.registeration_code}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Joining Date</th>
+                                    <td>{{s.registration.joining_date}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Course Fee</th>
+                                    <td>{{s.registration.course_fee}}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Course Name</th>
+                                    <td>{{s.registration.course_name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Year Name</th>
+                                    <td>{{s.registration.year_name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Category Name</th>
+                                    <td>{{s.registration.category_name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Description</th>
+                                    <td>{{s.registration.description}}</td>
+                                </tr>
+                            </table>
+                        </section>
+                    </div>
+                </div>
+            </div>
+    
+</div>
+<div class="tab-pane container " id="menu3">
+    <div class="card ">
+        <div class="card-header bg-dark text-white text-center">
+           Student Payment Details
+        </div>
+        <div class="card-body" style="overflow-y: auto;">
+            <div class="container">
+                        <section class="table mt-2" style="background-color: white;">
+                          <button type="button" style="margin-bottom: 10px;" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" (click)="OpenPaymentModal()">
+                            Add Payment
+                          </button>
+                          
+                          <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xl table-hover table-bordered" style="overflow-x: auto;background-color: white;">
+                                <tr>
+                                    <th>Payment No</th>
+                                    <th>Amount Paid</th>
+                                    <th>Payment Mode</th>
+                                    <th>Payment Type</th>
+                                    <th>Payment Date</th>
+                                    <th>Action</th>
+                                </tr>
+                                <tr *ngFor="let p of s.payments">
+                                    <td>{{p.payment_id}}</td>
+                                    <td>{{p.payment_amount}}</td>
+                                    <td>{{p.payment_mode}}</td>
+                                    <td>{{p.payment_type}}</td>
+                                    <td>{{p.payment_date}}</td>
+                                    <td class="social-media">
+                                        <a (click)="ViewPayment(p)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                                         <a (click)="Delete(p)"><i class="fa fa-trash  social-iconn   " ></i></a>
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </section>
+                    </div>
+                </div> 
+            </div>
+    
+</div>
 </div>

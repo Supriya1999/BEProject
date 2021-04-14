@@ -1,87 +1,87 @@
 <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn"  (click)="OpenModal()">
-        Add Location
-    </button>
-    <hr/>
-    <!-- Modal -->
+<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn"  (click)="OpenModal()">
+    Add Location
+</button>
+<hr/>
+<!-- Modal -->
 <form [formGroup]="locationform" (submit)="AddLocation(locationform.value)">
-  <div class="modal" id="exampleModal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Location  </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-                <label>Location ID</label>
-                <input type="text" formControlName="location_id" class="form-control" disabled>
-            </div>
-            <div class="form-group">
-                <label>State</label>
-                <select class="form-control"  formControlName="state_id" [(ngModel)]="sid" (change)="GetCities(sid)">
-                    <option>Select State</option>
-                    <option *ngFor="let s of states" value={{s.state_id}}>{{s.state_name}}</option>
-
-                </select>
-            </div>
-            <div class="form-group">
-                <label>City</label>
-                <select class="form-control" formControlName="city_id">
-                    <option>Select City</option>
-                    <option *ngFor="let s of cities" value={{s.city_id}}>{{s.city_name}}</option>
-
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Location</label>
-                <input type="text" formControlName="location_name" class="form-control" >
-            </div>
-                
-        </div>
-        <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-danger" (click)="CloseModal()">Close</button>
-        
-        </div>
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Location  </h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
     </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <label>Location ID</label>
+            <input type="text" formControlName="location_id" class="form-control" disabled>
+        </div>
+        <div class="form-group">
+            <label>State</label>
+            <select class="form-control"  formControlName="state_id" [(ngModel)]="sid" (change)="GetCities(sid)">
+                <option>Select State</option>
+                <option *ngFor="let s of states" value={{s.state_id}}>{{s.state_name}}</option>
+
+            </select>
+        </div>
+        <div class="form-group">
+            <label>City</label>
+            <select class="form-control" formControlName="city_id">
+                <option>Select City</option>
+                <option *ngFor="let s of cities" value={{s.city_id}}>{{s.city_name}}</option>
+
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Location</label>
+            <input type="text" formControlName="location_name" class="form-control" >
+        </div>
+            
+    </div>
+    <div class="modal-footer">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-danger" (click)="CloseModal()">Close</button>
+    
     </div>
 </div>
+</div>
+</div>
 </form>
-    
-    <!--filter-->
-    <div class="row">
-        <div class="col-md-3">
-        <label>Filter Data</label><br>
-        <input type="text" placeholder="Filter data by name" class="form-control"/>
-        </div>
+
+<!--filter-->
+<div class="row">
+    <div class="col-md-3">
+    <label>Filter Data</label><br>
+    <input type="text" placeholder="Filter data by name" class="form-control"/>
     </div>
-    <br><br>
-    <!--table-->
-    <section class="table" style="background-color: white;">
-        <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xs table-hover table-bordered" >
-            <thead>
-              <tr>
-                <th scope="col">State Name</th>
-                <th scope="col">City Name</th>
-                <th scope="col">Location Name</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let l of locations">
-                  <td>{{l.state_name}}</td>
-                  <td>{{l.city_name}}</td>
-                  <td>{{l.location_name}}</td>
-                  <td class="social-media">
-                    <a  (click)="View(l)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                    <a  (click)="Delete(l)"><i class="fa fa-trash  social-iconn" ></i></a>
-                  </td>
-                 
-              </tr>
-               
-            </tbody>
-          </table>            
-        </section> 
+</div>
+<br><br>
+<!--table-->
+<section class="table" style="background-color: white;">
+    <table class="table table-responsive-lg table-responsive-md table-responsive-sm table-responsive-xs table-hover table-bordered" >
+        <thead>
+          <tr>
+            <th scope="col">State Name</th>
+            <th scope="col">City Name</th>
+            <th scope="col">Location Name</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let l of locations">
+              <td>{{l.state_name}}</td>
+              <td>{{l.city_name}}</td>
+              <td>{{l.location_name}}</td>
+              <td class="social-media">
+                <a  (click)="View(l)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                <a  (click)="Delete(l)"><i class="fa fa-trash  social-iconn" ></i></a>
+              </td>
+             
+          </tr>
+           
+        </tbody> 
+      </table>            
+    </section> 

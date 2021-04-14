@@ -2,273 +2,283 @@
 <!-- Modal -->
 <form [formGroup]="openingform" (submit)="SubmitData(openingform.value)">
         
-<div class="modal fade" id="openingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog " role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Company Opening</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-        <div class="modal-body ">
-            <div class="container">
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                  <label>Opening ID</label>
-                  <input type="text" formControlName="opening_id" class="form-control" disabled>
-                </div>
-            </div>  
-            <div class="form-row">
-                
-                <div class="form-group col-md-6">
-                    <label >Company Name</label>
-                    <span *ngIf="openingform.get('company_name').errors && openingform.get('company_name').dirty">
-                    <span *ngIf="openingform.get('company_name').errors.required" style="color:red;"> please enter Company name</span>
-                    <span *ngIf="openingform.get('company_name').errors.pattern" style="color:red;"> only characters are allowed</span>
-                    </span>
-                    <input type="text" formControlName="company_name" class="form-control" >
-                  </div>
-                <div class="form-group col-md-6">
-                    <label >Opening Date</label>
-                    <input type="date" formControlName="opening_date" class="form-control" >
-                </div>
-            </div>
-            <div class="form-row">
-                
-                <div class="form-group col-md-6 ">
-                    <label >Requirement</label>
-                    <span *ngIf="openingform.get('company_name').errors && openingform.get('company_name').dirty">
-                        <span *ngIf="openingform.get('company_name').errors.required" style="color:red;"> please enter Company name</span>
-                        <span *ngIf="openingform.get('company_name').errors.pattern" style="color:red;"> only characters are allowed</span>
-                        </span>
-                    <input type="text" formControlName="requirements" class="form-control" >
-
-                  </div>
-                  
-                <div class="form-group col-md-6 ">
-                    <label >Qualification</label>
-                    <span *ngIf="openingform.get('company_name').errors && openingform.get('company_name').dirty">
-                        <span *ngIf="openingform.get('company_name').errors.required" style="color:red;"> please enter Company name</span>
-                        <span *ngIf="openingform.get('company_name').errors.pattern" style="color:red;"> only characters are allowed</span>
-                        </span>
-                    <input type="text" formControlName="qualification" class="form-control" >
-                  </div>
-            </div>
-            
-            <div class="form-row">
-                
-                <div class="form-group col-md-6 ">
-                    <label >Percentage/CGPA</label>
-                    <span *ngIf="openingform.get('company_name').errors && openingform.get('company_name').dirty">
-                        <span *ngIf="openingform.get('company_name').errors.required" style="color:red;"> please enter Company name</span>
-                        <span *ngIf="openingform.get('company_name').errors.pattern" style="color:red;"> only characters are allowed</span>
-                        </span>
-                    <input type="text" formControlName="percentage" class="form-control" >
-                  </div>
-                  
-                <div class="form-group col-md-6 ">
-                    <label >Description</label>
-                    <span *ngIf="openingform.get('company_name').errors && openingform.get('company_name').dirty">
-                        <span *ngIf="openingform.get('company_name').errors.required" style="color:red;"> please enter Company name</span>
-                        <span *ngIf="openingform.get('company_name').errors.pattern" style="color:red;"> only characters are allowed</span>
-                        </span>
-                    <input type="text" formControlName="description" class="form-control" >
-                  </div>
-            </div>
-
-            <div class="form-row">
-                
-                <div class="form-group col-md-12">
-                    <label >Address</label>
-                    <span *ngIf="openingform.get('company_name').errors && openingform.get('company_name').dirty">
-                        <span *ngIf="openingform.get('company_name').errors.required" style="color:red;"> please enter Company name</span>
-                        <span *ngIf="openingform.get('company_name').errors.pattern" style="color:red;"> only characters are allowed</span>
-                        </span>
-                    <input type="text" formControlName="address" class="form-control" >
-                  </div>
-                  
-            </div>
-              
-            </div>
-        </div>
-        <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" >Save</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        
-        </div>
-        </div>
-    </div>
-</div>
-</form>
-    
-
-<!-- Modal -->
-<form [formGroup]="placementform" (submit)="SubmitPlacementData(placementform.value)">
-<div class="modal fade" id="placedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog " role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Student Placement</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-        <div class="modal-body ">
-            <div class="container">
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                  <label>Selection ID</label>
-                  <input type="text" formControlName="select_id" class="form-control" disabled>
-                </div>
-            </div>  
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label >Course</label>
-                    <select class="form-control" [(ngModel)]="course_id" formControlName="course_id" (change)="GetYears(course_id)">
-                        <option selected disabled>
-                            Select Course Name
-                        </option>
-                        <option *ngFor="let c of course" value="{{c.course_id}}">{{c.course_name}}</option>
-                    </select>
-                  </div> 
-                  <div class="form-group col-md-12">
-                    <label >Year Of Study </label>
-                    <select class="form-control" [(ngModel)]="year_id" formControlName="year_id" (change)="GetStudents(year_id)">
-                        <option selected disabled>
-                            Select Year Name
-                        </option>
-                        <option *ngFor="let y of year" value="{{y.year_id}}">{{y.year_name}}</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                
-                <div class="form-group col-md-6">
-                    <label >Student Name</label>
-                    <select class="form-control" formControlName="registeration_id" >
-                        <option>Select Student Name</option>
-                        <option *ngFor="let s of students" value={{s.registeration_id}}>{{s.first_name}} {{s.last_name}}</option>
-                    </select>
-                  </div>
-              
-            </div>
-            <div class="form-row">
-                
-                <div class="form-group col-md-6 ">
-                    <label >Company Name</label>
-                    <input type="text" formControlName="company_name" class="form-control" >
-                  </div>
-                  
-                <div class="form-group col-md-6 ">
-                    <label >Package</label>
-                    <input type="text" formControlName="package" class="form-control" >
-                  </div>
-            </div>
-            
-            <div class="form-row">
-                
-                <div class="form-group col-md-6 ">
-                    <label >Placement Date</label>
-                    <input type="date" formControlName="placement_date" class="form-control" >
-                  </div>
-                  
-                <div class="form-group col-md-6 ">
-                    <label >Student Pic</label>
-                    <input type="file" (change)="onSelectFile($event.target.files)" class="form-control" >
-                  </div>
-            </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" [disabled]="!placementform.valid">Save</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        
-        </div>
-    </div>
-    </div>
-</div>
-</form>
-<!-- Nav tabs -->
-<ul class="nav nav-tabs">
-    <li class="nav-item ">
-      <a class="nav-link "  data-toggle="tab" href="#home">Add Openings</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#menu1">Student placement</a>
-    </li>
-  </ul>
-  
-  <!-- Tab panes -->
-  <div class="tab-content mt-3">
-    <div class="tab-pane container " id="home">
-        <section class="table" style="background-color: white; overflow-y: auto; ">
-            <table class="table  table-hover table-bordered" >
-                <thead>
-                <tr>
-                    <th scope="col">Company Name</th>
-                    <th scope="col">Opening Date</th>
-                    <th scope="col">Requirements</th>
-                    <th scope="col">Qualification</th>
-                    <th scope="col">Percentage</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let o of opening">
-                    <td>{{o.company_name}}</td>
-                    <td>{{o.opening_date}}</td>
-                    <td>{{o.requirements}}</td>
-                    <td>{{o.qualification}}</td>
-                    <td>{{o.percentage}}</td>
-                    <td>{{o.description}}</td>
-                    <td>{{o.address}}</td>
-                    <td class="social-media">
-                        <a data-toggle="modal" data-target="#openingModal"><i class="fa fa-plus social-iconnn " ></i></a>
-                        <a data-toggle="modal" data-target="#openingModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                        <i class="fa fa-trash  social-iconn   " ></i>
-                    </td>
-                </tr>
-                </tbody>
-            </table>            
-            </section>
-    </div>
-    <div class="tab-pane container fade" id="menu1">
-        <section class="table" style="background-color: white; overflow-y: auto; ">
-            <table class="table  table-hover table-bordered" >
-                <thead>
-                <tr>
-                    <th scope="col">Student Name</th>
-                    <th scope="col">Course</th>
-                    <th scope="col">Company Name</th>
-                    <th scope="col">Package</th>
-                    <th scope="col">Placement Date</th>
-                    <th scope="col">Student Pic</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let o of placements">
-                        <td>{{o.first_name}}</td>
-                        <td>{{o.course_name}}</td>
-                        <td>{{o.company_name}}</td>
-                        <td>{{o.package}}</td>
-                        <td>{{o.placement_date}}</td>
-                        <td>
-                            <img src="{{server}}{{o.path}}/{{o.photo}}" height="100px" width="100px"/>
-                        </td>
-                        <td class="social-media">
-                            <a data-toggle="modal" data-target="#placedModal"><i class="fa fa-plus social-iconnn " ></i></a>
-                            <a data-toggle="modal" data-target="#placedModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                            <i class="fa fa-trash  social-iconn   " ></i>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>            
-            </section>
-    </div>
-    
-  </div>
+    <!-- <div class="modal" id="openingModal" tabindex="-1" [ngStyle]="{'display':display}" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">   -->
+      <div class="modal " tabindex="-1" role="dialog" [ngStyle]="{'display':displayopening}">   
+       <div class="modal-dialog modal-dialog-scrollable" role="document">
+       <div class="modal-content" >
+           <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Company Opening</h5>
+           <button type="button" class="close" (click)="CloseModal()">
+               <span aria-hidden="true">&times;</span>
+           </button>
+           </div>
+           <div class="modal-body ">
+               <div class="container">
+               <div class="form-row">
+                   <div class="form-group col-md-12">
+                     <label>Opening ID</label>
+                     <input type="text" formControlName="opening_id" class="form-control" disabled>
+                   </div>
+               </div>  
+               <div class="form-row">
+                   
+                   <div class="form-group col-md-6">
+                       <label >Company Name</label>
+                       <span *ngIf="openingform.get('company_name').errors && openingform.get('company_name').dirty">
+                       <span *ngIf="openingform.get('company_name').errors.required" style="color:red;"> please enter Company name</span>
+                       <span *ngIf="openingform.get('company_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                       </span>
+                       <input type="text" formControlName="company_name" class="form-control" >
+                     </div>
+                   <div class="form-group col-md-6">
+                       <label >Opening Date</label>
+                       <input type="date" formControlName="opening_date" class="form-control" >
+                   </div>
+               </div>
+               <div class="form-row">
+                   
+                   <div class="form-group col-md-6 ">
+                       <label >Requirement</label>
+                       <span *ngIf="openingform.get('company_name').errors && openingform.get('company_name').dirty">
+                           <span *ngIf="openingform.get('company_name').errors.required" style="color:red;"> please enter Company name</span>
+                           <span *ngIf="openingform.get('company_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                           </span>
+                       <input type="text" formControlName="requirements" class="form-control" >
+   
+                     </div>
+                     
+                   <div class="form-group col-md-6 ">
+                       <label >Qualification</label>
+                       <span *ngIf="openingform.get('company_name').errors && openingform.get('company_name').dirty">
+                           <span *ngIf="openingform.get('company_name').errors.required" style="color:red;"> please enter Company name</span>
+                           <span *ngIf="openingform.get('company_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                           </span>
+                       <input type="text" formControlName="qualification" class="form-control" >
+                     </div>
+               </div>
+               
+               <div class="form-row">
+                   
+                   <div class="form-group col-md-6 ">
+                       <label >Percentage/CGPA</label>
+                       <span *ngIf="openingform.get('company_name').errors && openingform.get('company_name').dirty">
+                           <span *ngIf="openingform.get('company_name').errors.required" style="color:red;"> please enter Company name</span>
+                           <span *ngIf="openingform.get('company_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                           </span>
+                       <input type="text" formControlName="percentage" class="form-control" >
+                     </div>
+                     
+                   <div class="form-group col-md-6 ">
+                       <label >Description</label>
+                       <span *ngIf="openingform.get('company_name').errors && openingform.get('company_name').dirty">
+                           <span *ngIf="openingform.get('company_name').errors.required" style="color:red;"> please enter Company name</span>
+                           <span *ngIf="openingform.get('company_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                           </span>
+                       <input type="text" formControlName="description" class="form-control" >
+                     </div>
+               </div>
+   
+               <div class="form-row">
+                   
+                   <div class="form-group col-md-12">
+                       <label >Address</label>
+                       <span *ngIf="openingform.get('company_name').errors && openingform.get('company_name').dirty">
+                           <span *ngIf="openingform.get('company_name').errors.required" style="color:red;"> please enter Company name</span>
+                           <span *ngIf="openingform.get('company_name').errors.pattern" style="color:red;"> only characters are allowed</span>
+                           </span>
+                       <input type="text" formControlName="address" class="form-control" >
+                     </div>
+                     
+               </div>
+                 
+               </div>
+           </div>
+           <div class="modal-footer">
+           <button type="submit" class="btn btn-primary">Save</button>
+           <button type="button" class="btn btn-danger" (click)="CloseModal()">Close</button>
+           
+           </div>
+           </div>
+       </div>
+   </div>
+   </form>
+       
+   
+   <!-- Modal -->
+   <form [formGroup]="placementform" (submit)="SubmitPlacementData(placementform.value)" enctype="multipart/form-data">
+    <!-- <div class="modal fade" id="placedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">  -->
+    <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayplacement}">
+       <div class="modal-dialog modal-dialog-scrollable" role="document"> 
+       <div class="modal-content">
+           <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">Student Placement</h5>
+           <button type="button" class="close" (click)="CloseModall()">
+               <span aria-hidden="true">&times;</span>
+           </button>
+           </div>
+           <div class="modal-body ">
+               <div class="container">
+               <div class="form-row">
+                   <div class="form-group col-md-6">
+                     <label>Selection ID</label>
+                     <input type="text" formControlName="select_id" class="form-control" disabled>
+                   </div>
+                 
+               
+                   <div class="form-group col-md-6">
+                       <label >Course</label>
+                       <select class="form-control" [(ngModel)]="course_id" formControlName="course_id" (change)="GetYears(course_id)">
+                           <option>
+                               Select Course Name
+                           </option>
+                           <option *ngFor="let c of course" value="{{c.course_id}}">{{c.course_name}}</option>
+                       </select>
+                     </div> 
+                   </div>
+                     <div class="form-row">
+                     <div class="form-group col-md-6">
+                       <label >Year Of Study </label>
+                       <select class="form-control" [(ngModel)]="year_id" formControlName="year_id" (change)="GetStudents(year_id)">
+                           <option selected disabled>
+                               Select Year Name
+                           </option>
+                           <option *ngFor="let y of year" value="{{y.year_id}}">{{y.year_name}}</option>
+                       </select>
+                   </div>
+               
+   
+               
+                   
+                   <div class="form-group col-md-6">
+                       <label >Student Name</label>
+                       <select class="form-control" formControlName="registeration_id" >
+                           <option>Select Student Name</option>
+                           <option *ngFor="let s of students" value={{s.registeration_id}}>{{s.first_name}} {{s.last_name}}</option>
+                       </select>
+                     </div>
+                 
+                   </div>
+               <div class="form-row">
+                   
+                   <div class="form-group col-md-6 ">
+                       <label >Company Name</label>
+                       <input type="text" formControlName="company_name" class="form-control" >
+                     </div>
+                     
+                   <div class="form-group col-md-6 ">
+                       <label >Package</label>
+                       <input type="text" formControlName="package" class="form-control" >
+                     </div>
+               </div>
+               
+               <div class="form-row">
+                   
+                   <div class="form-group col-md-6 ">
+                       <label >Placement Date</label>
+                       <input type="date" formControlName="placement_date" class="form-control" >
+                     </div>
+                     
+                   <div class="form-group col-md-6 ">
+                       <label >Student Pic</label>
+                       <input type="file" (change)="onSelectFile($event.target.files)" class="form-control" >
+                     </div>
+               </div>
+               </div>
+           </div>
+           <div class="modal-footer">
+               <button type="submit" class="btn btn-primary">Save</button>
+           <button type="button" class="btn btn-danger" (click)="CloseModall()">Close</button>
+           
+           </div>
+       </div>
+       </div>
+   </div>
+   </form>
+   <!-- Nav tabs -->
+   <ul class="nav nav-tabs">
+       <li class="nav-item ">
+         <a class="nav-link "  data-toggle="tab" href="#home">Add Openings</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" data-toggle="tab" href="#menu1">Student placement</a>
+       </li>
+     </ul>
+     
+     <!-- Tab panes -->
+     <div class="tab-content mt-3">
+       <div class="tab-pane container " id="home">
+           <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs " style="margin-bottom: 10px;" id="btnn"  (click)="OpenModal()">
+               Add Openings
+           </button>
+           
+           <section class="table" style="background-color: white; overflow-y: auto; ">
+               <table class="table  table-hover table-bordered" >
+                   <thead>
+                   <tr>
+                       <th scope="col">Company Name</th>
+                       <th scope="col">Opening Date</th>
+                       <th scope="col">Requirements</th>
+                       <th scope="col">Qualification</th>
+                       <th scope="col">Percentage</th>
+                       <th scope="col">Description</th>
+                       <th scope="col">Address</th>
+                       <th scope="col">Action</th>
+                   </tr>
+                   </thead>
+                   <tbody>
+                   <tr *ngFor="let o of opening">
+                       <td>{{o.company_name}}</td>
+                       <td>{{o.opening_date}}</td>
+                       <td>{{o.requirements}}</td>
+                       <td>{{o.qualification}}</td>
+                       <td>{{o.percentage}}</td>
+                       <td>{{o.description}}</td>
+                       <td>{{o.address}}</td>
+                       <td class="social-media">
+                           <!-- <a data-toggle="modal" data-target="#openingModal"><i class="fa fa-plus social-iconnn " ></i></a> -->
+                           <a (click)="View(o)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                           <a (click)="Delete(o)"><i class="fa fa-trash  social-iconn   " ></i></a>
+                       </td>
+                   </tr>
+                   </tbody>
+               </table>            
+               </section>
+       </div>
+       <div class="tab-pane container fade" id="menu1">
+           <button type="button" class="btn btn-primary btn-lg btn-sm btn-xs " style="margin-bottom: 10px;" id="btnn" (click)="OpenModall()">
+               Add Placed Students
+           </button>
+           <section class="table" style="background-color: white; overflow-y: auto; ">
+               <table class="table  table-hover table-bordered" >
+                   <thead>
+                   <tr>
+                       <th scope="col">Student Name</th>
+                       <th scope="col">Course</th>
+                       <th scope="col">Company Name</th>
+                       <th scope="col">Package</th>
+                       <th scope="col">Placement Date</th>
+                       <th scope="col">Student Pic</th>
+                       <th scope="col">Action</th>
+                   </tr>
+                   </thead>
+                   <tbody>
+                       <tr *ngFor="let o of placements">
+                           <td>{{o.first_name}}</td>
+                           <td>{{o.course_name}}</td>
+                           <td>{{o.company_name}}</td>
+                           <td>{{o.package}}</td>
+                           <td>{{o.placement_date}}</td>
+                           <td>
+                               <img src="{{server}}{{o.path}}/{{o.photo}}" height="100px" width="100px"/>
+                           </td>
+                           <td class="social-media">
+                                   <a (click)="Vieww(o)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                                   <a (click)="Deletee(o)"><i class="fa fa-trash  social-iconn   " ></i></a>
+                           </td>
+                       </tr>
+                   </tbody>
+               </table>            
+               </section>
+       </div>
+       
+     </div>

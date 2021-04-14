@@ -1,15 +1,17 @@
-<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" (click)="OpenModal()">
   Add Branch Owners
 </button>
 <hr/>
 <!-- Modal -->
 <form [formGroup]="ownerform" (submit)="AddOwner(ownerform.value)">
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+ 
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
   <div class="modal-content">
       <div class="modal-header">
       <h5 class="modal-title" id="exampleModalLabel">Owner Details  </h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <button type="button" class="close" (click)="CloseModal()">
           <span aria-hidden="true">&times;</span>
       </button>
       </div>
@@ -93,7 +95,7 @@
       </div>
       <div class="modal-footer">
       <button type="submit" class="btn btn-primary" [disabled]="!ownerform.valid">Save</button>
-      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-danger" (click)="CloseModal()">Close</button>
       
       </div>
   </div>
@@ -143,8 +145,8 @@
             </td>
             
             <td class="social-media">
-              <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-              <i class="fa fa-trash  social-iconn   " ></i>
+              <a (click)="View(o)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+              <a (click)="Delete(o)"><i class="fa fa-trash  social-iconn   " ></i></a>
             </td>
            
         </tr>

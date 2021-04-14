@@ -1,15 +1,16 @@
-<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" (click)="OpenModal()">
     Add Year of Study
 </button>
 <hr/>
 <form [formGroup]="yearform" (submit)="AddYear(yearform.value)">
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog " role="document">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+  <div class="modal-dialog " role="document">
     <div class="modal-content">
         <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Year of Study</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" (click)="CloseModal()">
             <span aria-hidden="true">&times;</span>
         </button> 
         </div>
@@ -57,7 +58,7 @@
         </div>
         <div class="modal-footer">
         <button type="submit" class="btn btn-primary" [disabled]="!yearform.valid">Save</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" (click)="CloseModal()" class="btn btn-danger">Close</button>
         
         </div>
     </div>
@@ -84,15 +85,15 @@
             <th scope="col">Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody> 
           <tr *ngFor="let y of years">
               <td>{{y.course_name}}</td>
               <td>{{y.year_name}}</td>
               <td>{{y.year_code}}</td>
 
               <td class="social-media">
-                <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                <i class="fa fa-trash  social-iconn   " ></i>
+                <a (click)="View(y)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                <a (click)="Delete(y)"><i class="fa fa-trash  social-iconn   " ></i></a>
               </td>
           </tr>
         </tbody>

@@ -8,7 +8,7 @@
   <div class="col-md-3">
   <label>Filter Data</label><br>
   <input type="text" placeholder="Search student by name,student code,location,mobile number,etc" class="form-control"/>
-  </div>
+  </div> 
 </div>
 <br><br>
 <!--table-->
@@ -35,13 +35,12 @@
             <td>{{s.location_name}}</td>
             <td class="social-media">
               <a [routerLink]='["../student_view",s.student_id]'  style="text-decoration: none;"><i class="fa fa-eye  social-iconnn"></i></a>
-              <i class="fa fa-pencil-square-o  social-icon   " ></i>
-              <i class="fa fa-trash  social-iconn   " ></i>
+              <a (click)="DeleteAll(s)"><i class="fa fa-trash  social-iconn   " ></i></a>
             </td>
            
-        </tr>
+        </tr> 
         
       </tbody>
     </table>            
-  </section>
+  </section> 
 

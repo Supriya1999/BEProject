@@ -60,7 +60,8 @@ export class CityClass{
     ViewCityForm(s){
         this.cityform=this.fb.group({
             city_id:[s.city_id],
-            city_name:[s.city_name,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]]
+            city_name:[s.city_name,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
+            state_id:[s.state_id]
         })
       
         // $("#exampleModalLabel").modal("show")

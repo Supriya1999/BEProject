@@ -7,11 +7,18 @@ import {FormGroup,FormControl,Validators, FormBuilder,Validator} from "@angular/
     templateUrl:'Website.html'
 })
 export class WebsiteClass{
-    website:any;
+    website:any; 
     constructor(private api:GenericApi){
         this.GetWebsite();
     }
     GetWebsite(){
-        this.api.GetApi("http://localhost:8000/website_enquiry").subscribe(e=>this.website=e)
+        this.api.GetApi("website_enquiry").subscribe(e=>this.website=e)
+    }
+    DeleteWebsite(w)
+    {
+        this.api.DeleteApi("website_enquiry?website_enquiry_id="+w.website_enquiry_id).subscribe(e=>{
+            alert(e.msg)
+            this.GetWebsite();
+        })
     }
 } 

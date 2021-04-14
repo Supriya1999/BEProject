@@ -145,6 +145,8 @@
               <div class="container">
                   <div class="form-row">
                       <div class="form-group col-md-3">
+                        <label style="color:#000">First Name</label>
+
                         <span *ngIf="studentform.get('first_name').errors && studentform.get('first_name').dirty">
                           <span *ngIf="studentform.get('first_name').errors.required" style="color:red;"> please enter first name</span>
                           <span *ngIf="studentform.get('first_name').errors.pattern" style="color:red;"> only characters are allowed</span>
@@ -152,6 +154,7 @@
                         <input type="text" [(ngModel)]="first_name" placeholder="First Name" class="form-control" >
                       </div>
                       <div class="form-group col-md-3">
+                        <label style="color:#000">Middle Name</label>
                         <span *ngIf="studentform.get('middle_name').errors && studentform.get('middle_name').dirty">
                           <span *ngIf="studentform.get('middle_name').errors.required" style="color:red;"> please enter middle name</span>
                           <span *ngIf="studentform.get('middle_name').errors.pattern" style="color:red;"> only characters are allowed</span>
@@ -159,6 +162,7 @@
                         <input type="text" [(ngModel)]="middle_name" placeholder="Middle Name" class="form-control" >
                       </div>
                       <div class="form-group col-md-3">
+                        <label style="color:#000">Last Name</label>
                         <span *ngIf="studentform.get('last_name').errors && studentform.get('last_name').dirty">
                           <span *ngIf="studentform.get('last_name').errors.required" style="color:red;"> please enter last name</span>
                           <span *ngIf="studentform.get('last_name').errors.pattern" style="color:red;"> only characters are allowed</span>
@@ -166,12 +170,14 @@
                         <input type="text" [(ngModel)]="last_name" placeholder="Last Name" class="form-control" >
                       </div>
                       <div class="form-group col-md-3">
+                        <label style="color:#000">Birth Date</label>
                         <input type="date" class="form-control" [(ngModel)]="birth_date" placeholder="Birth Date">
                       </div>
                   </div>
                   <div class="form-row">
                       <div class="form-group col-md-6">
-
+                        <label style="color:#000">Email Address</label>
+                      
                         <span *ngIf="studentform.get('email_address').errors && studentform.get('email_address').dirty">
                           <span *ngIf="studentform.get('email_addre').errors.required" style="color:red;"> please enter email address</span>
                           <span *ngIf="studentform.get('email_address').errors.pattern" style="color:red;"> only characters are allowed</span>
@@ -179,14 +185,17 @@
                         <input type="text" [(ngModel)]="email_address" placeholder="Email Address" class="form-control" >
                       </div>
                       <div class="form-group col-md-6">
+                        <label style="color:#000">Center Name</label>
                         <select class="form-control" [(ngModel)]="center_id">
                           <option selected disabled>Select Center Name</option>
-                          <option *ngFor="let c of centers" value={{c.center_id}}>{{c.center_name}}</option>
+                          <option *ngFor="let c of centers" value={{c.center_id}}>{{c.college_name}}</option>
                         </select>
-                      </div>
+                      </div> 
                     </div>
                       <div class="form-row">
                         <div class="form-group col-md-6">
+                        <label style="color:#000">Mobile Number</label>
+
                           <span *ngIf="studentform.get('mobile_number').errors && studentform.get('mobile_number').dirty">
                             <span *ngIf="studentform.get('mobile_number').errors.required" style="color:red;"> please enter mobile number</span>
                             <span *ngIf="studentform.get('mobile_number').errors.pattern" style="color:red;"> only characters are allowed</span>
@@ -194,6 +203,8 @@
                           <input type="text" [(ngModel)]="mobile_number" placeholder="Mobile Number" class="form-control" >
                           </div>
                           <div class="form-group col-md-6">
+                        <label style="color:#000"> Alternative Number</label>
+
                         <span *ngIf="studentform.get('alternative_number').errors && studentform.get('alternative_number').dirty">
                           <span *ngIf="studentform.get('alternative_number').errors.required" style="color:red;"> please enter mobile number</span>
                           <span *ngIf="studentform.get('alternative_number').errors.pattern" style="color:red;"> only characters are allowed</span>
@@ -203,6 +214,7 @@
                   </div>
                   <div class="form-row">
                     <div class="form-group col-md-4">
+                      <label style="color:#000">State</label>
                       
                       <select class="form-control" [(ngModel)]="state_id" (change)="GetCities(state_id)">
                         <option selected disabled>Select State</option>
@@ -210,6 +222,7 @@
                       </select>
                       </div>
                     <div class="form-group col-md-4">
+                      <label style="color:#000"> City</label>
                      
                       <select class="form-control" [(ngModel)]="city_id" (change)="GetLocations(city_id)">
                         <option selected disabled>Select City</option>
@@ -217,6 +230,7 @@
                       </select>
                     </div>
                     <div class="form-group col-md-4">
+                      <label style="color:#000"> Location</label>
                       
                       <select class="form-control" [(ngModel)]="location_id">
                         <option selected disabled>Select Location</option>
@@ -226,6 +240,8 @@
                 </div>
                   <div class="form-row">
                     <div class="form-group col-md-6">
+                      <label style="color:#000">Local Address</label>
+
                       <span *ngIf="studentform.get('local_address').errors && studentform.get('local_address').dirty">
                         <span *ngIf="studentform.get('local_address').errors.required" style="color:red;"> please enter mobile number</span>
                         <span *ngIf="studentform.get('local_address').errors.pattern" style="color:red;"> only characters are allowed</span>
@@ -233,6 +249,8 @@
                       <input type="text" [(ngModel)]="local_address" class="form-control" placeholder="Local Address" >
                     </div>
                     <div class="form-group col-md-6">
+                      <label style="color:#000"> Permanent Address</label>
+
                       <span *ngIf="studentform.get('permanent_address').errors && studentform.get('permanent_address').dirty">
                         <span *ngIf="studentform.get('permanent_address').errors.required" style="color:red;"> please enter mobile number</span>
                         <span *ngIf="studentform.get('permanent_address').errors.pattern" style="color:red;"> only characters are allowed</span>
@@ -241,7 +259,7 @@
                       </div>
                   </div>
                   <div class="form-group">
-                    <label>Upload Picture</label>
+                    <label style="color: black;">Upload Picture</label>
                     <input type="file" class="form-control" (change)="onSelectFile($event.target.files)" placeholder="Permanent Address">
                   </div>
               </div>
@@ -410,14 +428,14 @@
               <div class="container">
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label>Course</label>
+                    <label style="color: black;">Course</label>
                     <select class="form-control" [(ngModel)]="course_id" (change)=GetYears(course_id)>
                       <option selected disabled>Select Course</option>
                       <option *ngFor="let c of courses" value="{{c.course_id}}">{{c.course_name}}</option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
-                    <label>Year of Study</label>
+                    <label style="color: black;">Year of Study</label>
                     <select class="form-control" [(ngModel)]="year_id" >
                       <option selected disabled>Select Year of Study</option>
                       <option *ngFor="let c of years" value="{{c.year_id}}">{{c.year_name}}</option>
@@ -429,7 +447,7 @@
                 <div class="form-row">
                   
                   <div class="form-group col-md-4">
-                    <label>Category</label>
+                    <label style="color: black;">Category</label>
                     <select class="form-control" [(ngModel)]="category_id">
                       <option selected disabled>Select Category</option>
                       <option *ngFor="let c of category" value="{{c.category_id}}">{{c.category_name}}</option>
@@ -437,18 +455,18 @@
                     </select>
                   </div>
                   <div class="form-group col-md-4">
-                    <label>Course Fees</label>
+                    <label style="color: black;">Course Fees</label>
                     <input type="text" class="form-control" [(ngModel)]="course_fees" placeholder="Course Fees"/>
                   </div>
                   
                   <div class="form-group col-md-4">
-                    <label>Joining Date</label>
+                    <label style="color: black;">Joining Date</label>
                     <input type="date" [(ngModel)]="joining_date" class="form-control" />
                   </div>
                   
                 </div>
                 <div class="form-group ">
-                  <label>Description</label>
+                  <label style="color: black;">Description</label>
                   <input type="text" [(ngModel)]="description" class="form-control" placeholder="Description"/>
                 </div>  
               </div>
@@ -472,7 +490,7 @@
                   <div class="form-row">
                       
                       <div class="form-group col-md-6">
-                        <label>Payment Date</label>
+                        <label style="color: black;">Payment Date</label>
                           <input type="date"  [(ngModel)]="payment_date" class="form-control">
                       </div>
                       
@@ -480,7 +498,7 @@
                   <div class="form-row">
                       
                     <div class="form-group col-md-6">
-                        <label>Payment Mode</label>
+                        <label style="color: black;">Payment Mode</label>
                         <select class="form-control" [(ngModel)]="payment_mode">
                           <option selected disabled>Select Payment Mode</option>
                           <option value="cash">Cash</option>
@@ -488,7 +506,7 @@
                         </select>
                     </div>
                     <div class="form-group col-md-6">
-                      <label>Payment Type</label>
+                      <label style="color: black;">Payment Type</label>
                       <select class="form-control" [(ngModel)]="payment_type">
                         <option selected disabled>Select Payment Type</option>
                         <option value="lumsum">Lumsum</option>
@@ -498,7 +516,7 @@
                 </div>
                   <div class="form-row">
                     <div class="form-group col-md-12">
-                      <label>Ammount Paid</label>
+                      <label style="color: black;">Ammount Paid</label>
                       <input type="text" [(ngModel)]="ammount_paid" class="form-control" placeholder="Amount Paid">
                     </div>
                       

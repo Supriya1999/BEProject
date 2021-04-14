@@ -121,6 +121,6 @@ export class EnquiryFormClass{
                 ,"source_id":this.checkarraysource,"technology_id":this.checkarraytech}
                 this.api.PostApi("enquiry",st).subscribe(e=>console.log(e));
             this.candidate_name=this.mobile_number=this.birth_date=this.address=this.enquiry_date=this.category_id=this.annual_income=this.center_id=this.cet_marks=this.pcm_marks=this.checkarraysource=this.checkarraytech=null
-    }
+    } 
 
 } 

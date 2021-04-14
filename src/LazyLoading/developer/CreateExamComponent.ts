@@ -44,7 +44,7 @@ GetUnits(sid:any){
 }
 GetExamLevels(){
     this.api.GetApi("examlevels").subscribe(e=>this.examlevels=e)
-}
+} 
 AddQuestion(q,o1,o2,o3,o4,co){
     this.examquestions.push({"question":q,"option1":o1,"option2":o2,"option3":o3,"option4":o4,"correct_option_id":co})
     this.question=this.option1=this.option2=this.option3=this.option4=this.correct_option_id=null;

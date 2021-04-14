@@ -1,7 +1,80 @@
+<!-- Modal -->
+<form [formGroup]="examform" (submit)="SubmitData(examform.value)">
+  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+    <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+    <div class="modal-dialog " role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Course</h5>
+          <button type="button" class="close" (click)="CloseModal()">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body ">
+              <div class="container">
+              <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label>Exam ID</label>
+                    <input type="text" formControlName="exam_id" class="form-control" disabled>
+                  </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Course Name</label><br>
+                  <select class="form-control" formControlName="course_id" [(ngModel)]="cid" (change)="GetYears(cid)">
+                    <option selected disabled>Select Course</option>
+                    <option *ngFor="let c of courses" value="{{c.course_id}}">{{c.course_name}}</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Year of Study</label><br>
+                  <select class="form-control" formControlName="year_id" [(ngModel)]="yid" (change)="GetSubjects(yid)"> 
+                      <option>Open this select menu</option>
+                      <option *ngFor="let c of years" value="{{c.year_id}}">{{c.year_name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label>Subject Name</label><br>
+                    <select class="form-control" formControlName="subject_id" [(ngModel)]="sid" (change)="GetUnits(sid)">
+                        <option>Open this select menu</option>
+                        <option *ngFor="let c of subjects" value="{{c.subject_id}}">{{c.subject_name}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label>Unit Name</label><br>
+                    <select class="form-control" formControlName="unit_id">
+                        <option>Open this select menu</option>
+                        <option *ngFor="let c of units" value="{{c.unit_id}}">{{c.unit_name}}</option>
+                    </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Exam Level</label><br>
+                  <select class="form-control" formControlName="level_id">
+                       <option>Open this select menu</option>
+                       <option *ngFor="let c of examlevels" value="{{c.level_id}}">{{c.level}}</option>
+                    </select>
+
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" [disabled]="!examform.valid">Save</button>
+          <button type="button" class="btn btn-danger" (click)="CloseModal()">Close</button>
+  
+          </div>
+      </div>
+      </div> 
+  </div>
+  </form>
+  
 <a routerLink="../create_exam" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" >
     Create Exam
  </a>
  <hr/>
+
  <!--filter-->
  <div class="row">
      <div class="col-md-3">
@@ -29,15 +102,17 @@
            <tr *ngFor="let e of exams">
                <td>{{e.course_name}}</td>
                <td>{{e.year_name}}</td>
-               <td>{{e.subject_name}}</td>
+               <td>{{e.subject_name}}</td> 
                <td>{{e.unit_name}}</td>
                <td>{{e.level}}</td>
-               <td>{{e.exam_count}}</td>
+               <div *ngIf="e.exam_count==0; then thenBlock else elseBlock"></div>
+               <td><ng-template #elseBlock>{{e.exam_count}}</ng-template></td>
+               <td><ng-template #thenBlock></ng-template></td>
                <td>{{e.first_name}} {{e.last_name}}</td>
                <td class="social-media">
                  <a [routerLink]='["../exam_view",e.exam_id]'  style="text-decoration: none;"><i class="fa fa-eye social-iconnn " ></i></a>
-                 <a href="exams_edit.html"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                 <a href="exams_delete.html"><i class="fa fa-trash social-iconn " ></i></a>
+                 <a (click)="View(e)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                 <a (click)="Delete(e)"><i class="fa fa-trash social-iconn " ></i></a>
                </td>
                
            </tr>

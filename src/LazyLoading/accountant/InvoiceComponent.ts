@@ -14,6 +14,6 @@ export class InvoiceClass{
         
     }  
     GetStudent(){
-        this.api.GetApi("student_details").subscribe(e=>this.student=e)
+        this.api.GetApi("student_payment").subscribe(e=>this.student=e)
     }
 } 

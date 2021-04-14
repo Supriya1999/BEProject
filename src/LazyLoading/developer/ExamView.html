@@ -1,7 +1,88 @@
+<form [formGroup]="examquestionform" (submit)="SubmitData(examquestionform.value)">
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+      <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+      <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Course</h5>
+            <button type="button" class="close" (click)="CloseModal()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body ">
+                <div class="container">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label>question ID</label>
+                      <input type="text" formControlName="question_id" class="form-control" disabled>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Exam ID</label>
+                        <input type="text" formControlName="exam_id" class="form-control" disabled>
+                      </div>
+                </div>
+                <div class="form-group">
+                    <label>Question</label><br>
+                    <input type="text" formControlName="question" class="form-control" >
+                </div>
+                
+                <div class="form-group">
+                    <label>Option 1</label><br>
+                    <input type="text" formControlName="option1" class="form-control" >
+                </div>
+                
+                <div class="form-group">
+                    <label>Option 2</label><br>
+                    <input type="text" formControlName="option2" class="form-control" >
+                </div>
+                
+                <div class="form-group">
+                    <label>Option 3</label><br>
+                    <input type="text" formControlName="option3" class="form-control" >
+                </div>
+                
+                <div class="form-group">
+                    <label>Option 4</label><br>
+                    <input type="text" formControlName="option4" class="form-control" >
+                </div>
+                
+                <div class="form-group">
+                    <label>Correct Answer Option</label><br>
+                    <input type="text" formControlName="correct_answer_option" class="form-control" >
+                </div>
+                  
+              </div>
+            </div>
+            <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" >Save</button>
+            <button type="button" class="btn btn-danger" (click)="CloseModal()">Close</button>
+    
+            </div>
+        </div>
+        </div> 
+    </div>
+    </form>
+  
 <h4>Exams</h4>
 <hr>
         <div class="card rounded" style="margin-bottom: 20px;" *ngFor="let q of s">
-            <div class="card-header bg-dark text-white"><h6>Question- {{q.question}}</h6></div>
+            <div class="card-header bg-dark text-white">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h6>Question- {{q.question}}</h6>
+                    </div>
+                    <div class="col-md-2"> 
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a (click)="View(q)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                            </div>
+                            <div class="col-md-4">
+                                <a (click)="Delete(q)"><i class="fa fa-trash social-iconn " ></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <div class="radio">

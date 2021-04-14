@@ -1,15 +1,16 @@
-<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" (click)="OpenModal()">
         Add Units
     </button>
     <hr/>
     <form [formGroup]="unitform" (submit)="AddUnit(unitform.value)">
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog " role="document">
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+    <div class="modal " tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Units</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" (click)="CloseModal()">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
@@ -22,19 +23,19 @@
                         </div>
                         <div class="form-group col-md-8">
                             <label>Course Name</label>
-                            <select class="form-control" formControlName="course_id">
+                            <select class="form-control" [(ngModel)]="cid" formControlName="course_id" (change)="GetYear(cid)">
                                 <option selected disabled>Select Course</option>
-                                <option *ngFor="let c of courses">{{c.course_name}}</option>
+                                <option *ngFor="let c of courses" value="{{c.course_id}}">{{c.course_name}}</option>
                             </select>
                         </div>
                     </div>
-                    
+                     
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Year of Study</label>
-                            <select class="form-control" formControlName="year_id">
+                            <select class="form-control" [(ngModel)]="yid" formControlName="year_id" (change)="GetSubject(yid)">
                                 <option selected disabled>Select Year</option>
-                                <option *ngFor="let y of years">{{y.year_name}}</option>
+                                <option *ngFor="let y of years" value="{{y.year_id}}">{{y.year_name}}</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
@@ -44,7 +45,7 @@
                                 <option *ngFor="let s of subjects" value="{{s.subject_id}}">{{s.subject_name}}</option>
                             </select>
                         </div>
-                    </div>
+                    </div> 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Unit Name</label>
@@ -70,7 +71,8 @@
                     </div>
                     <div class="form-group">
                         <label>Upload Video</label>
-                        <input type="file" formControlName="video" (change)="onSelectFile($event.target.files)" class="form-control" >
+                        <input type="file"  (change)="onSelectFile($event.target.files)" class="form-control" >
+                        <span [ngStyle]="{'display':displaymsg}">Note-If you don't want to update the video then keep the upload video field blank</span>
                     </div>
                     
                 </div>
@@ -78,7 +80,7 @@
                 
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" [disabled]=!unitform.valid>Save</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger"(click)="CloseModal()">Close</button>
             </div>
         </div>
         </div>
@@ -123,8 +125,8 @@
                       
                     </td>
                   <td class="social-media">
-                    <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                    <i class="fa fa-trash  social-iconn   " ></i>
+                    <a (click)="View(u)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                    <a (click)="Delete(u)"><i class="fa fa-trash  social-iconn   " ></i></a>
                   </td>
                  
               </tr>

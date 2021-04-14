@@ -99,16 +99,16 @@ AddQulification(q,s,m,u,y,p){
      this.qualifications.push({"qualification_id":qdata[0],"qualification_name":qdata[1],"specialization_id":sdata[0],"specialization_name":sdata[1],"medium":m,"university":u,"year":y,"percentage":p})
      this.medium=this.university=this.year=this.percentage=null;
 } 
-AddDocuments(dn){
-   console.log(dn)
-   console.log(this.imgname)
-   this.multiplephoto.push(this.imgname)
-    this.documents.push({"document_name":dn,"image_name":this.imgname.name,"image":this.imgname})
-}
+// AddDocuments(dn){
+//    console.log(dn)
+//    console.log(this.imgname)
+//    this.multiplephoto.push(this.imgname)
+//     this.documents.push({"document_name":dn,"image_name":this.imgname.name,"image":this.imgname})
+// }
 
 AddEmployee(first_name,middle_name,last_name,birth_date,joining_date,mobile_number,email_address,role_id,state_id,city_id,location_id,permanent_address,local_address,center_id,photo,salary_date,actual_salary,incentive_amount,tax_deduction,total_present_days){
     //console.log(c)
-    var st={"first_name":first_name,"middle_name":middle_name,"last_name":last_name,"birth_date":birth_date,"joining_date":joining_date,"mobile_number":mobile_number,"email_address":email_address,"role_id":role_id,"state_id":state_id,"city_id":city_id,"location_id":location_id,"permanent_address":permanent_address,"local_address":local_address,"center_id":center_id,"photo":photo,"qualifications":this.qualifications,"documents":this.documents,"salary_date":salary_date,"actual_salary":actual_salary,"incentive_amount":incentive_amount,"tax_deduction":tax_deduction,"total_present_days":total_present_days};
+    var st={"first_name":first_name,"middle_name":middle_name,"last_name":last_name,"birth_date":birth_date,"joining_date":joining_date,"mobile_number":mobile_number,"email_address":email_address,"role_id":role_id,"state_id":state_id,"city_id":city_id,"location_id":location_id,"permanent_address":permanent_address,"local_address":local_address,"center_id":center_id,"photo":photo,"qualifications":this.qualifications,"salary_date":salary_date,"actual_salary":actual_salary,"incentive_amount":incentive_amount,"tax_deduction":tax_deduction,"total_present_days":total_present_days};
     var data=new FormData() 
     data.append("first_name",st.first_name)
     data.append("middle_name",st.middle_name)
@@ -126,7 +126,6 @@ AddEmployee(first_name,middle_name,last_name,birth_date,joining_date,mobile_numb
     data.append("center_id",st.center_id)
     data.append("photo",this.photo[0])
     data.append("qualifications",JSON.stringify(st.qualifications))
-    data.append("documents",JSON.stringify(st.documents))               
     data.append("salary_date",st.salary_date)
     data.append("actual_salary",st.actual_salary)
     data.append("tax_deduction",st.tax_deduction)
@@ -134,23 +133,13 @@ AddEmployee(first_name,middle_name,last_name,birth_date,joining_date,mobile_numb
     data.append("total_present_days",st.total_present_days)
     data.append("multiple_images", this.multiplephoto)
 
-    this.api.PostApi("employee_details",data).subscribe(e=>console.log(e));
-        
+    this.api.PostApi("employee_details",data).subscribe(e=>{
+        alert(e.msg);
+    });
     this.first_name=this.middle_name=this.last_name=this.birth_date=this.joining_date=this.mobile_number=this.email_address,this.permanent_address=this.local_address=this.salary_date=this.actual_salary=this.incentive_amount=this.tax_deduction=this.total_present_days=null; 
-    
     }
     onSelectFile(e:any){
-                this.photo=e;
-                
-                console.log(this.photo[0])
+        this.photo=e;
+        console.log(this.photo[0])
     }
-    
-    onSelectMultipleFile(e:any){
-        this.imgname=e[0]
-        // console.log(e[0].name)
-  
-        
-        // console.log(this.multiplephoto[0])
-}
-
 }  

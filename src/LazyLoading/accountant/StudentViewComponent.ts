@@ -1,28 +1,491 @@
 import {Component} from "@angular/core"
 import {GenericApi} from "../APIS/GenericApi"
 import {ActivatedRoute} from "@angular/router"
-import {FormGroup,FormControl,Validators,FormBuilder,Validator} from "@angular/forms"
+import {FormGroup,FormControl,Validators,FormBuilder,Validator, Form} from "@angular/forms"
 @Component({
     selector:'app-root',
     templateUrl:'StudentView.html'
 })
 export class StudentViewClass{
     id:any=0;
-    s:any;
-    qualifications:any;
+    registeration_id:any=0;
+    s:any; 
+    u:any;
+    p:any;
+    states:any; 
+    cities:any=[];
+    locations:any=[];
+    centers:any;
+    qualifications:any=[];
+    qualification_id:any;
+    specializations:any=[];
+    specialization_id:any;
+    studentqualifications:any=[];
+    medium:any;
+    passing_year:any;
+    percentage:any;
+    university:any;
+    cet_marks:any;
+    pcm_marks:any;
+    squalification:any;
+    first_name:any;
+    middle_name:any;
+    last_name:any;
+    email_address:any;
+    mobile_number:any;
+    alternative_number:any;
+    birth_date:any;
+    state_id:any;
+    location_id:any;
+    city_id:any;
+    local_address:any;
+    permanent_address:any;
+    center_id:any;
+    father_name:any;
+    father_number:any;
+    mother_name:any;
+    mother_number:any;
+    occupation:any;
+    annual_income:any;
+    email_addresss:any;
+    courses:any;
+    years:any;
+    category:any;
+    course_id:any;
+    year_id:any;
+    category_id:any;
+    course_fees:any;
+    description:any;
+    joining_date:any;
+    payment_date:any;
+    payment_mode:any;
+    payment_type:any;
+    ammount_paid:any;
+    photo:any;
+    sid:any;
+    cid:any;
+    qid:any;
+    profileform:FormGroup;
+    parentform:FormGroup;
+    registerationform:FormGroup;
+    paymentform:FormGroup;
+    qualificationform:FormGroup;
+    displayprofile:any="none";
+    displayparent:any="none";
+    displayregisteration:any="none";
+    displaypayment:any="none";
+    displayqualification:any="none";
+    action=""
     server:any="http://localhost:8000/"
     constructor(private rt:ActivatedRoute,private api:GenericApi,private fb:FormBuilder){
+        this.NewProfileForm();
+        this.NewParentForm();
+        this.NewRegisterationForm();
+        this.NewPaymentForm();
+        this.NewQualificationForm();
         this.rt.params.subscribe(e=>{
              
             this.id=e["id"]
 
         }) 
         this.GetStudentById(this.id)
+        this.GetStates();
+        this.GetQualifications();
+        this.GetCenters();
+        this.GetCourses();
+        this.GetCategory();
     }
-
+    NewProfileForm(){
+        this.profileform=this.fb.group({
+            student_id:[null],
+            student_code:[null],
+            first_name:[null,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
+            middle_name:[null,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
+            last_name:[null,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
+            email_address:[null],
+            mobile_number:[null],
+            alternative_number:[null],
+            birth_date:[null],
+            state_id:[null],
+            city_id:[null],
+            location_id:[null],
+            local_address:[null,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
+            permanent_address:[null,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
+            center_id:[null],
+            pcm_marks:[null],
+            cet_marks:[null]
+        })
+    }
+    NewParentForm(){
+        this.parentform=this.fb.group({
+            parent_id:[null],
+            student_id:[null],
+            father_name:[null],
+            father_number:[null],
+            mother_name:[null],
+            mother_number:[null],
+            occupation:[null],
+            annual_income:[null],
+            email_addresss:[null]
+        })
+    }
+    NewRegisterationForm(){
+      this.registerationform=this.fb.group({
+        registeration_id:[null],
+        registeration_code:[null],
+        course_id:[null],
+        year_id:[null],
+        category_id:[null],
+        course_fees:[null],
+        joining_date:[null],
+        description:[null]
+      })  
+    }
+    NewPaymentForm(){
+        this.paymentform=this.fb.group({
+          payment_id:[null],
+          registeration_id:[null],
+          payment_date:[null],
+          payment_mode:[null],
+          payment_type:[null],
+          payment_amount:[null],
+        })  
+      }
+    NewQualificationForm(){
+        this.qualificationform=this.fb.group({
+            qualification_id:[null],
+            student_id:[null],
+            qualification:[null],
+            specialization_id:[null],
+            medium:[null],
+            university:[null],
+            passing_year:[null],
+            percentage:[null],
+        })
+    }
     GetStudentById(id){
        
-            this.api.GetApi("student_details?student_id="+id).subscribe(e=>this.s=e)
+            this.api.GetApi("student_details?student_id="+id).subscribe(e=>{
+             
+                this.s=e;
+                this.u=e;
+                console.log(this.u)
+                this.u.student_id=this.id;
+                this.registeration_id=this.u.registration.registeration_id;
+            })
        
+    }
+    GetStates(){
+        this.api.GetApi("state").subscribe(e=>this.states=e)
+        this.cities=[]
+    }
+    GetCities(cid:any){
+        this.api.GetApi("city?state_id="+cid).subscribe(e=>this.cities=e)
+        this.locations=[]
+    }
+    GetLocations(lid:any){
+        this.api.GetApi("location?city_id="+lid).subscribe(e=>this.locations=e)
+    }
+    GetCenters(){
+        this.api.GetApi("center_details").subscribe(e=>this.centers=e)
+    }
+    GetCourses(){
+        this.api.GetApi("courses").subscribe(e=>this.courses=e)
+    }
+    GetYears(cid:any){
+        this.api.GetApi("years?course_id="+cid).subscribe(e=>this.years=e)
+        }
+    GetCategory(){
+        this.api.GetApi("category").subscribe(e=>this.category=e)
+    }
+    GetQualifications(){
+        this.api.GetApi("qualification").subscribe(e=>this.qualifications=e)
+        this.specializations=[]
+    } 
+    GetSpecializations(qid:any){
+        this.api.GetApi("specialization?qualification_id="+qid).subscribe(e=>this.specializations=e)
+    }
+    SubmitProfileData(s){
+        var data=new FormData();
+        data.append("student_id",s.student_id) 
+        data.append("birth_date",s.birth_date)
+        data.append("first_name",s.first_name)
+        data.append("middle_name",s.middle_name)
+        data.append("last_name",s.last_name)
+        data.append("email_address",s.email_address)
+        data.append("center_id",s.center_id)
+        data.append("mobile_number",s.mobile_number)
+        data.append("alternative_number",s.alternative_number)
+        data.append("location_id",s.location_id)
+        data.append("local_address",s.local_address)
+        data.append("permanent_address",s.permanent_address)
+        data.append("cet_marks",s.cet_marks)
+        data.append("pcm_marks",s.pcm_marks)
+        if (this.photo==null)
+        { 
+            data.append("photo","")
+        }
+        else
+        {
+            data.append("photo",this.photo[0])
+        }
+        this.api.PutApi("student_details",data).subscribe(e=>{
+        alert(e.msg)
+        this.NewProfileForm();
+        this.GetStudentById(this.id) 
+        this.CloseProfileModal();
+
+    })
+    }
+    ViewProfileForm(s){
+        this.profileform=this.fb.group({
+            student_id:[s.student_id],
+            student_code:[s.student_code],
+            first_name:[s.first_name,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
+            middle_name:[s.middle_name,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
+            last_name:[s.last_name,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
+            email_address:[s.email_address],
+            mobile_number:[s.mobile_number],
+            alternative_number:[s.alternative_number],
+            birth_date:[s.birth_date],
+            state_id:[s.state_id],
+            city_id:[s.city_id],
+            location_id:[s.location_id],
+            local_address:[s.local_address,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
+            permanent_address:[s.permanent_address,[Validators.compose([Validators.required,Validators.pattern("[a-zA-Z]+")])]],
+            center_id:[s.center_id],
+            pcm_marks:[s.pcm_marks],
+            cet_marks:[s.cet_marks],
+            
+        })
+    }    
+    ViewProfile(s){
+        console.log(s);
+        this.ViewProfileForm(s);
+        this.displayprofile="block"
+    }
+    CloseProfileModal(){
+        this.displayprofile="none"
+    }
+    
+    SubmitParentData(s){
+        var data=new FormData();
+        data.append("parent_id",s.parent_id)
+        data.append("father_name",s.father_name)
+        data.append("father_number",s.father_number)
+        data.append("mother_name",s.mother_name)
+        data.append("mother_number",s.mother_number)
+        data.append("occupation",s.occupation)
+        data.append("email_address",s.email_addresss)
+        data.append("annual_income",s.annual_income)
+        this.api.PutApi("parent_details",data).subscribe(e=>{
+            alert(e.msg)
+            this.NewParentForm();
+            this.GetStudentById(this.id) 
+            this.CloseParentModal();
+        })
+    }
+    ViewParentForm(s){
+        this.parentform=this.fb.group({
+            parent_id:[s.parents.parent_id],
+            student_id:[s.parents.student_id],
+            father_name:[s.parents.father_name],
+            father_number:[s.parents.father_number],
+            mother_name:[s.parents.mother_name],
+            mother_number:[s.parents.mother_number],
+            occupation:[s.parents.occupation],
+            annual_income:[s.parents.annual_income],
+            email_addresss:[s.parents.email_address]
+        })
+    }    
+    ViewParent(s){
+        console.log(s);
+        this.ViewParentForm(s);
+        this.displayparent="block"
+    }
+    CloseParentModal(){
+        this.displayparent="none"
+    }
+    onSelectFile(e:any){
+        this.photo=e;
+        //console.log(this.photo[0])
+      }
+
+
+
+    SubmitRegisterationData(s){
+        var data=new FormData();
+        data.append("registeration_id",s.registeration_id)
+        data.append("registeration_code",s.registeration_code)
+        data.append("joining_date",s.joining_date)
+        data.append("year_id",s.year_id)
+        data.append("category_id",s.category_id)
+        data.append("course_fees",s.course_fees)
+        data.append("description",s.description)
+        this.api.PutApi("student_registration",data).subscribe(e=>{
+            alert(e.msg)
+            this.NewRegisterationForm();
+            this.GetStudentById(this.id) 
+            this.CloseRegisterationModal();
+        })
+    }
+    ViewRegisterationForm(s){
+        this.registerationform=this.fb.group({
+            registeration_id:[s.registration.registeration_id],
+            registeration_code:[s.registration.registeration_code],
+            course_id:[s.registration.course_id],
+            year_id:[s.registration.year_id],
+            category_id:[s.registration.category_id],
+            course_fees:[s.registration.course_fee],
+            joining_date:[s.registration.joining_date],
+            description:[s.registration.description]
+            
+        })
+    }    
+    ViewRegisteration(s){
+        console.log(s);
+        this.ViewRegisterationForm(s);
+        this.displayregisteration="block"
+    }  
+    CloseRegisterationModal(){
+        this.displayregisteration="none" 
+    }
+
+
+    SubmitPaymentData(p){
+        switch(this.action)
+        {
+            case "Add":
+                var data=new FormData();
+                data.append("registeration_id",this.registeration_id)
+                data.append("payment_amount",p.payment_amount)
+                data.append("payment_mode",p.payment_mode)
+                data.append("payment_type",p.payment_type)
+                data.append("payment_date",p.payment_date)
+                this.api.PostApi("student_payment",data).subscribe(e=>{
+                    alert(e.msg)
+                    this.NewPaymentForm();
+                    this.GetStudentById(this.id) 
+                    this.ClosePaymentModal();
+                })
+                break;
+            case "Update":
+                var data=new FormData();
+                data.append("payment_id",p.payment_id)
+                data.append("payment_amount",p.payment_amount)
+                data.append("payment_mode",p.payment_mode)
+                data.append("payment_type",p.payment_type)
+                data.append("payment_date",p.payment_date)
+                this.api.PutApi("student_payment",data).subscribe(e=>{
+                    alert(e.msg)
+                    this.NewPaymentForm();
+                    this.GetStudentById(this.id) 
+                    this.ClosePaymentModal();
+                })
+                break;
+        }
+        
+    }
+    ViewPaymentForm(p){
+        this.paymentform=this.fb.group({
+          payment_id:[p.payment_id],
+          registeration_id:[p.registeration_id],
+          payment_date:[p.payment_date],
+          payment_mode:[p.payment_mode],
+          payment_type:[p.payment_type],
+          payment_amount:[p.payment_amount],
+            
+        })
+    }
+    ViewPayment(p){
+        console.log(p);
+        this.ViewPaymentForm(p);
+        this.action="Update"
+        this.displaypayment="block"
+    }
+    OpenPaymentModal(){
+        this.NewPaymentForm()
+        this.action="Add"
+        this.displaypayment="block"   
+    }
+    ClosePaymentModal(){
+        this.displaypayment="none" 
+    }
+    Delete(p){
+        this.api.DeleteApi("student_payment?payment_id="+p.payment_id).subscribe(e=>{
+            alert(e.msg)
+            this.GetStudentById(this.id);
+       })
+    } 
+    SubmitQualificationData(q){
+        switch(this.action)
+        {
+            case "Add":
+                var data=new FormData();
+                data.append("student_id",this.id)
+                data.append("specialization_id",q.specialization_id)
+                data.append("medium",q.medium)
+                data.append("university",q.university)
+                data.append("passing_year",q.passing_year)
+                data.append("percentage",q.percentage)
+                this.api.PostApi("student_qualification",data).subscribe(e=>{
+                    alert(e.msg)
+                    this.NewQualificationForm();
+                    this.GetStudentById(this.id) 
+                    this.CloseQualificationModal();
+                })
+                break;
+            case "Update":
+                var data=new FormData();
+                data.append("student_qualification_id",q.qualification)
+                data.append("student_id",q.student_id)
+                data.append("specialization_id",q.specialization_id)
+                data.append("medium",q.medium)
+                data.append("university",q.university)
+                data.append("passing_year",q.passing_year)
+                data.append("percentage",q.percentage)
+                this.api.PutApi("student_qualification",data).subscribe(e=>{
+                    alert(e.msg)
+                    this.NewQualificationForm();
+                    this.GetStudentById(this.id) 
+                    this.CloseQualificationModal();
+                })
+                break;
+        }
+    }
+    ViewQualificationForm(q){
+        this.qualificationform=this.fb.group({
+            qualification:[q.student_qualification_id],
+            student_id:[q.student_id],
+            qualification_id:[q.qualification_id],
+            specialization_id:[q.specialization_id],
+            medium:[q.medium],
+            university:[q.university],
+            passing_year:[q.passing_year],
+            percentage:[q.percentage],
+        })
+    }
+    ViewQualification(q){
+        console.log(q);
+        this.ViewQualificationForm(q);
+        this.displayqualification="block"
+        this.action="Update"
+
+    }
+    CloseQualificationModal(){
+        this.displayqualification="none" 
+    }
+    OpenQualificationModal(){
+        this.NewQualificationForm()
+        this.action="Add"
+        this.displayqualification="block"   
+    }
+    DeleteQualification(q){
+        this.api.DeleteApi("student_qualification?student_qualification_id="+q.student_qualification_id).subscribe(e=>{
+            alert(e.msg)
+            this.GetStudentById(this.id);
+          
+   
+       })
     }
 }

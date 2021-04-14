@@ -1,15 +1,16 @@
-<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-primary btn-lg btn-sm btn-xs" id="btnn" (click)="OpenModal()">
     Add Course
 </button>
 <hr/>
 <!-- Modal -->
 <form [formGroup]="coursesform" (submit)="SubmitData(coursesform.value)">
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog " role="document">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+  <div class="modal-dialog " role="document">
     <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header"> 
         <h5 class="modal-title" id="exampleModalLabel">Course</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" (click)="CloseModal()">
             <span aria-hidden="true">&times;</span>
         </button>
         </div>
@@ -33,8 +34,8 @@
         </div>
         <div class="modal-footer">
         <button type="submit" class="btn btn-primary" [disabled]="!coursesform.valid">Save</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        
+        <button type="button" class="btn btn-danger" (click)="CloseModal()">Close</button>
+
         </div>
     </div>
     </div> 
@@ -62,8 +63,8 @@
           <tr *ngFor="let c of courses">
               <td>{{c.course_name}}</td>
               <td class="social-media">
-                <a data-toggle="modal" data-target="#exampleModal"><i class="fa fa-pencil-square-o social-icon " ></i></a>
-                <i class="fa fa-trash  social-iconn   " ></i>
+                <a (click)="View(c)"><i class="fa fa-pencil-square-o social-icon " ></i></a>
+                <a (click)="Delete(c)"><i class="fa fa-trash  social-iconn   " ></i></a>
               </td>
              
           </tr>
